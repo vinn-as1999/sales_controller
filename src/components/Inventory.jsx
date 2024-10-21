@@ -16,14 +16,14 @@ function Inventory() {
       frutas: {
         banana: ['banana.01', 'banana.02'],
         morango: ['morango.01', 'morango.02'],
-        uva: [] // sem subinventário
+        uva: []
       }
     },
     doces: {
       chocolates: {
         alpino: ['alpino.01', 'alpino.02'],
         sufle: ['sufle.01', 'sufle.02'],
-        garoto: [] // sem subinventário
+        garoto: []
       }
     }
   });
