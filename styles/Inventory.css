@@ -1,0 +1,84 @@
+.inventoryMain {
+    max-height: 80vh;
+
+    section {
+        display: flex;
+        width: 50vw;
+        height: 80vh;
+        max-height: 70vh;
+        margin: 20px 5px;
+    }
+
+    .addInput {
+        height: 2vh;
+        outline-color:#c4423b;
+        border: none;
+    }
+
+    .addButton {
+        color: rgb(31, 214, 62);
+        font-size: 20px;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    .addButton:hover {
+        color: rgb(58, 240, 88);
+    }
+
+    .xButton {
+        color: #F02737;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .xButton:hover {
+        color: #fd4454;
+    }
+
+    .bttnsDiv {
+        display: flex;
+        align-items: center;
+    }
+
+    .WH {
+        width: 40vw;
+        height: 75vh;
+        margin-left: 50px;
+
+        .subInvDiv {
+            display: flex;
+            align-items: center;
+            width: 20vw;
+            
+            .whInput {
+                width: 5vw;
+                height: 2vh;
+                margin: 5px;
+            }
+
+            button {
+                height: 3vh;
+                font-size: 25px;
+                display: flex;
+                align-items: center;
+                background-color: rgb(31, 214, 62);
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: rgb(58, 240, 88);
+            }
+        }
+        
+        li {
+            cursor: pointer;
+        }
+
+        li:hover {
+            color: #c4423b;
+        }
+    }
+}

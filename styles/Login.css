@@ -1,0 +1,171 @@
+* {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.loginMain {
+    background: linear-gradient(to top, #E4554D, #c4423b);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    & .loginBox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    & .message {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        width: 40vw;
+        height: 80vh;
+    }
+
+    & .greetings {
+        font-weight: bold;
+        font-size: 50px;
+        margin-left: 20px;
+        animation: entranceMessage 0.5s;
+    }
+
+    & .phrase {
+        width: 30vw;
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+        margin-left: 20px;
+        animation: entranceMessage linear 0.6s;
+    }
+
+    & .img {
+        margin: 10px 20px;
+        animation: entranceMessage linear 0.7s;
+    }
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(230, 230, 230);
+    box-shadow: -5px 5px 20px #292929;
+    padding: 20px;
+    width: 40vw;
+    height: 80vh;
+
+    & button {
+        background-color: #c4423b;
+        color: white;
+        font-weight: bold;
+        width: 10vw;
+        padding: 10px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    & button:hover {
+        background-color: #E4554D;
+        transition: ease-in-out 0.3s;
+    }
+
+    & input {
+        padding: 10px;
+        margin: 5px;
+        width: 20vw;
+        outline: none;
+        border-color: rgb(211, 211, 211);
+        border-radius: 5px;
+    }
+
+    & label {
+        margin-left: 5px;
+    }
+
+    & span {
+        color: rgb(248, 67, 67);
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    & div {
+        cursor: default;
+    }
+
+    & .enter {
+        margin: 20px 5px;
+        font-size: 35px;
+    }
+
+    & .insert {
+        margin: 15px 5px;
+        font-size: 20px;
+        color: grey;
+    }
+
+    & .registerLink {
+        font-size: 15px;
+        margin: 10px 5px
+    }
+}
+
+@media (max-width: 770px) {
+    .loginMain {
+        display: flex;
+        flex-direction: column;
+
+        & .loginBox {
+            display: flex;
+            flex-direction: column;
+        }
+
+        & .initialMsg div {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        & .initialMsg {
+            padding: 20px 5px;
+        }
+
+        & .message {
+            display: none;
+        }
+
+        & .loginForm {
+            display: flex;
+            justify-content: center;
+            height: 75vh;
+            width: 70vw;
+            border-radius: 10px;
+            
+            & input, button {
+                width: 40vw;
+            }
+            
+            & .registerLink {
+                font-size: 12px;
+                width: 40vw;
+
+                & span:hover {
+                    color: #E4554D;
+                }
+            }
+        }
+    }
+}
+
+@keyframes entranceMessage {
+    from {
+        transform: translateX(1000px);
+    }
+
+    to {
+        transform: translateX(0px)
+    }
+}
+

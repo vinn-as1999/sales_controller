@@ -1,0 +1,98 @@
+.prodMain {
+    
+    h2 {
+        color: #C4423B;
+        margin: 10px;
+        width: 11vw;
+        cursor: pointer;
+    }
+
+    h2:hover {
+        color: #d1524b;
+    }
+}
+
+.prodBttnMain {
+    cursor: pointer;
+
+    section {
+        display: flex;
+        align-items: center;
+        background-color: #f5d4b8;
+        padding: 15px;
+        margin: 10px;
+        width: 25vw;
+        border-radius: 8px;
+
+        .symbol {
+            font-size: 45px;
+            padding: 5px 10px;
+            color: rgb(223, 129, 129);
+        }
+
+        .inf {
+            transition: ease-in-out 0.1s;
+    
+            & .prodName {
+                font-size: 25px;
+                font-weight: 460;
+            }
+    
+            & .prodValue, .prodQty {
+                color: rgb(99, 99, 99);
+            }
+        }
+    }
+
+    section:hover {
+        background-color: #facfa9;
+        margin-left: 20px;
+    }
+}
+
+.prodFormMain {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+        color: #C4423B;
+        font-size: 35px;
+    }
+
+    & .prodInfo {
+        display: flex;
+        flex-direction: column;
+
+        label {
+            margin-left: 5px;
+            font-weight: 450;
+            font-size: 20px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+            width: 20vw;
+            outline: none;
+            border-color: rgb(211, 211, 211);
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #54E258;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 10px;
+            margin: 5px;
+            width: 10vw;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #67ec6c;
+        }
+    }
+}

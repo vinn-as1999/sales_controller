@@ -1,0 +1,89 @@
+.clientsMain {
+    & .cliBttnMain {
+        background-color: #f7e6d7;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding: 5px;
+        margin: 10px;
+        border-radius: 5px;
+
+        & .nameClient {
+            display: flex;
+            font-size: 30px;
+            font-weight: 400;
+            
+            & div {
+                padding: 5px 15px;
+            }
+        }
+
+        & .numberClient {
+            display: flex;
+            font-size: 25px;
+            font-weight: 400;
+            color: grey;
+
+            & div {
+                padding: 5px 15px;
+            }
+        }
+    }
+
+    & .cliBttnMain:hover {
+        background-color: #f5d4b8;
+    }
+}
+
+/* CLIENTS INFO */
+
+.cliInfoMain {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+
+    header {
+        display: flex;
+        flex-direction: column;
+
+        .closeBttn {
+            display: flex;
+            position: absolute;
+            cursor: pointer;
+            left: 95%;
+            color: rgb(219, 54, 54);
+        }
+
+        .closeBttn:hover {
+            color: rgb(255, 97, 97);
+        }
+        
+        label {
+            color: grey;
+            font-size: 15px;
+            cursor: default;
+        }
+
+        .cliData {
+            font-size: 28px;
+            width: 20vw;
+            border-radius: 5px;
+            padding: 10px;
+        }
+    }
+
+    section {
+        header {
+            font-size: 15px;
+            color: grey;
+            cursor: default;
+        }
+
+        article {
+            background-color: #ffffff;
+            height: 40vh;
+            max-height: 40vh;
+        }
+    }
+}

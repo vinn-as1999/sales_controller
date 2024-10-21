@@ -1,0 +1,64 @@
+.salesMain, 
+.histMain, 
+.clientsMain,
+.prodMain {
+    width: 50vw;
+    height: 80vh;
+    max-height: 80vh;
+    overflow-y: auto;
+  
+
+    & .newSales {
+        display: flex;
+        align-items: center;
+
+        & div {
+            margin: 5px;
+
+            & input {
+                padding: 5px;
+                width: 14vw;
+                border: none;
+                outline-color: #c4423b;
+            }
+
+            & button {
+                padding: 7px 25px;
+                font-weight: 600;
+                border-radius: 5px;
+                background-color: rgb(30, 204, 102);
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+            & button:hover {
+                background-color: rgb(63, 245, 139);
+            }
+        }
+    }
+
+    & table {
+        border-spacing: 0 5px;
+        margin: 5px;
+
+        & tr {
+
+            & th {
+                background-color: #2A2D34;  
+                color: white;
+                width: 10vw;  
+                padding: 5px;
+            }
+            
+            & td {
+                text-align: center;
+                cursor: pointer;
+                background-color: #f7e6d7;
+                margin: 5px;
+                padding: 10px 0px;
+                font-size: 13px;
+            }
+        }
+    }
+}
