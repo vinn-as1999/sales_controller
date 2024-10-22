@@ -16,6 +16,7 @@ import Products from '../components/Products.jsx'
 import ProductsForm from '../components/forms/ProductsForm.jsx'
 import Empty from '../components/Empty.jsx'
 import Inventory from '../components/Inventory.jsx'
+import GeneralInfo from '../components/GeneralInfo.jsx'
 
 function Home() {
   const [title, setTitle] = useState('Informações gerais');
@@ -33,7 +34,7 @@ function Home() {
       <main className='homeMain'>
         <sidebar>
           <div className="iconTextWrapper" 
-            onClick={() => renderComponent('Informações gerais')}>
+            onClick={() => renderComponent('Informações gerais', <GeneralInfo />)}>
             <BiInfoSquare size={30} />
             <div>Informações gerais</div>
           </div>
