@@ -19,7 +19,7 @@ function ClientsBttn(props) {
 
         <article className='numberClient'>
             <div>
-                <MdOutlineLocalPhone size={35} color='black' />
+                <MdOutlineLocalPhone size={35} />
             </div>
             <div>
                 (19) 9999-9999

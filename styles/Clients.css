@@ -27,12 +27,18 @@
 
             & div {
                 padding: 5px 15px;
+                color: black;
             }
         }
     }
 
     & .cliBttnMain:hover {
-        background-color: #f5d4b8;
+        background-color: #e4b389;
+        color: rgb(255, 255, 255);
+
+        div {
+            color: white;
+        }
     }
 }
 
