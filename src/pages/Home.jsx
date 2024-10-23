@@ -17,6 +17,7 @@ import ProductsForm from '../components/forms/ProductsForm.jsx'
 import Empty from '../components/Empty.jsx'
 import Inventory from '../components/Inventory.jsx'
 import GeneralInfo from '../components/GeneralInfo.jsx'
+import GeneralCharts from '../components/GeneralCharts.jsx'
 
 function Home() {
   const [title, setTitle] = useState('Informações gerais');
@@ -88,10 +89,10 @@ function Home() {
             <article className='singularInfo'>
               {
                 clients === true ? <ClientsInfo setClients={setClients} /> : 
-                (title === 'Produtos' ? <ProductsForm /> : (title === 'Inventário' ? <Products /> : 
+                (title === 'Produtos' ? <ProductsForm /> : (title === 'Inventário' ? <Products /> : (title === 'Informações gerais' ? <GeneralCharts /> :
                 <div className="empty">
                   <Empty />
-                </div>))
+                </div>)))
               }
             </article>
           </article>

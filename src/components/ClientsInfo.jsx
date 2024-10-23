@@ -5,13 +5,13 @@ import { IoIosClose } from 'react-icons/io'
 function ClientsInfo(props) {
   const options = {
     chart: {
-      type: 'bar',  // Define o tipo de gráfico como colunas (barras verticais)
+      type: 'bar',
       height: 350
     },
     xaxis: {
-      type: 'datetime',  // Especifica que o eixo X usará datas
+      type: 'datetime',
       labels: {
-        format: 'dd/MM/yyyy',  // Formato para exibir dias
+        format: 'dd/MM/yyyy',
       }
     },
     yaxis: {

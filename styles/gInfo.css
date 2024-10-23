@@ -1,0 +1,54 @@
+.gInfoMain {
+    header {
+        display: flex;
+        margin: 5px;
+        
+        article {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(to bottom, white, rgb(221, 221, 221));
+            padding: 20px;
+            margin: 5px;
+            box-shadow: 2px 2px 5px rgb(44, 44, 44);
+            width: 12vw;
+            cursor: pointer;
+        }
+    
+        .artTitle {
+            font-size: 18px;
+            font-weight: 600;
+            color: grey;
+        }
+    
+        .artValue {
+            font-size: 30px;
+        }
+    }
+
+    .gITable {
+        margin: 10px;
+        background: linear-gradient(to bottom, white, rgb(221, 221, 221));
+        width: 46.5vw;
+        height: 60vh;
+
+        table {
+            width: 46.5vw;
+            border-spacing: 0;
+
+            thead {
+                background-color: #2A2D34;  
+                color: white;
+            }
+
+            th {
+                padding: 5px;
+            }
+
+            td {
+                background-color: #F7E6D7;
+                padding: 5px;
+            }
+        }
+    }
+}
