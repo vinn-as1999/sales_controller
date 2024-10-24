@@ -30,6 +30,8 @@ function Home() {
     setClients(false)
   };
 
+  useEffect(() => renderComponent('Informações gerais', <GeneralInfo />), [])
+
   return (
     <>
       <main className='homeMain'>
@@ -82,10 +84,12 @@ function Home() {
           </article>
 
           <article className='info'>
-            { activeComponent ? activeComponent : <div className="empty">
-              <Empty />
-            </div> }
-
+            { 
+              activeComponent ? activeComponent : 
+              <div className="empty">
+                <Empty />
+              </div> 
+            }
             <article className='singularInfo'>
               {
                 clients === true ? <ClientsInfo setClients={setClients} /> : 

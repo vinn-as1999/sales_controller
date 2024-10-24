@@ -14,6 +14,11 @@
             width: 12vw;
             cursor: pointer;
         }
+
+        article:hover {
+            background: linear-gradient(to bottom, rgb(212, 212, 212), rgb(141, 141, 141));
+            color: white
+        }
     
         .artTitle {
             font-size: 18px;
@@ -51,4 +56,12 @@
             }
         }
     }
+}
+
+.genChartsMain {
+    margin: 5px;
+    width: 46vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
