@@ -25,10 +25,10 @@ function Register(props) {
         <label>Confirme sua senha</label>
         <input type="text" />
 
-        <button style={{backgroundColor: '#24B468'}}>Registrar</button>
+        <button className='registerBttn'>Registrar</button>
 
         <div className='registerLink'>
-          Já possui uma conta? <span onClick={() => props.setRegister(false)}>Faça o login</span>
+          Já possui uma conta? <span onClick={() => {props.setRegister(false); props.setWelcome(true)}}>Faça o login</span>
         </div>
       </form>
     </>

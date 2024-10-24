@@ -5,6 +5,7 @@ import Register from '../components/Register.jsx';
 
 function Login() {
   const [register, setRegister] = useState(false);
+  const [welcome, setWelcome] = useState(true);
 
   useEffect(() => console.log(register), [register])
 
@@ -13,17 +14,22 @@ function Login() {
       <main className='loginMain'>
         <section className='loginBox'>
             <article className='logBoxInputs'>
-                { register === false ? <LoginForm setRegister={setRegister} /> : <Register setRegister={setRegister} />
+                { register === false ? <LoginForm setRegister={setRegister} setWelcome={setWelcome} /> : <Register setRegister={setRegister} setWelcome={setWelcome} />
                 }
             </article>
 
             <article className='message'>
                 <div className='greetings'>
-                    Bem-vindo de volta!
+                    {
+                      welcome ? 'Bem-vindo de volta!' : 'É um prazer tê-lo aqui'
+                    }
                 </div>
 
                 <div className='phrase'>
-                    Acesse seu painel e gerencie suas vendas com rapidez e praticidade.
+                    {
+                      welcome ? 'Acesse seu painel e gerencie suas vendas com rapidez e praticidade.' : 
+                      'Registre-se e comece a gerenciar suas vendas com rapizes e praticidade!'
+                    }
                 </div>
 
                 <div className='img'>

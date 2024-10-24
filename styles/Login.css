@@ -4,6 +4,9 @@
 }
 
 .loginMain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: linear-gradient(to top, #E4554D, #c4423b);
     width: 100vw;
     height: 100vh;
@@ -13,7 +16,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100vh;
+        
     }
 
     & .message {
@@ -37,7 +40,7 @@
         font-weight: 600;
         color: white;
         margin-left: 20px;
-        animation: entranceMessage linear 0.6s;
+        animation: entranceMessage 0.6s;
     }
 
     & .img {
@@ -53,7 +56,7 @@
     background-color: rgb(230, 230, 230);
     box-shadow: -5px 5px 20px #292929;
     padding: 20px;
-    width: 40vw;
+    width: 30vw;
     height: 80vh;
 
     & button {
@@ -71,6 +74,14 @@
     & button:hover {
         background-color: #E4554D;
         transition: ease-in-out 0.3s;
+    }
+
+    & .registerBttn {
+        background-color: #24B468;
+    }
+
+    & .registerBttn:hover {
+        background-color: #34ce7c;
     }
 
     & input {

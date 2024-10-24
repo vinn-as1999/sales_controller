@@ -25,7 +25,7 @@ function LoginForm(props) {
         <button>Entrar</button>
         
         <div className='registerLink'>
-          Não possui uma conta? <span onClick={() => props.setRegister(true)}>Registre-se aqui</span>
+          Não possui uma conta? <span onClick={() => {props.setRegister(true); props.setWelcome(false)}}>Registre-se aqui</span>
         </div>
       </form>
     </>
