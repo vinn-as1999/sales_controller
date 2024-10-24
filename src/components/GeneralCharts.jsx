@@ -48,7 +48,7 @@ function GeneralCharts() {
 
           <section>
             <h3>Mais Vendidos</h3>
-            <h4 style={{color: 'grey'}}>(últimos 7 dias)</h4>
+            <h4>(últimos 7 dias)</h4>
 
             <Chart options={{
               chart: {
@@ -70,6 +70,13 @@ function GeneralCharts() {
             type='line'
             width={600}
             height={250} />
+          </section>
+
+          <section>
+            <h3>Valor Obtido</h3>
+            <h4>(últimos 7 dias)</h4>
+            
+            
           </section>
       </main>
     </>

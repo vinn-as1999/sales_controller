@@ -64,4 +64,9 @@
     max-height: 80vh;
     overflow-y: auto;
     overflow-x: hidden;
+
+
+    h4 {
+        color: grey;
+    }
 }
