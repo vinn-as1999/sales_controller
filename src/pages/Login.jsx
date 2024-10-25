@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import LoginForm from '../components/forms/LoginForm.jsx'
 import '../../styles/Login.css'
-import Register from '../components/Register.jsx';
+import Register from '../components/forms/Register.jsx';
 
 function Login() {
   const [register, setRegister] = useState(false);
