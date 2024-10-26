@@ -1,0 +1,39 @@
+.messageMain {
+    color: rgb(24, 199, 103);
+    background-color: rgb(219, 247, 238);
+    width: 25vw;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid rgb(30, 221, 235) 1px;
+    position: absolute;
+    top: 10vh;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    animation: msgEntrance 0.3s linear;
+}
+
+.checkDone {
+    color: rgb(30, 221, 235);
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+@media (max-width: 760px) {
+    .messageMain {
+        width: 70vw;
+        top: 3vh;
+        left: 13vw;
+        font-size: 14px;
+    }
+}
+
+@keyframes msgEntrance {
+    from {
+        transform: translateX(-100vw);
+    } 
+
+    to {
+        transform: translateX(0);
+    }
+}
