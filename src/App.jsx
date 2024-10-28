@@ -5,13 +5,14 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 
 function App() {
+  const [isToken, setIsToken] = useState(localStorage.getItem('token'));
 
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route element={<Login />} path='/' />
-          <Route element={<Home />} path='/home' />
+          <Route element={<Login isToken={isToken} setIsToken={setIsToken} />} path='/' />
+          <Route element={<Home isToken={isToken} setIsToken={setIsToken} />} path='/home' />
         </Routes>
       </BrowserRouter>
     </>

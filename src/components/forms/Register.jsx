@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Message from '../messages/Message';
+import Error from '../messages/Error';
 
 const apiUrl = import.meta.env.VITE_USERS_URL;
 
@@ -10,6 +11,7 @@ function Register(props) {
   const [confirmPswd, setConfirmPswd] = useState('');
   const [message, setMessage] = useState(false);
   const [noFields, setNoFields] = useState(false);
+  const [error, setError] = useState('');
   const [inputStyles, setInputStyles] = useState({
     name: {},
     email: {},
@@ -50,6 +52,7 @@ function Register(props) {
       const data = await response.json();
       if (data[0].error) {
         setNoFields(true);
+        setError(data[0].error)
         return;
       }
 
@@ -77,7 +80,7 @@ function Register(props) {
 
   return (
     <>
-      <form className='loginForm' onSubmit={(e) => { e.preventDefault(); registerUser(password, confirmPswd); }}>
+      <form className='registerForm' onSubmit={(e) => { e.preventDefault(); registerUser(password, confirmPswd); }}>
         <div className='initialMsg'>
           <div className='enter'>Registre-se</div>
           <div className='insert'>Insira suas credenciais aqui</div>
@@ -102,6 +105,8 @@ function Register(props) {
         </div>
 
         {message && <Message />}
+
+        {error && <Error error={error} />}
       </form>
     </>
   );

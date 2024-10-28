@@ -18,17 +18,60 @@ import Empty from '../components/Empty.jsx'
 import Inventory from '../components/Inventory.jsx'
 import GeneralInfo from '../components/GeneralInfo.jsx'
 import GeneralCharts from '../components/GeneralCharts.jsx'
+import { useNavigate } from 'react-router-dom'
+import ClientsForm from '../components/forms/ClientsForm.jsx'
 
-function Home() {
+function Home(props) {
+  const navigate = useNavigate();
   const [title, setTitle] = useState('Informações gerais');
   const [clients, setClients] = useState(false);
+  const [clientsList, setClientsList] = useState([]); // array de objetos
+  const [time, setTime] = useState(new Date());
+  const [greeting, setGreeting] = useState('');
   const [activeComponent, setActiveComponent] = useState(null);
+  const name = localStorage.getItem('username')
+
 
   function renderComponent(title, component) {
     setTitle(title);
     setActiveComponent(component)
     setClients(false)
   };
+
+
+  function handleLogout() {
+    localStorage.clear();
+    props.setIsToken(false);
+  };
+  
+
+  useEffect(() => {
+    const updateGreeting = () => {
+      const hours = time.getHours();
+      if (hours < 12) {
+        setGreeting("Bom dia");
+      } else if (hours < 18) {
+        setGreeting("Boa tarde");
+      } else {
+        setGreeting("Boa noite");
+      }
+    };
+
+    updateGreeting();
+
+    const timer = setInterval(() => {
+      setTime(new Date());
+      updateGreeting();
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [time]);
+
+  useEffect(() => {
+    if (!props.isToken) {
+      navigate('/');
+    }
+  }, [props.isToken, navigate]);
 
   useEffect(() => renderComponent('Informações gerais', <GeneralInfo />), [])
 
@@ -51,7 +94,7 @@ function Home() {
             <GrHistory size={30} />
             <div>Histórico de vendas</div>
           </div>
-          <div className="iconTextWrapper" onClick={() => renderComponent('Clientes', <Clients setClients={setClients} />)}>
+          <div className="iconTextWrapper" onClick={() => renderComponent('Clientes', <Clients setClients={setClients} clientsList={clientsList} setClientsList={setClientsList} />)}>
             <RiContactsLine size={30} />
             <div>Clientes</div>
           </div>
@@ -63,11 +106,7 @@ function Home() {
             <MdOutlineInventory size={30} />
             <div>Inventário</div>
           </div>
-          <div className="iconTextWrapper" onClick={() => renderComponent('Dados')}>
-            <GrBarChart size={30} />
-            <div>Dados</div>
-          </div>
-          <div className="iconTextWrapper">
+          <div className="iconTextWrapper" onClick={handleLogout}>
             <CiLogout size={30} />
             <div>Sair</div>
           </div>
@@ -75,7 +114,7 @@ function Home() {
 
         <section className='generalInfo'>
           <article className='giHeader'>
-            <div className='gihGreetings'>Bem-vindo, </div>
+            <div className='gihGreetings'>{greeting}, {name}</div>
             <div className='gihCapital'>Capital: R$ 500,00</div>
           </article>
 
@@ -93,10 +132,13 @@ function Home() {
             <article className='singularInfo'>
               {
                 clients === true ? <ClientsInfo setClients={setClients} /> : 
-                (title === 'Produtos' ? <ProductsForm /> : (title === 'Inventário' ? <Products /> : (title === 'Informações gerais' ? <GeneralCharts /> :
+                (title === 'Produtos' ? <ProductsForm /> : 
+                  (title === 'Inventário' ? <Products /> : 
+                    (title === 'Informações gerais' ? <GeneralCharts /> : 
+                      (title === 'Clientes' ? <ClientsForm clientsList={clientsList} setClientsList={setClientsList} /> :
                 <div className="empty">
                   <Empty />
-                </div>)))
+                </div>))))
               }
             </article>
           </article>

@@ -3,7 +3,7 @@ import LoginForm from '../components/forms/LoginForm.jsx'
 import '../../styles/Login.css'
 import Register from '../components/forms/Register.jsx';
 
-function Login() {
+function Login(props) {
   const [register, setRegister] = useState(false);
   const [welcome, setWelcome] = useState(true);
 
@@ -14,7 +14,7 @@ function Login() {
       <main className='loginMain'>
         <section className='loginBox'>
             <article className='logBoxInputs'>
-                { register === false ? <LoginForm setRegister={setRegister} setWelcome={setWelcome} /> : <Register setRegister={setRegister} setWelcome={setWelcome} />
+                { register === false ? <LoginForm isToken={props.isToken} setIsToken={props.setIsToken} setRegister={setRegister} setWelcome={setWelcome} /> : <Register setRegister={setRegister} setWelcome={setWelcome} />
                 }
             </article>
 

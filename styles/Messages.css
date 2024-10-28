@@ -1,4 +1,4 @@
-.messageMain {
+.messageMain, .errorMsg {
     color: rgb(24, 199, 103);
     background-color: rgb(219, 247, 238);
     width: 25vw;
@@ -10,7 +10,8 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    animation: msgEntrance 0.3s linear;
+    cursor: default;
+    animation: msgEntrance 0.1s linear;
 }
 
 .checkDone {
@@ -19,12 +20,25 @@
     margin-left: 5px;
 }
 
+.errorMsg {
+    color: rgb(255, 255, 255);
+    background-color: rgb(247, 171, 161);
+    border: solid rgb(241, 25, 25) 1px;
+}
+
 @media (max-width: 760px) {
     .messageMain {
         width: 70vw;
         top: 3vh;
         left: 13vw;
         font-size: 14px;
+    }
+
+    .errorMsg {
+        width: 50vw;
+        top: 14vh;
+        font-size: 14px;
+        margin-left: 40px;
     }
 }
 

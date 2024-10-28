@@ -44,27 +44,32 @@ function ClientsInfo(props) {
       <main className='cliInfoMain'>
         <header>
           <div className='closeBttn' onClick={() => props.setClients(false)}>
-            <IoIosClose size={50} />
+            <IoIosClose className='xbtt' size={50} />
           </div>
-          <label htmlFor="">Nome:</label>
+          <label>Nome:</label>
           <div className="cliData">
             João
           </div>
 
-          <label htmlFor="">Contato:</label>
+          <label>Contato:</label>
           <div className="cliData">
             (19) 9999-9999
           </div>
 
-          <label htmlFor="">Local/Endereço:</label>
+          <label>Local/Endereço:</label>
           <div className="cliData">
             CAMPINAS
+          </div>
+
+          <label>Observações</label>
+          <div className="cliData" style={{fontSize: 15}}>
+            coments
           </div>
         </header>
         
         <section className='charts'>
           <header>
-            Gráfico:
+            Gráficos:
           </header>
           
           <article>

@@ -7,7 +7,7 @@ function Clients(props) {
   return (
     <>
       <main className='clientsMain'>
-        <ClientsBttn setClients={props.setClients} />
+        {props.clientsList.length > 0 ? <ClientsBttn setClients={props.setClients} /> : 'n'}
       </main>
     </>
   ) 

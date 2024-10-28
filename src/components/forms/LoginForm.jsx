@@ -1,12 +1,68 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import Error from '../messages/Error';
+
+
+const apiUrl = import.meta.env.VITE_LOGIN_URL;
 
 function LoginForm(props) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  function goToPage(path) {
+    navigate(path);
+  }
+
+  async function login() {
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email, password
+        })
+      });
+  
+      if (!response.ok) {
+        console.log('Erro ao logar usuário', response)
+        return
+      }
+  
+      const data = await response.json();
+
+      if (data[0].error) {
+        console.log(data[0].error)
+        setError(data[0].error)
+        return
+      }
+
+      console.log('O DATA', data)
+
+      props.setIsToken(true);
+      localStorage.setItem('id', data[0].id);
+      localStorage.setItem('username', data[0].name);
+      localStorage.setItem('token', data[0].token);
+
+    } catch (error) {
+      console.log('Erro de rede: ', error)
+    }
+  };
+
+  useEffect(() => {
+    if (props.isToken) {
+      goToPage('/home')
+    }
+  }, [props.isToken]);
 
   useEffect(() => props.setRegister(false), [])
 
   return (
     <>
-      <form className='loginForm' style={{height: '60vh'}}>
+      <form className='loginForm'>
         <div className='initialMsg'>
           <div className='enter'>
             Entre em sua conta
@@ -17,17 +73,21 @@ function LoginForm(props) {
         </div>
 
         <label>Email</label>
-        <input type="text" placeholder='exemplo@email.com' autoFocus={true} />
+        <input type="text" value={email} placeholder='exemplo@email.com' autoFocus={true} onChange={(e) => setEmail(e.target.value)} />
 
         <label htmlFor="">Senha</label>
-        <input type="password" placeholder='Sua senha aqui' />
+        <input type="password" value={password} placeholder='Sua senha aqui' onChange={(e) => setPassword(e.target.value)} />
 
-        <button>Entrar</button>
+        <button onClick={(e) => {e.preventDefault(); login()}}>Entrar</button>
         
         <div className='registerLink'>
           Não possui uma conta? <span onClick={() => {props.setRegister(true); props.setWelcome(false)}}>Registre-se aqui</span>
         </div>
       </form>
+
+      <div style={{marginLeft: '20px'}}>
+        {error && <Error error={error} />}
+      </div>
     </>
   )
 }

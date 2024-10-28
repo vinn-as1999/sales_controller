@@ -1,3 +1,4 @@
+/* Estilo base permanece igual */
 * {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -16,7 +17,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        
     }
 
     & .message {
@@ -49,7 +49,8 @@
     }
 }
 
-.loginForm {
+/* Formulários */
+.loginForm, .registerForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -120,13 +121,13 @@
 
     & .registerLink {
         font-size: 15px;
-        margin: 10px 5px
+        margin: 10px 5px;
     }
 }
 
+/* Modo celular: esconder o .message */
 @media (max-width: 760px) {
     .loginMain {
-        display: flex;
         flex-direction: column;
 
         & .loginBox {
@@ -134,49 +135,56 @@
             flex-direction: column;
         }
 
-        & .initialMsg div {
-            font-size: 18px;
-            margin: 0;
+        & .message {
+            display: none; /* Esconde a mensagem em telas pequenas */
         }
 
-        & .initialMsg {
-            padding: 20px 5px;
+        & .loginForm, & .registerForm {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 80vw;
+            height: auto;
+            padding: 15px;
+            border-radius: 10px;
+
+            & input, button {
+                width: 80%;
+            }
+
+            & .enter {
+                font-size: 24px;
+            }
+
+            & .insert {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+/* Modo paisagem em telas menores */
+@media (orientation: landscape) and (max-width: 760px) {
+    .loginMain {
+        flex-direction: row;
+        height: auto;
+
+        & .loginBox {
+            width: 100%;
         }
 
         & .message {
             display: none;
         }
-
-        & .loginForm {
-            display: flex;
-            justify-content: center;
-            height: 75vh;
-            width: 60vw;
-            border-radius: 10px;
-            
-            & input, button {
-                width: 40vw;
-            }
-            
-            & .registerLink {
-                font-size: 12px;
-                width: 40vw;
-
-                & span:hover {
-                    color: #E4554D;
-                }
-            }
-        }
     }
 }
 
+/* Animação de entrada */
 @keyframes entranceMessage {
     from {
         transform: translateX(1000px);
     }
-
     to {
-        transform: translateX(0px)
+        transform: translateX(0px);
     }
 }
-

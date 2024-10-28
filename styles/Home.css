@@ -82,11 +82,12 @@ li {
             background-color: #ebebeb;
             justify-content: space-between;
             padding: 15px 5px;
-            height: 8vh;
 
             & .gihGreetings, .gihCapital {
                 font-size: 30px;
                 font-weight: 500;
+                cursor: default;
+                user-select: none;
             }
         }
 
@@ -101,7 +102,10 @@ li {
         display: flex;
         
         & .singularInfo {
-            width: 40vw;
+            width: 44vw;
+            margin: 5px;
+            overflow-y: auto;
+            
         }
     }
 }

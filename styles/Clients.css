@@ -48,6 +48,7 @@
     display: flex;
     flex-direction: column;
     margin: 5px;
+    height: 80vh;
 
     header {
         display: flex;
@@ -55,13 +56,15 @@
 
         .closeBttn {
             display: flex;
-            position: absolute;
             cursor: pointer;
+            position: absolute;
             left: 95%;
+            justify-content: end;
             color: rgb(219, 54, 54);
         }
+        
 
-        .closeBttn:hover {
+        .xbtt:hover {
             color: rgb(255, 97, 97);
         }
         
@@ -90,6 +93,52 @@
             background-color: #ffffff;
             height: 40vh;
             max-height: 40vh;
+            margin: 5px;
+        }
+    }
+}
+
+/* CLIENTS FORM */
+
+.cliFormMain {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 40vw;
+        max-height: 80vh;
+
+        input, textarea {
+            width: 25vw;
+            height: 20px;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px rgb(187, 187, 187);
+            outline-color: rgb(235, 156, 156);
+        }
+
+        textarea {
+            height: 15vh;
+        }
+
+        button {
+            width: 15vw;
+            margin: 5px;
+            padding: 5px;
+            font-size: 20px;
+            font-weight: 600;
+            border: none;
+            background-color: rgb(50, 241, 50);
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgb(108, 255, 108);
         }
     }
 }
