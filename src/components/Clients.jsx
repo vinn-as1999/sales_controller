@@ -7,7 +7,15 @@ function Clients(props) {
   return (
     <>
       <main className='clientsMain'>
-        {props.clientsList.length > 0 ? <ClientsBttn setClients={props.setClients} /> : 'n'}
+        {props.clientsList.length > 0 ? (
+          props.clientsList.map((value, index) => (
+          <div key={index}>
+            <ClientsBttn setClients={props.setClients} 
+              name={value.client}
+              contact={value.contact} />
+          </div>
+        ))
+        ) : 'n'}
       </main>
     </>
   ) 

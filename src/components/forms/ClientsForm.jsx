@@ -10,6 +10,9 @@ function ClientsForm(props) {
   const [obs, setObs] = useState('');
 
   async function addClients() {
+    if (!name.trim && !contact.trim() && !clientAddress.trim()) {
+      return
+    }
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {

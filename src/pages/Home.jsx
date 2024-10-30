@@ -26,8 +26,8 @@ function Home(props) {
   const [title, setTitle] = useState('Informações gerais');
   const [clients, setClients] = useState(false);
   const [clientsList, setClientsList] = useState(() => {
-    const storedItems = localStorage.getItem('clients');
-    return storedItems ? JSON.parse(storedItems) : []
+    const stored = localStorage.getItem('clients')
+    return stored ? JSON.parse(stored) : []
   })
   const [time, setTime] = useState(new Date());
   const [greeting, setGreeting] = useState('');

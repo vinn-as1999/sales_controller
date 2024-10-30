@@ -13,7 +13,7 @@ function ClientsBttn(props) {
                 <FiUser size={35} />
             </div>
             <div>
-                João
+                {props.name}
             </div>
         </article>
 
@@ -22,7 +22,7 @@ function ClientsBttn(props) {
                 <MdOutlineLocalPhone size={35} />
             </div>
             <div>
-                (19) 9999-9999
+                {props.contact}
             </div>
         </article>
       </main>
