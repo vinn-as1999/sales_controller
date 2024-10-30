@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../../styles/Clients.css'
+
+const apiUrl = import.meta.env.VITE_ADD_CLIENTS_URL
 
 function ClientsForm(props) {
   const [name, setName] = useState('');
@@ -8,7 +10,18 @@ function ClientsForm(props) {
   const [obs, setObs] = useState('');
 
   async function addClients() {
-    const response = await fetch();
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id: localStorage.getItem('id'),
+        client: name,
+        contact: contact,
+        address: clientAddress
+      })
+    });
     
     if (!response.ok) {
       console.log('Erro ao adicionar cliente', response);
@@ -21,6 +34,14 @@ function ClientsForm(props) {
       console.log(data[0].error);
       return
     }
+
+    props.setClientsList(prev => [
+      ...prev, {
+        client: data[0].client,
+        contact: data[0].contact,
+        address: data[0].address,
+      }
+    ]);
   };
 
 

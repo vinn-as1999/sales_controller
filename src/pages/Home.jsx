@@ -25,7 +25,10 @@ function Home(props) {
   const navigate = useNavigate();
   const [title, setTitle] = useState('Informações gerais');
   const [clients, setClients] = useState(false);
-  const [clientsList, setClientsList] = useState([]); // array de objetos
+  const [clientsList, setClientsList] = useState(() => {
+    const storedItems = localStorage.getItem('clients');
+    return storedItems ? JSON.parse(storedItems) : []
+  })
   const [time, setTime] = useState(new Date());
   const [greeting, setGreeting] = useState('');
   const [activeComponent, setActiveComponent] = useState(null);
@@ -74,6 +77,8 @@ function Home(props) {
   }, [props.isToken, navigate]);
 
   useEffect(() => renderComponent('Informações gerais', <GeneralInfo />), [])
+
+  useEffect(() => localStorage.setItem('clients', JSON.stringify(clientsList)), [clientsList]);
 
   return (
     <>
