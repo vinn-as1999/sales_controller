@@ -10,7 +10,7 @@ function ProductsForm() {
 
         <section className='prodInfo'>
             <label>Nome do produto:</label>
-            <input type="text" />
+            <input type="text" autoFocus={true} />
 
             <label>Categoria:</label>
             <input type="text" />

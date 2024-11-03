@@ -3,6 +3,8 @@ import Chart from 'react-apexcharts'
 import { IoIosClose } from 'react-icons/io'
 
 function ClientsInfo(props) {
+  const {client, address, contact, observations} = props.clientData || {};
+
   const options = {
     chart: {
       type: 'bar',
@@ -48,22 +50,26 @@ function ClientsInfo(props) {
           </div>
           <label>Nome:</label>
           <div className="cliData">
-            João
+            {client}
           </div>
 
           <label>Contato:</label>
           <div className="cliData">
-            (19) 9999-9999
+            {contact}
           </div>
 
           <label>Local/Endereço:</label>
           <div className="cliData">
-            CAMPINAS
+            {address}
           </div>
 
           <label>Observações</label>
           <div className="cliData" style={{fontSize: 15}}>
-            coments
+            {observations ? observations : (
+              <div style={{color: 'grey', fontStyle: 'italic', cursor: 'default'}}>
+                Sem comentários
+              </div>
+            )}
           </div>
         </header>
         

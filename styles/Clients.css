@@ -5,6 +5,7 @@
         justify-content: space-between;
         align-items: center;
         cursor: pointer;
+        overflow-x: hidden;
         padding: 5px;
         margin: 10px;
         border-radius: 5px;
@@ -126,19 +127,20 @@
         }
 
         button {
-            width: 15vw;
-            margin: 5px;
-            padding: 5px;
-            font-size: 20px;
-            font-weight: 600;
-            border: none;
-            background-color: rgb(50, 241, 50);
+            background-color: #54E258;
             color: white;
             cursor: pointer;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 10px;
+            margin: 5px;
+            width: 10vw;
+            border: none;
+            border-radius: 5px;
         }
 
         button:hover {
-            background-color: rgb(108, 255, 108);
+            background-color: #67ec6c;
         }
     }
 }

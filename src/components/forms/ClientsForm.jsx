@@ -10,7 +10,8 @@ function ClientsForm(props) {
   const [obs, setObs] = useState('');
 
   async function addClients() {
-    if (!name.trim && !contact.trim() && !clientAddress.trim()) {
+    if (!name.trim || !contact.trim() || !clientAddress.trim()) {
+      console.log('deu n')
       return
     }
     const response = await fetch(apiUrl, {
@@ -22,7 +23,8 @@ function ClientsForm(props) {
         user_id: localStorage.getItem('id'),
         client: name,
         contact: contact,
-        address: clientAddress
+        address: clientAddress,
+        observations: obs
       })
     });
     
@@ -38,24 +40,36 @@ function ClientsForm(props) {
       return
     }
 
-    props.setClientsList(prev => [
-      ...prev, {
-        client: data[0].client,
-        contact: data[0].contact,
-        address: data[0].address,
-      }
-    ]);
+    const newClients = {
+      client: data[0].client,
+      contact: data[0].contact,
+      address: data[0].address,
+      observations: data[0].observations
+    }
+
+    props.setClientsList(prev => [...prev, newClients]);
+
+    localStorage.setItem('clients', JSON.stringify(props.clientsList))
+
+    setName('');
+    setContact('');
+    setClientAddress('');
+    setObs('');
   };
 
+  useEffect(() => localStorage.setItem('clients', JSON.stringify(props.clientsList)), [props.clientsList])
 
   return (
     <>
       <main className='cliFormMain'>
+        <header>
+          <h1>Registrar cliente</h1>
+        </header>
         <form>
             <label>
                 Nome:
             </label>
-            <input type="text" value={name} onChange={e => setName(e.target.value)} />
+            <input type="text" value={name} onChange={e => setName(e.target.value)} autoFocus={true} />
 
             <label>
                 Contato:

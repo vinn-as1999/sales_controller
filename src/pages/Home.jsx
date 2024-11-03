@@ -5,7 +5,6 @@ import { GrHistory } from "react-icons/gr"
 import { RiContactsLine } from "react-icons/ri"
 import { AiOutlineProduct } from "react-icons/ai"
 import { MdOutlineInventory } from "react-icons/md"
-import { GrBarChart } from "react-icons/gr"
 import { CiLogout } from "react-icons/ci"
 import '../../styles/Home.css'
 import NewSales from '../components/NewSales.jsx'
@@ -32,8 +31,8 @@ function Home(props) {
   const [time, setTime] = useState(new Date());
   const [greeting, setGreeting] = useState('');
   const [activeComponent, setActiveComponent] = useState(null);
-  const name = localStorage.getItem('username')
-
+  const name = localStorage.getItem('username');
+  const [selectedClient, setSelectedClient] = useState(null);
 
   function renderComponent(title, component) {
     setTitle(title);
@@ -76,9 +75,12 @@ function Home(props) {
     }
   }, [props.isToken, navigate]);
 
-  useEffect(() => renderComponent('Informações gerais', <GeneralInfo />), [])
+  useEffect(() => {
+    console.log('AQUI> ', clientsList)
+    setClientsList(clientsList)
+  }, [clientsList]);
 
-  useEffect(() => localStorage.setItem('clients', JSON.stringify(clientsList)), [clientsList]);
+  useEffect(() => renderComponent('Informações gerais', <GeneralInfo />), [])
 
   return (
     <>
@@ -99,7 +101,7 @@ function Home(props) {
             <GrHistory size={30} />
             <div>Histórico de vendas</div>
           </div>
-          <div className="iconTextWrapper" onClick={() => renderComponent('Clientes', <Clients setClients={setClients} clientsList={clientsList} setClientsList={setClientsList} />)}>
+          <div className="iconTextWrapper" onClick={() => renderComponent('Clientes', <Clients key={clientsList.length} setClients={setClients} clientsList={[...clientsList]} setClientsList={setClientsList} setSelectedClient={setSelectedClient} />)}>
             <RiContactsLine size={30} />
             <div>Clientes</div>
           </div>
@@ -136,7 +138,7 @@ function Home(props) {
             }
             <article className='singularInfo'>
               {
-                clients === true ? <ClientsInfo setClients={setClients} /> : 
+                clients === true ? <ClientsInfo setClients={setClients} clientData={selectedClient} /> : 
                 (title === 'Produtos' ? <ProductsForm /> : 
                   (title === 'Inventário' ? <Products /> : 
                     (title === 'Informações gerais' ? <GeneralCharts /> : 
