@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import '../../styles/Clients.css'
 import ClientsBttn from './bttns/ClientsBttn'
+import { ClientsContext } from './contexts/ClientsContext';
 
 function Clients(props) {
+  const {clientsList, setClientsList} = useContext(ClientsContext)
   
   useEffect(() => {
     console.log('foi')
-    console.log(props.clientsList)
-  }, [props.clientsList]);
+    console.log(clientsList)
+  }, [clientsList]);
 
-  console.log('aqui', props.clientsList)
+  console.log('aqui', clientsList)
 
   return (
     <main className='clientsMain'>
-      {props.clientsList.length > 0 ? (
-        props.clientsList.map((value, index) => (
+      {clientsList.length > 0 ? (
+        clientsList.map((value, index) => (
           <div key={index}>
             <ClientsBttn 
               setSelectedClient={props.setSelectedClient}

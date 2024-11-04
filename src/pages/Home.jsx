@@ -24,10 +24,6 @@ function Home(props) {
   const navigate = useNavigate();
   const [title, setTitle] = useState('Informações gerais');
   const [clients, setClients] = useState(false);
-  const [clientsList, setClientsList] = useState(() => {
-    const stored = localStorage.getItem('clients')
-    return stored ? JSON.parse(stored) : []
-  })
   const [time, setTime] = useState(new Date());
   const [greeting, setGreeting] = useState('');
   const [activeComponent, setActiveComponent] = useState(null);
@@ -75,10 +71,6 @@ function Home(props) {
     }
   }, [props.isToken, navigate]);
 
-  useEffect(() => {
-    console.log('AQUI> ', clientsList)
-    setClientsList(clientsList)
-  }, [clientsList]);
 
   useEffect(() => renderComponent('Informações gerais', <GeneralInfo />), [])
 
@@ -101,7 +93,7 @@ function Home(props) {
             <GrHistory size={30} />
             <div>Histórico de vendas</div>
           </div>
-          <div className="iconTextWrapper" onClick={() => renderComponent('Clientes', <Clients key={clientsList.length} setClients={setClients} clientsList={[...clientsList]} setClientsList={setClientsList} setSelectedClient={setSelectedClient} />)}>
+          <div className="iconTextWrapper" onClick={() => renderComponent('Clientes', <Clients setClients={setClients} setSelectedClient={setSelectedClient} />)}>
             <RiContactsLine size={30} />
             <div>Clientes</div>
           </div>
@@ -142,7 +134,7 @@ function Home(props) {
                 (title === 'Produtos' ? <ProductsForm /> : 
                   (title === 'Inventário' ? <Products /> : 
                     (title === 'Informações gerais' ? <GeneralCharts /> : 
-                      (title === 'Clientes' ? <ClientsForm clientsList={clientsList} setClientsList={setClientsList} /> :
+                      (title === 'Clientes' ? <ClientsForm /> :
                 <div className="empty">
                   <Empty />
                 </div>))))

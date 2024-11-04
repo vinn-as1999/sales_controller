@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { ClientsContext } from '../contexts/ClientsContext.jsx'
 import '../../../styles/Clients.css'
 
 const apiUrl = import.meta.env.VITE_ADD_CLIENTS_URL
 
 function ClientsForm(props) {
+  const {clientsList, setClientsList} = useContext(ClientsContext)
   const [name, setName] = useState('');
   const [contact, setContact] = useState('');
   const [clientAddress, setClientAddress] = useState('');
@@ -14,50 +16,56 @@ function ClientsForm(props) {
       console.log('deu n')
       return
     }
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user_id: localStorage.getItem('id'),
-        client: name,
-        contact: contact,
-        address: clientAddress,
-        observations: obs
-      })
-    });
-    
-    if (!response.ok) {
-      console.log('Erro ao adicionar cliente', response);
-      return
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: localStorage.getItem('id'),
+          client: name,
+          contact: contact,
+          address: clientAddress,
+          observations: obs
+        })
+      });
+      
+      if (!response.ok) {
+        console.log('Erro ao adicionar cliente: ', response);
+        return
+      }
+  
+      const data = await response.json();
+  
+      if (data[0].error) {
+        console.log(data[0].error);
+        return
+      }
+  
+      const newClients = {
+        client: data[0].client,
+        contact: data[0].contact,
+        address: data[0].address,
+        observations: data[0].observations
+      }
+  
+      setClientsList(prev => [...prev, newClients]);
+  
+      localStorage.setItem('clients', JSON.stringify(clientsList))
+  
+      setName('');
+      setContact('');
+      setClientAddress('');
+      setObs('');
+
+    } catch (error) {
+      console.log('Erro ocorrido: ', error)
     }
-
-    const data = await response.json();
-
-    if (data[0].error) {
-      console.log(data[0].error);
-      return
-    }
-
-    const newClients = {
-      client: data[0].client,
-      contact: data[0].contact,
-      address: data[0].address,
-      observations: data[0].observations
-    }
-
-    props.setClientsList(prev => [...prev, newClients]);
-
-    localStorage.setItem('clients', JSON.stringify(props.clientsList))
-
-    setName('');
-    setContact('');
-    setClientAddress('');
-    setObs('');
   };
 
-  useEffect(() => localStorage.setItem('clients', JSON.stringify(props.clientsList)), [props.clientsList])
+  useEffect(() => localStorage.setItem('clients', JSON.stringify(clientsList)), [clientsList])
 
   return (
     <>
