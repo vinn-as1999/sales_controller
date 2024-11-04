@@ -1,19 +1,22 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { ProductsContext } from '../contexts/ProductsContext'
 
 function ProductsForm() {
+  const {products, setProducts} = useContext(ProductsContext)
+
   return (
     <>
       <main className='prodFormMain'>
-        <div className='prodFormTitle'>
+        <header className='prodFormTitle'>
             <h1>Adicionar Produto</h1>
-        </div>
+        </header>
 
         <section className='prodInfo'>
-            <label>Nome do produto:</label>
-            <input type="text" autoFocus={true} />
-
             <label>Categoria:</label>
             <input type="text" />
+
+            <label>Nome do produto:</label>
+            <input type="text" autoFocus={true} />
 
             <label>Preço</label>
             <input type="number" />

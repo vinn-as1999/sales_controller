@@ -1,26 +1,11 @@
-import React, { useState } from 'react';
-import ProductsBttn from './bttns/ProductsBttn';
-import '../../styles/Products.css';
+import React, { useContext, useState } from 'react'
+import ProductsBttn from './bttns/ProductsBttn.jsx'
+import { ProductsContext } from './contexts/ProductsContext.jsx'
+import '../../styles/Products.css'
 
-const prod = {
-  Categoria1: [{
-      Produto: 'pacoça',
-      Preço: 3,
-      Quantidade: 10
-  }, {
-      Produto: 'cocada',
-      Preço: 3,
-      Quantidade: 5
-  }],
-  Categoria2: [{
-      Produto: 'chocolate',
-      Preço: 8,
-      Quantidade: 1
-  }]
-};
 
 function Products() {
-  // Armazenar o estado de visibilidade das listas por categoria
+  const {products, setProducts} = useContext(ProductsContext)
   const [visibleCategories, setVisibleCategories] = useState({});
 
   // Alterna a visibilidade de uma categoria específica
@@ -34,11 +19,11 @@ function Products() {
   return (
     <>
       <main className='prodMain'>
-        {Object.keys(prod).map((cat) => (
+        {Object.keys(products).length > 0 ? Object.keys(products).map((cat) => (
           <div key={cat}>
             <h2 onClick={() => toggleList(cat)}>{cat}</h2>
             <ul style={{ display: visibleCategories[cat] ? 'block' : 'none' }}>
-              {prod[cat].map((product, index) => (
+              {products[cat].map((product, index) => (
                 <li key={index}>
                   <ProductsBttn 
                     productName={product.Produto} 
@@ -49,7 +34,7 @@ function Products() {
               ))}
             </ul>
           </div>
-        ))}
+        )) : (<div>Nada aqui</div>)}
       </main>
     </>
   );
