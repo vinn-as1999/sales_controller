@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
-import ProductsBttn from './bttns/ProductsBttn.jsx'
-import { ProductsContext } from './contexts/ProductsContext.jsx'
+import ProductsBttn from '../bttns/ProductsBttn.jsx'
+import { ProductsContext } from '../contexts/ProductsContext.jsx'
 import '../../styles/Products.css'
 
 

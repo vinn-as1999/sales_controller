@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { MdLibraryAdd } from "react-icons/md"
 import { IoIosCloseCircle } from "react-icons/io"
-import WarehouseForm from './forms/WarehouseForm.jsx'
+import WarehouseForm from '../forms/WarehouseForm.jsx'
 import '../../styles/Inventory.css'
 
 function Inventory() {
