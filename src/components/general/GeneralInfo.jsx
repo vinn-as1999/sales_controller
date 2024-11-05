@@ -1,6 +1,6 @@
 import React from 'react'
 import History from './History'
-import '../../styles/gInfo.css'
+import '../../../styles/gInfo.css'
 
 function GeneralInfo() {
   return (

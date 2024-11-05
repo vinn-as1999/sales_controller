@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { MdLibraryAdd } from "react-icons/md"
 import { IoIosCloseCircle } from "react-icons/io"
-import WarehouseForm from '../forms/WarehouseForm.jsx'
-import '../../styles/Inventory.css'
+import { ProductsContext } from '../contexts/ProductsContext.jsx'
+import '../../../styles/Inventory.css'
 
 function Inventory() {
+  const {products, setProducts} = useContext(ProductsContext)
   const [visibleIndex, setVisibleIndex] = useState({});
   const [visibleSubIndex, setVisibleSubIndex] = useState({});
   const [visibleSubValue, setVisibleSubValue] = useState({});

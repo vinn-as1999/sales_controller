@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import '../../styles/Clients.css'
+import '../../../styles/Clients.css'
 import ClientsBttn from '../bttns/ClientsBttn'
 import { ClientsContext } from '../contexts/ClientsContext';
 

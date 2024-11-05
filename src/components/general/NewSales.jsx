@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../styles/NewSales.css'
+import '../../../styles/NewSales.css'
 
 function NewSales(props) {
 

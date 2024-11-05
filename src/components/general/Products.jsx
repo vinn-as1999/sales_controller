@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react'
 import ProductsBttn from '../bttns/ProductsBttn.jsx'
 import { ProductsContext } from '../contexts/ProductsContext.jsx'
-import '../../styles/Products.css'
+import '../../../styles/Products.css'
+import Empty from '../messages/Empty.jsx'
 
 
 function Products() {
@@ -34,7 +35,11 @@ function Products() {
               ))}
             </ul>
           </div>
-        )) : (<div>Nada aqui</div>)}
+        )) : (
+          <div className="empty">
+            <Empty />
+          </div>
+        )}
       </main>
     </>
   );
