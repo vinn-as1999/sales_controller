@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { AiOutlineProduct } from "react-icons/ai"
+import { ProductsContext } from '../contexts/ProductsContext.jsx'
 
 function ProductsBttn(props) {
-
+  const {products, setProducts} = useContext(ProductsContext)
+  
   return (
     <>
       <main className='prodBttnMain'>
