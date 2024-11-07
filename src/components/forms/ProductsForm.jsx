@@ -1,7 +1,9 @@
 import React, {useContext, useState} from 'react'
 import { ProductsContext } from '../contexts/ProductsContext'
 
+const userID = localStorage.getItem('id')
 const url = import.meta.env.VITE_PRODUCTS_URL
+const queryUrl = import.meta.env.VITE_PRODUCTS_QUERY_URL + userID
 
 function ProductsForm() {
   const {products, setProducts} = useContext(ProductsContext);
@@ -27,27 +29,16 @@ function ProductsForm() {
   
   */
 
-  /*
-    products = {
-      chocolates: [{
-        name: alpino,
-        valor: 8,
-        quantidade: 5
-      },
-      {
-        name: suflair,
-        valor: 8,
-        quantidade: 3
-      }],
+  async function addProducts() {
+    const response = await fetch(queryUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
-      doces: [{
-        name: paçoca,
-        valor: 3,
-        quantidade: 10
-      }]
-    }
-  
-  */
+    // ...
+  };
 
   return (
     <>
