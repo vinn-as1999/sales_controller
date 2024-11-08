@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react'
 import { ProductsContext } from '../contexts/ProductsContext'
 
 const userID = localStorage.getItem('id')
+const username = localStorage.getItem('username')
 const url = import.meta.env.VITE_PRODUCTS_URL
 const queryUrl = import.meta.env.VITE_PRODUCTS_QUERY_URL + userID
 
@@ -31,10 +32,20 @@ function ProductsForm() {
 
   async function addProducts() {
     const response = await fetch(queryUrl, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      body: JSON.stringify({
+        user_id: userID,
+        username: username,
+        category: category,
+        product: {
+          name: name,
+          price: price,
+          quantity: quantity
+        }
+      })
     });
 
     if (!response.ok) {
@@ -42,8 +53,13 @@ function ProductsForm() {
       return
     }
 
-    const data = await response.json();
-    console.log('aqui o data: ', data)
+    try {
+      const data = await response.json();
+      console.log('aqui o data: ', data)
+
+    } catch (error) {
+      console.log('Erro ao inserir dados: ', error)
+    }
   };
 
   return (
@@ -66,7 +82,7 @@ function ProductsForm() {
             <label>Quantidade:</label>
             <input type="number" value={quantity} onChange={e => setQuantity(e.target.value)} />
 
-            <button onClick={addProducts}>
+            <button onClick={() => addProducts()}>
               Salvar
             </button>
         </section>
