@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { ProductsContext } from '../contexts/ProductsContext'
 
 const userID = localStorage.getItem('id')
@@ -45,12 +45,18 @@ function ProductsForm() {
 
     try {
       const data = await response.json()
-      console.log("aqui os produtos: ", data);
+      console.log("aqui os produtos: ", data.products);
+      if (data.products) {
+        setProducts(data.products);
 
+      } else {
+        console.log('Nenhum produto encontrado', data)
+      }
     } catch (error) {
-      
+      console.log('Erro ao buscar produtos: ', error)
     }
   };
+
 
   async function addProducts() {
     const response = await fetch(url, {
@@ -84,6 +90,12 @@ function ProductsForm() {
       console.log('Erro ao inserir dados: ', error);
     }
   };
+
+  useEffect(() => {
+    getProducts()
+
+    return () => {}
+  }, [])
 
   return (
     <>

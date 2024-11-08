@@ -17,7 +17,7 @@ function ProductsBttn(props) {
                     {props.productName.charAt(0).toUpperCase() + props.productName.slice(1)}
                 </div>
                 <div className='prodValue'>
-                    Valor: {`R$ ${props.productValue}`}
+                    Valor: {`R$ ${props.productPrice}`}
                 </div>
                 <div className='prodQty'>
                     Quantidade: {props.productQty}

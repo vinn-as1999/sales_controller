@@ -20,26 +20,27 @@ function Products() {
   return (
     <>
       <main className='prodMain'>
-        {Object.keys(products).length > 0 ? Object.keys(products).map((cat) => (
-          <div key={cat}>
-            <h2 onClick={() => toggleList(cat)}>{cat}</h2>
-            <ul style={{ display: visibleCategories[cat] ? 'block' : 'none' }}>
-              {products[cat].map((product, index) => (
+        {products.length > 0 ? products.map((cat) => (
+          <>
+            <h2 onClick={() => toggleList(cat.category)}>{cat.category}</h2>
+            <ul style={{ display: visibleCategories[cat.category] ? 'block' : 'none' }}>
+              {cat.products.map((prod, index) => (
                 <li key={index}>
-                  <ProductsBttn 
-                    productName={product.Produto} 
-                    productValue={product.Preço} 
-                    productQty={product.Quantidade}
+                  <ProductsBttn
+                    productName={prod.name}
+                    productPrice={prod.price}
+                    productQty={prod.quantity}
                   />
                 </li>
               ))}
             </ul>
-          </div>
-        )) : (
-          <div className="empty">
+          </>
+        )) : 
+        (
+          <div className='empty'>
             <Empty />
           </div>
-        )}
+        )} 
       </main>
     </>
   );
