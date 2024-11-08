@@ -37,7 +37,13 @@ function ProductsForm() {
       }
     });
 
-    // ...
+    if (!response.ok) {
+      console.log('error occurred: ', response.status)
+      return
+    }
+
+    const data = await response.json();
+    console.log('aqui o data: ', data)
   };
 
   return (
@@ -49,18 +55,20 @@ function ProductsForm() {
 
         <section className='prodInfo'>
             <label>Categoria:</label>
-            <input type="text" autoFocus={true} value={category} />
+            <input type="text" autoFocus={true} value={category} onChange={e => setCategory(e.target.value)} />
 
             <label>Nome do produto:</label>
-            <input type="text" value={name} />
+            <input type="text" value={name} onChange={e => setName(e.target.value)} />
 
             <label>Preço</label>
-            <input type="number" value={price} />
+            <input type="number" value={price} onChange={e => setPrice(e.target.value)} />
 
             <label>Quantidade:</label>
-            <input type="number" value={quantity} />
+            <input type="number" value={quantity} onChange={e => setQuantity(e.target.value)} />
 
-            <button>Salvar</button>
+            <button onClick={addProducts}>
+              Salvar
+            </button>
         </section>
       </main>
     </>
