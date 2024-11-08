@@ -31,7 +31,7 @@ function ProductsForm() {
   */
 
   async function addProducts() {
-    const response = await fetch(queryUrl, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
