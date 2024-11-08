@@ -30,6 +30,28 @@ function ProductsForm() {
   
   */
 
+  async function getProducts() {
+    const response = await fetch(queryUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    if (!response.ok) {
+      console.log('erro ao buscar produtos: ', response.status)
+      return
+    }
+
+    try {
+      const data = await response.json()
+      console.log("aqui os produtos: ", data);
+
+    } catch (error) {
+      
+    }
+  };
+
   async function addProducts() {
     const response = await fetch(url, {
       method: 'POST',
@@ -55,10 +77,11 @@ function ProductsForm() {
 
     try {
       const data = await response.json();
-      console.log('aqui o data: ', data)
+      console.log('Server response: ', data);
+      getProducts();
 
     } catch (error) {
-      console.log('Erro ao inserir dados: ', error)
+      console.log('Erro ao inserir dados: ', error);
     }
   };
 
