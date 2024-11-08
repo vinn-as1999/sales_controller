@@ -32,6 +32,10 @@ li {
     margin: 5px;
 }
 
+table {
+    animation: tableEntrance 0.3s linear;
+}
+
 .homeMain {
     display: flex;
     overflow: hidden;
@@ -68,6 +72,7 @@ li {
             transition: ease-in-out 0.2s;
             white-space: nowrap;
             animation: expands 0.2s linear;
+            z-index: 1000;
         }
     }
 
@@ -131,6 +136,16 @@ li {
     font-size: 20vw;
     color: #f5857f;
     opacity: 0.5;
+}
+
+@keyframes tableEntrance {
+    from {
+        transform: translateX(-500px);
+    }
+
+    to {
+        transform: translateX(0);
+    }
 }
 
 @keyframes expands {

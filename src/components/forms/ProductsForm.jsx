@@ -13,22 +13,6 @@ function ProductsForm() {
   const [price, setPrice] = useState();
   const [quantity, setQuantity] = useState();
 
-  // toda categoria será um novo documento no db
-
-  /*
-    doc: {
-      user_id: 321351302132,
-      username: 'marcelo',
-      category: 'chocolates',
-      products: [{
-        name: 'alpino',
-        valor: 8,
-        quantidade: 5
-      }]
-    }
-
-  
-  */
 
   async function getProducts() {
     const response = await fetch(queryUrl, {
@@ -90,6 +74,10 @@ function ProductsForm() {
       console.log('Erro ao inserir dados: ', error);
     }
   };
+
+  async function deleteProduct() {
+    
+  }
 
   useEffect(() => {
     getProducts()

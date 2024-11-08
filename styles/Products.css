@@ -10,6 +10,18 @@
     h2:hover {
         color: #d1524b;
     }
+
+    .trashBttn {
+        font-size: 30px;
+        color: #e6372e;
+        cursor: pointer;
+        transition: ease-in-out 0.1s;
+    }
+
+    .trashBttn:hover {
+        font-size: 32px;
+        color: #f81b0f;
+    }
 }
 
 .prodBttnMain {
@@ -53,6 +65,7 @@
 .prodFormMain {
     display: flex;
     flex-direction: column;
+    margin-left: 20px;
 
     & .prodInfo {
         display: flex;
