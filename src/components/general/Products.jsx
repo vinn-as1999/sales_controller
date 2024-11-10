@@ -7,7 +7,7 @@ import Empty from '../messages/Empty.jsx'
 
 // PRONTO!
 
-function Products() {
+function Products(props) {
   const {products, setProducts} = useContext(ProductsContext)
   const [visibleCategories, setVisibleCategories] = useState({});
 
@@ -33,7 +33,8 @@ function Products() {
                     productPrice={prod.price}
                     productQty={prod.quantity}
                   />
-                  <BiSolidTrash className='trashBttn' title='Remover produto' />
+                  <BiSolidTrash className='trashBttn' title='Remover produto'
+                    onClick={() => props.deleteProduct(prod.name)} />
                 </li>
               ))}
             </ul>

@@ -75,9 +75,6 @@ function ProductsForm() {
     }
   };
 
-  async function deleteProduct() {
-    
-  }
 
   useEffect(() => {
     getProducts()

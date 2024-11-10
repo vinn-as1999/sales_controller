@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { BiInfoSquare } from "react-icons/bi"
 import { BsBuildingGear } from "react-icons/bs"
 import { GrHistory } from "react-icons/gr"
@@ -6,6 +6,7 @@ import { RiContactsLine } from "react-icons/ri"
 import { AiOutlineProduct } from "react-icons/ai"
 import { MdOutlineInventory } from "react-icons/md"
 import { CiLogout } from "react-icons/ci"
+import { ProductsContext } from '../components/contexts/ProductsContext.jsx'
 import '../../styles/Home.css'
 import NewSales from '../components/general/NewSales.jsx'
 import History from '../components/general/History.jsx'
@@ -22,6 +23,7 @@ import ClientsForm from '../components/forms/ClientsForm.jsx'
 
 function Home(props) {
   const navigate = useNavigate();
+  const {products, setProducts} = useContext(ProductsContext)
   const [title, setTitle] = useState('Informações gerais');
   const [clients, setClients] = useState(false);
   const [time, setTime] = useState(new Date());
@@ -41,6 +43,11 @@ function Home(props) {
     localStorage.clear();
     props.setIsToken(false);
   };
+
+  async function deleteProduct(event) {
+    const el = products.filter((prod) => prod)
+    console.log(el)
+  }
   
 
   useEffect(() => {
@@ -97,7 +104,7 @@ function Home(props) {
             <RiContactsLine size={30} />
             <div>Clientes</div>
           </div>
-          <div className="iconTextWrapper" onClick={() => renderComponent('Produtos', <Products />)}>
+          <div className="iconTextWrapper" onClick={() => renderComponent('Produtos', <Products deleteProduct={deleteProduct} />)}>
             <AiOutlineProduct size={30} />
             <div>Produtos</div>
           </div>
