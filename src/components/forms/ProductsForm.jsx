@@ -57,7 +57,7 @@ function ProductsForm() {
         product: {
           name: name,
           price: price,
-          quantity: quantity
+          quantity: quantity && quantity.trim() !== '' ? quantity : 1
         }
       })
     });
@@ -88,7 +88,11 @@ function ProductsForm() {
   useEffect(() => {
     getProducts()
 
-  }, [])
+    if (quantity) {
+      console.log('tem quantidade')
+    }
+
+  }, [quantity])
 
   return (
     <>

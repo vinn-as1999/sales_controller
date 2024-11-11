@@ -21,6 +21,10 @@ import GeneralCharts from '../components/general/GeneralCharts.jsx'
 import { useNavigate } from 'react-router-dom'
 import ClientsForm from '../components/forms/ClientsForm.jsx'
 
+const url = import.meta.env.VITE_PRODUCTS_URL;
+const user_id = localStorage.getItem('id')
+const username = localStorage.getItem('username')
+
 function Home(props) {
   const navigate = useNavigate();
   const {products, setProducts} = useContext(ProductsContext)
@@ -44,21 +48,66 @@ function Home(props) {
     props.setIsToken(false);
   };
 
+
   function extractProduct(prod) {
     const prodd = products
         .map(item => item.products.find(product => product.name === prod))
         .filter(product => product !== undefined);
         
     return prodd[0]
-  }
+  };
 
   async function deleteProduct(item) {
     const selectedProd = await extractProduct(item)
 
-    const response = await fetch()
-    
-    
-  }
+    const response = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id,
+        username,
+        category: selectedProd.category,
+        product: {
+          name: selectedProd.name,
+          price: selectedProd.price,
+          category: selectedProd.category
+        }
+      })
+    })
+
+    if (!response.ok) {
+      console.log("Erro ao inserir dados dos produtos")
+      return;
+    }
+
+    const data = await response.json()
+
+    console.log('Server response: ', data)
+  };
+
+  async function deleteOneProduct(item) {
+    const selectedProd = await extractProduct(item);
+
+    const response = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id,
+        username,
+        category: selectedProd.category,
+        product: {
+          name: selectedProd.name,
+          price: selectedProd.price,
+          quantity: 1
+        },
+        decrement: true
+      })
+    })
+  };
 
   
 
