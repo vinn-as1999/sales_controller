@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react'
 import ProductsBttn from '../bttns/ProductsBttn.jsx'
 import { ProductsContext } from '../contexts/ProductsContext.jsx'
-import { BiSolidTrash } from "react-icons/bi";
+import { BiSolidTrash } from "react-icons/bi"
+import { FaChevronUp } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa"
 import '../../../styles/Products.css'
 import Empty from '../messages/Empty.jsx'
 
@@ -33,7 +35,9 @@ function Products(props) {
                     productPrice={prod.price}
                     productQty={prod.quantity}
                   />
-                  <BiSolidTrash className='trashBttn' title='Remover produto'
+                  <FaChevronUp className='qtyBttn' color='#45CB85' title='+1' />
+                  <FaChevronDown className='qtyBttn' color='#F34747' title='-1' />
+                  <BiSolidTrash className='qtyBttn' title='Remover produto'
                     onClick={() => props.deleteProduct(prod.name)} />
                 </li>
               ))}

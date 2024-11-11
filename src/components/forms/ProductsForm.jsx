@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect, useRef, useState} from 'react'
 import { ProductsContext } from '../contexts/ProductsContext'
 
 const userID = localStorage.getItem('id')
@@ -8,6 +8,7 @@ const queryUrl = import.meta.env.VITE_PRODUCTS_QUERY_URL + userID
 
 function ProductsForm() {
   const {products, setProducts} = useContext(ProductsContext);
+  const inputRef = useRef(null);
   const [category, setCategory] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState();
@@ -42,7 +43,8 @@ function ProductsForm() {
   };
 
 
-  async function addProducts() {
+  async function addProducts(event) {
+    event.preventDefault()
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -70,6 +72,13 @@ function ProductsForm() {
       console.log('Server response: ', data);
       getProducts();
 
+      setCategory('');
+      setName('');
+      setPrice('');
+      setQuantity('');
+
+      inputRef.current.focus();
+
     } catch (error) {
       console.log('Erro ao inserir dados: ', error);
     }
@@ -79,7 +88,6 @@ function ProductsForm() {
   useEffect(() => {
     getProducts()
 
-    return () => {}
   }, [])
 
   return (
@@ -89,9 +97,9 @@ function ProductsForm() {
             <h1>Adicionar Produto</h1>
         </header>
 
-        <section className='prodInfo'>
+        <form className='prodInfo' onSubmit={addProducts}>
             <label>Categoria:</label>
-            <input type="text" autoFocus={true} value={category} onChange={e => setCategory(e.target.value)} />
+            <input type="text" autoFocus={true} value={category} onChange={e => setCategory(e.target.value)} ref={inputRef} />
 
             <label>Nome do produto:</label>
             <input type="text" value={name} onChange={e => setName(e.target.value)} />
@@ -102,10 +110,10 @@ function ProductsForm() {
             <label>Quantidade:</label>
             <input type="number" value={quantity} onChange={e => setQuantity(e.target.value)} />
 
-            <button onClick={() => addProducts()}>
+            <button type='submit' >
               Salvar
             </button>
-        </section>
+        </form>
       </main>
     </>
   )

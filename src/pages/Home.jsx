@@ -44,10 +44,22 @@ function Home(props) {
     props.setIsToken(false);
   };
 
-  async function deleteProduct(event) {
-    const el = products.filter((prod) => prod)
-    console.log(el)
+  function extractProduct(prod) {
+    const prodd = products
+        .map(item => item.products.find(product => product.name === prod))
+        .filter(product => product !== undefined);
+        
+    return prodd[0]
   }
+
+  async function deleteProduct(item) {
+    const selectedProd = await extractProduct(item)
+
+    const response = await fetch()
+    
+    
+  }
+
   
 
   useEffect(() => {

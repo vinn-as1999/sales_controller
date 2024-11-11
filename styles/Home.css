@@ -47,6 +47,7 @@ table {
         flex-direction: column;
         align-items: center;
         width: 5vw;
+        z-index: 1000;
     }
 
     & .iconTextWrapper {
