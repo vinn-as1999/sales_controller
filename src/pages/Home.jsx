@@ -35,6 +35,8 @@ function Home(props) {
   const [activeComponent, setActiveComponent] = useState(null);
   const name = localStorage.getItem('username');
   const [selectedClient, setSelectedClient] = useState(null);
+  const [trigger, setTrigger] = useState(false);
+  const [activate, setActivate] = useState(false);
 
   function renderComponent(title, component) {
     setTitle(title);
@@ -57,57 +59,7 @@ function Home(props) {
     return prodd[0]
   };
 
-  async function deleteProduct(item) {
-    const selectedProd = await extractProduct(item)
 
-    const response = await fetch(url, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user_id,
-        username,
-        category: selectedProd.category,
-        product: {
-          name: selectedProd.name,
-          price: selectedProd.price,
-          category: selectedProd.category
-        }
-      })
-    })
-
-    if (!response.ok) {
-      console.log("Erro ao inserir dados dos produtos")
-      return;
-    }
-
-    const data = await response.json()
-
-    console.log('Server response: ', data)
-  };
-
-  async function deleteOneProduct(item) {
-    const selectedProd = await extractProduct(item);
-
-    const response = await fetch(url, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user_id,
-        username,
-        category: selectedProd.category,
-        product: {
-          name: selectedProd.name,
-          price: selectedProd.price,
-          quantity: 1
-        },
-        decrement: true
-      })
-    })
-  };
 
   
 
@@ -165,7 +117,7 @@ function Home(props) {
             <RiContactsLine size={30} />
             <div>Clientes</div>
           </div>
-          <div className="iconTextWrapper" onClick={() => renderComponent('Produtos', <Products deleteProduct={deleteProduct} />)}>
+          <div className="iconTextWrapper" onClick={() => renderComponent('Produtos', <Products setTrigger={setTrigger} />)}>
             <AiOutlineProduct size={30} />
             <div>Produtos</div>
           </div>
@@ -199,8 +151,8 @@ function Home(props) {
             <article className='singularInfo'>
               {
                 clients === true ? <ClientsInfo setClients={setClients} clientData={selectedClient} /> : 
-                (title === 'Produtos' ? <ProductsForm /> : 
-                  (title === 'Inventário' ? <Products /> : 
+                (title === 'Produtos' ? <ProductsForm trigger={trigger} activate={activate} /> : 
+                  (title === 'Inventário' ? <Products setActivate={setActivate} /> : 
                     (title === 'Informações gerais' ? <GeneralCharts /> : 
                       (title === 'Clientes' ? <ClientsForm /> :
                 <div className="empty">

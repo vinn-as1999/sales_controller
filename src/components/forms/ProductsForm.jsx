@@ -6,7 +6,7 @@ const username = localStorage.getItem('username')
 const url = import.meta.env.VITE_PRODUCTS_URL
 const queryUrl = import.meta.env.VITE_PRODUCTS_QUERY_URL + userID
 
-function ProductsForm() {
+function ProductsForm(props) {
   const {products, setProducts} = useContext(ProductsContext);
   const inputRef = useRef(null);
   const [category, setCategory] = useState('');
@@ -57,7 +57,7 @@ function ProductsForm() {
         product: {
           name: name,
           price: price,
-          quantity: quantity && quantity.trim() !== '' ? quantity : 1
+          quantity: quantity
         }
       })
     });
@@ -88,11 +88,10 @@ function ProductsForm() {
   useEffect(() => {
     getProducts()
 
-    if (quantity) {
-      console.log('tem quantidade')
-    }
+    return () => {}
 
-  }, [quantity])
+  }, [props.trigger])
+
 
   return (
     <>
