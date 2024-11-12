@@ -29,6 +29,12 @@ function Inventory() {
     }
   });
 
+
+  async function getInventory(inventory) {
+    //
+  };
+
+
   function invInterface() {
     return {
       addInv(newItem) {
@@ -193,7 +199,10 @@ function Inventory() {
     setVisibleSubValue(prev => ({ ...prev, [item]: !prev[item] }));
   };
 
-  useEffect(() => {}, [list]);
+  useEffect(() => {
+    
+
+  }, [list]);
 
   const inv = invInterface();
 

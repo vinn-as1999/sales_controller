@@ -11,7 +11,8 @@
 
     .addInput {
         height: 2vh;
-        outline-color:#c4423b;
+        padding: 5px;
+        outline-color:#f16c65;
         border: none;
     }
 
