@@ -4,6 +4,10 @@ import { IoIosCloseCircle } from "react-icons/io"
 import { ProductsContext } from '../contexts/ProductsContext.jsx'
 import '../../../styles/Inventory.css'
 
+const url = import.meta.env.VITE_INVENTORY_URL;
+const user_id = localStorage.getItem('id');
+const username = localStorage.getItem('username');
+
 function Inventory() {
   const {products, setProducts} = useContext(ProductsContext)
   const [visibleIndex, setVisibleIndex] = useState({});

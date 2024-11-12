@@ -21,9 +21,6 @@ import GeneralCharts from '../components/general/GeneralCharts.jsx'
 import { useNavigate } from 'react-router-dom'
 import ClientsForm from '../components/forms/ClientsForm.jsx'
 
-const url = import.meta.env.VITE_PRODUCTS_URL;
-const user_id = localStorage.getItem('id')
-const username = localStorage.getItem('username')
 
 function Home(props) {
   const navigate = useNavigate();
