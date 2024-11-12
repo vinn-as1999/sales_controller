@@ -35,7 +35,13 @@ function Inventory() {
 
 
   async function getInventory(inventory) {
-    //
+    const response = await fetch();
+
+    if (!response.ok) {
+
+    }
+
+    const data = await response.json();
   };
 
 
