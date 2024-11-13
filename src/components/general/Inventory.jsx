@@ -46,19 +46,25 @@ function Inventory() {
 
 
   async function insertInventory(inventory) {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(inventory)
-    });
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(inventory)
+      });
+  
+      if (!response.ok) {
+        console.log("Erro ao inserir inventário, insertInventory")
+        return;
+      }
+  
+      const data = await response.json();
+      console.log('Server response: ', data)
 
-    if (!response.ok) {
-      console.log("Erro ao inserir inventário, insertInventory")
+    } catch (error) {
+      console.log("Network error: ", error)
     }
-    
-    const data = await response.json();
-    console.log('Server response: ', data)
-  }
+  };
 
 
   function invInterface() {
