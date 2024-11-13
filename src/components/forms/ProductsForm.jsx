@@ -16,19 +16,19 @@ function ProductsForm(props) {
 
 
   async function getProducts() {
-    const response = await fetch(queryUrl, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-
-    if (!response.ok) {
-      console.log('erro ao buscar produtos: ', response.status)
-      return
-    }
-
     try {
+      const response = await fetch(queryUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+  
+      if (!response.ok) {
+        console.log('erro ao buscar produtos: ', response.status)
+        return
+      }
+
       const data = await response.json()
       console.log("aqui os produtos: ", data.products);
       if (data.products) {
@@ -45,29 +45,29 @@ function ProductsForm(props) {
 
   async function addProducts(event) {
     event.preventDefault()
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user_id: userID,
-        username: username,
-        category: category,
-        product: {
-          name: name,
-          price: price,
-          quantity: quantity
-        }
-      })
-    });
-
-    if (!response.ok) {
-      console.log('error occurred: ', response.status)
-      return
-    }
-
     try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: userID,
+          username: username,
+          category: category,
+          product: {
+            name: name,
+            price: price,
+            quantity: quantity
+          }
+        })
+      });
+  
+      if (!response.ok) {
+        console.log('error occurred: ', response.status)
+        return
+      }
+  
       const data = await response.json();
       console.log('Server response: ', data);
       getProducts();

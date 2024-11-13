@@ -34,7 +34,7 @@ function Inventory() {
   });
 
 
-  async function getInventory(inventory) {
+  async function getInventory() {
     const response = await fetch();
 
     if (!response.ok) {
@@ -43,6 +43,22 @@ function Inventory() {
 
     const data = await response.json();
   };
+
+
+  async function insertInventory(inventory) {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(inventory)
+    });
+
+    if (!response.ok) {
+      console.log("Erro ao inserir inventário, insertInventory")
+    }
+    
+    const data = await response.json();
+    console.log('Server response: ', data)
+  }
 
 
   function invInterface() {
@@ -209,8 +225,9 @@ function Inventory() {
     setVisibleSubValue(prev => ({ ...prev, [item]: !prev[item] }));
   };
 
-  useEffect(() => {
-    getInventory(list)
+  useEffect(async () => {
+    await insertInventory(list)
+    getInventory()
 
   }, [list]);
 
