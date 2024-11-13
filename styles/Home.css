@@ -39,7 +39,7 @@ table {
 .homeMain {
     display: flex;
     overflow: hidden;
-    background: linear-gradient(to right, rgb(245, 244, 244), rgb(231, 231, 231));
+    background: linear-gradient(to bottom, rgb(245, 244, 244), rgb(189, 189, 189));
 
     & sidebar {
         background-color: #c4423b;

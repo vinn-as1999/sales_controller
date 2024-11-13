@@ -210,7 +210,7 @@ function Inventory() {
   };
 
   useEffect(() => {
-    
+    getInventory(list)
 
   }, [list]);
 
