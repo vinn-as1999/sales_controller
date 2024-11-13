@@ -46,24 +46,25 @@ function Inventory() {
 
 
   async function insertInventory(inventory) {
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(inventory)
-      });
+    console.log("InsertInventory chamada: ", inventory)
+    // try {
+    //   const response = await fetch(url, {
+    //     method: "POST",
+    //     headers: {'Content-Type': 'application/json'},
+    //     body: JSON.stringify(inventory)
+    //   });
   
-      if (!response.ok) {
-        console.log("Erro ao inserir inventário, insertInventory")
-        return;
-      }
+    //   if (!response.ok) {
+    //     console.log("Erro ao inserir inventário, insertInventory")
+    //     return;
+    //   }
   
-      const data = await response.json();
-      console.log('Server response: ', data)
+    //   const data = await response.json();
+    //   console.log('Server response: ', data)
 
-    } catch (error) {
-      console.log("Network error: ", error)
-    }
+    // } catch (error) {
+    //   console.log("Network error: ", error)
+    // }
   };
 
 
@@ -231,10 +232,17 @@ function Inventory() {
     setVisibleSubValue(prev => ({ ...prev, [item]: !prev[item] }));
   };
 
-  useEffect(async () => {
-    await insertInventory(list)
-    getInventory()
+  useEffect(() => {
+    let isMounted = true
 
+    const insertData = async () => {
+      await insertInventory(list);
+      console.log("Chamou getInventory");
+    };
+  
+    insertData();
+  
+    return () => {isMounted = false}
   }, [list]);
 
   const inv = invInterface();
