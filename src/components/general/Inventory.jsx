@@ -246,7 +246,6 @@ function Inventory() {
   }, [])
 
   useEffect(() => {
-
     let isMounted = true
     if (Object.keys(list).length < 1) return;
 
