@@ -4,9 +4,10 @@ import { IoIosCloseCircle } from "react-icons/io"
 import { ProductsContext } from '../contexts/ProductsContext.jsx'
 import '../../../styles/Inventory.css'
 
-const url = import.meta.env.VITE_INVENTORY_URL;
 const user_id = localStorage.getItem('id');
 const username = localStorage.getItem('username');
+const url = import.meta.env.VITE_INVENTORY_URL;
+const queryUrl = import.meta.env.VITE_INVENTORY_URL + `/${user_id}`
 
 function Inventory() {
   const {products, setProducts} = useContext(ProductsContext)
@@ -16,55 +17,61 @@ function Inventory() {
   const [valor, setValor] = useState();
   
   // Exemplo de estrutura de list atualizada para suportar subinventários nos itens
-  const [list, setList] = useState({
-    alimentos: {
-      frutas: {
-        banana: ['banana.01', 'banana.02'],
-        morango: ['morango.01', 'morango.02'],
-        uva: []
-      }
-    },
-    doces: {
-      chocolates: {
-        alpino: ['alpino.01', 'alpino.02'],
-        sufle: ['sufle.01', 'sufle.02'],
-        garoto: []
-      }
-    }
-  });
+  const [list, setList] = useState({});
 
 
   async function getInventory() {
-    const response = await fetch();
+    try {
+      console.log(queryUrl)
+      const response = await fetch(queryUrl, {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+      });
+  
+      if (!response.ok) {
+        console.log('Erro ao buscar dados', response.status, response)
+        return;
+      }
+  
+      const data = await response.json();
+      const inventory = data[0].inventory
 
-    if (!response.ok) {
+      console.log('Server response: ', inventory)
+      if (JSON.stringify(inventory) !== JSON.stringify(list)) {
+        setList(inventory);
+      }
 
+    } catch (error) {
+      console.log("Network error: ", error);
+      return;
     }
-
-    const data = await response.json();
   };
 
 
   async function insertInventory(inventory) {
     console.log("InsertInventory chamada: ", inventory)
-    // try {
-    //   const response = await fetch(url, {
-    //     method: "POST",
-    //     headers: {'Content-Type': 'application/json'},
-    //     body: JSON.stringify(inventory)
-    //   });
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          user_id: user_id,
+          username: username,
+          inventory: inventory
+        })
+      });
   
-    //   if (!response.ok) {
-    //     console.log("Erro ao inserir inventário, insertInventory")
-    //     return;
-    //   }
+      if (!response.ok) {
+        console.log("Erro ao inserir inventário, insertInventory")
+        return;
+      }
   
-    //   const data = await response.json();
-    //   console.log('Server response: ', data)
+      const data = await response.json();
+      console.log('Server response: ', data)
 
-    // } catch (error) {
-    //   console.log("Network error: ", error)
-    // }
+    } catch (error) {
+      console.log("Network error: ", error)
+    }
   };
 
 
@@ -233,15 +240,27 @@ function Inventory() {
   };
 
   useEffect(() => {
+    getInventory()
+
+    return () => {}
+  }, [])
+
+  useEffect(() => {
+
     let isMounted = true
+    if (Object.keys(list).length < 1) return;
 
     const insertData = async () => {
       await insertInventory(list);
       console.log("Chamou getInventory");
+
+      if (isMounted) {
+        await getInventory();
+      }
     };
   
     insertData();
-  
+    
     return () => {isMounted = false}
   }, [list]);
 
