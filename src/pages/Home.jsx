@@ -21,6 +21,7 @@ import GeneralCharts from '../components/general/GeneralCharts.jsx'
 import { useNavigate } from 'react-router-dom'
 import ClientsForm from '../components/forms/ClientsForm.jsx'
 
+const name = localStorage.getItem('username');
 
 function Home(props) {
   const navigate = useNavigate();
@@ -30,7 +31,6 @@ function Home(props) {
   const [time, setTime] = useState(new Date());
   const [greeting, setGreeting] = useState('');
   const [activeComponent, setActiveComponent] = useState(null);
-  const name = localStorage.getItem('username');
   const [selectedClient, setSelectedClient] = useState(null);
   const [trigger, setTrigger] = useState(false);
   const [activate, setActivate] = useState(false);

@@ -313,8 +313,8 @@ function Inventory() {
                                     <li>
 
                                       <div className='bttnsDiv'>
-                                        <input type="text" className='addInput' onChange={(e) => setValor(e.target.value)} />
-                                        <MdLibraryAdd title='Adicionar endereço' className='addButton' onClick={() => inv.addSubItem(loc, subloc, value, valor)} />
+                                        <input maxLength={40} type="text" className='addInput' onChange={(e) => setValor(e.target.value)} />
+                                        <MdLibraryAdd title='Adicionar endereço' className='addButton' onClick={() => inv.addSubItem(loc, subloc, value, valor.toUpperCase())} />
                                       </div>
 
                                     </li>
@@ -325,8 +325,8 @@ function Inventory() {
                             <li>
 
                               <div className='bttnsDiv'>
-                                <input type="text" className='addInput' onChange={(e) => setValor(e.target.value)} />
-                                <MdLibraryAdd title='Adicionar endereço' className='addButton' onClick={() => inv.addSubVal(loc, subloc, valor)} />
+                                <input maxLength={40} type="text" className='addInput' onChange={(e) => setValor(e.target.value)} />
+                                <MdLibraryAdd title='Adicionar endereço' className='addButton' onClick={() => inv.addSubVal(loc, subloc, valor.toUpperCase())} />
                               </div>
 
                             </li>
@@ -336,8 +336,8 @@ function Inventory() {
                     ))}
 
                     <div className='bttnsDiv'>
-                      <input type="text" className='addInput' onChange={(e) => setValor(e.target.value)} />
-                      <MdLibraryAdd title='Adicionar endereço' className='addButton' onClick={() => inv.addSubInv(loc, valor)} />
+                      <input maxLength={40} type="text" className='addInput' onChange={(e) => setValor(e.target.value)} />
+                      <MdLibraryAdd title='Adicionar endereço' className='addButton' onClick={() => inv.addSubInv(loc, valor.toUpperCase())} />
                     </div>
 
                   </ul>
@@ -346,8 +346,8 @@ function Inventory() {
             ))}
             <li>
               <div className='bttnsDiv'>
-                <input type="text" className='addInput' onChange={(e) => setValor(e.target.value)} autoFocus={true} />
-                <MdLibraryAdd title='Adicionar endereço' className='addButton' onClick={() => inv.addInv(valor)} />
+                <input maxLength={40} type="text" className='addInput' onChange={(e) => setValor(e.target.value)} autoFocus={true} />
+                <MdLibraryAdd title='Adicionar endereço' className='addButton' onClick={() => inv.addInv(valor.toUpperCase())} />
               </div>
             </li>
           </ul>
