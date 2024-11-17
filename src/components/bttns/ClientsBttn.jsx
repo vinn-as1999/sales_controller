@@ -5,7 +5,7 @@ import '../../../styles/Clients.css'
 import { ClientsContext } from '../contexts/ClientsContext'
 
 function ClientsBttn(props) {
-  const {clientsList, setClientsList, getClientInfo} = useContext(ClientsContext)
+  const {getClientInfo} = useContext(ClientsContext)
 
   return (
     <>

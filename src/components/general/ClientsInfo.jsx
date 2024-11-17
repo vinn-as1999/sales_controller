@@ -4,7 +4,7 @@ import { IoIosClose } from 'react-icons/io'
 import { ClientsContext } from '../contexts/ClientsContext';
 
 function ClientsInfo(props) {
-  const {selectedClient, clientsList, setClientsList} = useContext(ClientsContext)
+  const {selectedClient} = useContext(ClientsContext)
 
   const options = {
     chart: {

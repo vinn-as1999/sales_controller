@@ -5,11 +5,7 @@ import { ProductsContext } from '../contexts/ProductsContext';
 
 function NewSales(props) {
   const {clients, setClients} = useContext(ClientsContext);
-  const {products, setProducts} = useContext(ProductsContext)
-
-  async function requisition(params) {
-    // faz a requisição para o banco
-  }
+  const {products, setProducts} = useContext(ProductsContext);
 
   async function registerSales() {
     // pega o nome do produto e pesquisa ele no contexto de produtos

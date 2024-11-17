@@ -101,7 +101,7 @@ export function ProductsProvider({ children }) {
   }, []);
 
   return (
-    <ProductsContext.Provider value={{ products, setProducts, addOneProduct, deleteProduct }}>
+    <ProductsContext.Provider value={{ products, getProducts, setProducts, addOneProduct, deleteProduct }}>
       {children}
     </ProductsContext.Provider>
   );

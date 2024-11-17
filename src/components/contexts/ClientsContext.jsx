@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react'
 
+
 export const ClientsContext = createContext();
 
 export const ClientsProvider = ({children}) => {
@@ -11,8 +12,8 @@ export const ClientsProvider = ({children}) => {
     console.log(selectedClient)
 
     function getClientInfo(event) {
-    const visibleClient = clientsList.find(client => client.client === event)
-    setSelectedClient(visibleClient)
+        const visibleClient = clientsList.find(client => client.client === event)
+        setSelectedClient(visibleClient)
     };
 
     return (
