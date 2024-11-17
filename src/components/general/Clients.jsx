@@ -11,7 +11,6 @@ function Clients(props) {
     console.log(clientsList)
   }, [clientsList]);
 
-  console.log('aqui', clientsList)
 
   return (
     <main className='clientsMain'>
@@ -19,6 +18,7 @@ function Clients(props) {
         clientsList.map((value, index) => (
           <div key={index}>
             <ClientsBttn 
+              getClientInfo={props.getClientInfo}
               setSelectedClient={props.setSelectedClient}
               setClients={props.setClients} 
               name={value.client}
@@ -31,7 +31,6 @@ function Clients(props) {
       )}
     </main>
   );
-  
 }
 
 export default Clients

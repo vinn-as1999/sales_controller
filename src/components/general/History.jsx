@@ -2,7 +2,7 @@ import React from 'react'
 import { IoCheckmarkDoneSharp } from "react-icons/io5"
 import { FaExclamation } from "react-icons/fa6"
 
-function History() {
+function History(props) {
   return (
     <>
       <main className='histMain'>
@@ -19,7 +19,7 @@ function History() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr onClick={() => {props.setClients(true); props.getClientInfo('João')}}>
                     <td>1</td>
                     <td>João</td>
                     <td>Paçoca</td>
@@ -29,9 +29,6 @@ function History() {
                     <td><IoCheckmarkDoneSharp size={25} color='#85FF9E' /></td>
                 </tr>
             </tbody>
-            {
-
-            }
         </table>
       </main>
     </>

@@ -77,6 +77,13 @@ function Home(props) {
   };
 
 
+  function getClientInfo(event) {
+    const item = localStorage.getItem('clients')
+    const visibleClient = JSON.parse(item).find(client => client.client === event)
+    setSelectedClient(visibleClient)
+  };
+
+
   useEffect(() => {
     const updateGreeting = () => {
       const hours = time.getHours();
@@ -118,7 +125,7 @@ function Home(props) {
             <div>Informações gerais</div>
           </div>
           <div className="iconTextWrapper" 
-            onClick={() => renderComponent('Adicionar vendas feitas', <NewSales setClients={setClients} />)}>
+            onClick={() => renderComponent('Adicionar vendas feitas', <NewSales setClients={setClients} getClientInfo={getClientInfo} />)}>
             <BsBuildingGear size={30} />
             <div>Adicionar vendas feitas</div>
           </div>
@@ -127,7 +134,7 @@ function Home(props) {
             <GrHistory size={30} />
             <div>Histórico de vendas</div>
           </div>
-          <div className="iconTextWrapper" onClick={() => renderComponent('Clientes', <Clients setClients={setClients} setSelectedClient={setSelectedClient} />)}>
+          <div className="iconTextWrapper" onClick={() => renderComponent('Clientes', <Clients getClientInfo={getClientInfo} setClients={setClients} setSelectedClient={setSelectedClient} />)}>
             <RiContactsLine size={30} />
             <div>Clientes</div>
           </div>
@@ -135,7 +142,7 @@ function Home(props) {
             <AiOutlineProduct size={30} />
             <div>Produtos</div>
           </div>
-          <div className="iconTextWrapper" onClick={() => renderComponent('Inventário', <Inventory trigger={trigger} setTrigger={setTrigger} getProducts={getProducts} />)}>
+          <div className="iconTextWrapper" onClick={() => renderComponent('Inventário', <Inventory trigger={trigger} setTrigger={setTrigger} getProducts={getProducts} getClientInfo={getClientInfo} />)}>
             <MdOutlineInventory size={30} />
             <div>Inventário</div>
           </div>

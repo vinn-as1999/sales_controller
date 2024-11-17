@@ -5,30 +5,24 @@ import '../../../styles/Clients.css'
 
 function ClientsBttn(props) {
 
-  function getClientInfo(event) {
-    const item = localStorage.getItem('clients')
-    const visibleClient = JSON.parse(item).find(client => client.client === event)
-    props.setSelectedClient(visibleClient)
-  };
-
   return (
     <>
-      <main className='cliBttnMain' onClick={() => {props.setClients(true); getClientInfo(props.name)}}>
+      <main className='cliBttnMain' onClick={() => {props.setClients(true); props.getClientInfo(props.name)}}>
         <article className='nameClient'>
             <div>
-                <FiUser size={35} />
+              <FiUser size={35} />
             </div>
             <div>
-                {props.name}
+              {props.name}
             </div>
         </article>
 
         <article className='numberClient'>
             <div>
-                <MdOutlineLocalPhone size={35} />
+              <MdOutlineLocalPhone size={35} />
             </div>
             <div>
-                {props.contact}
+              {props.contact}
             </div>
         </article>
       </main>
