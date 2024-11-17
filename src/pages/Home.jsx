@@ -48,17 +48,34 @@ function Home(props) {
   };
 
 
-  function extractProduct(prod) {
-    const prodd = products
-        .map(item => item.products.find(product => product.name === prod))
-        .filter(product => product !== undefined);
-        
-    return prodd[0]
+  async function getProducts() {
+    try {
+      console.log('chamou getprod')
+      const response = await fetch(queryUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+  
+      if (!response.ok) {
+        console.log('erro ao buscar produtos: ', response.status)
+        return
+      }
+
+      const data = await response.json()
+      console.log("aqui os produtos: ", data.products);
+      if (data.products) {
+        setProducts(data.products);
+
+      } else {
+        console.log('Nenhum produto encontrado', data)
+      }
+    } catch (error) {
+      console.log('Erro ao buscar produtos: ', error)
+    }
   };
 
-
-
-  
 
   useEffect(() => {
     const updateGreeting = () => {
@@ -118,7 +135,7 @@ function Home(props) {
             <AiOutlineProduct size={30} />
             <div>Produtos</div>
           </div>
-          <div className="iconTextWrapper" onClick={() => renderComponent('Inventário', <Inventory />)}>
+          <div className="iconTextWrapper" onClick={() => renderComponent('Inventário', <Inventory trigger={trigger} setTrigger={setTrigger} getProducts={getProducts} />)}>
             <MdOutlineInventory size={30} />
             <div>Inventário</div>
           </div>
@@ -148,8 +165,8 @@ function Home(props) {
             <article className='singularInfo'>
               {
                 clients === true ? <ClientsInfo setClients={setClients} clientData={selectedClient} /> : 
-                (title === 'Produtos' ? <ProductsForm trigger={trigger} activate={activate} /> : 
-                  (title === 'Inventário' ? <Products setActivate={setActivate} /> : 
+                (title === 'Produtos' ? <ProductsForm trigger={trigger} getProducts={getProducts} /> : 
+                  (title === 'Inventário' ? <Products setActivate={setActivate} setTrigger={setTrigger} /> : 
                     (title === 'Informações gerais' ? <GeneralCharts /> : 
                       (title === 'Clientes' ? <ClientsForm /> :
                 <div className="empty">

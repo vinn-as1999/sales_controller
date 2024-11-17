@@ -70,7 +70,7 @@ function ProductsForm(props) {
   
       const data = await response.json();
       console.log('Server response: ', data);
-      getProducts();
+      await getProducts();
 
       setCategory('');
       setName('');

@@ -34,7 +34,7 @@ function Inventory() {
       }
   
       const data = await response.json();
-      const inventory = data[0].inventory
+      const inventory = data[0].inventory;
 
       console.log('Server response: ', inventory)
       if (JSON.stringify(inventory) !== JSON.stringify(list)) {
@@ -55,8 +55,8 @@ function Inventory() {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-          user_id: user_id,
-          username: username,
+          user_id,
+          username,
           inventory: inventory
         })
       });
@@ -72,6 +72,29 @@ function Inventory() {
     } catch (error) {
       console.log("Network error: ", error)
     }
+  };
+
+  async function deleteCategory(category) {
+    const response = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id,
+        username,
+        inventory: category
+      })
+    });
+
+    if (!response.ok) {
+      console.log("Erro: ", response.status, response)
+      return;
+    }
+
+    const data = await response.json();
+
+    console.log("Server response: ", data)
   };
 
 
@@ -211,9 +234,14 @@ function Inventory() {
           return;
         }
 
+        console.log('o loc aqui', loc)
+
         setList((prev) => {
           const myList = {...prev}
+          deleteCategory(loc)
           delete myList[loc]
+
+          insertInventory(myList)
 
           return myList;
         })
@@ -251,17 +279,13 @@ function Inventory() {
 
     const insertData = async () => {
       await insertInventory(list);
-      console.log("Chamou getInventory");
-
-      if (isMounted) {
-        await getInventory();
-      }
     };
   
     insertData();
     
     return () => {isMounted = false}
   }, [list]);
+  
 
   const inv = invInterface();
 
@@ -275,7 +299,7 @@ function Inventory() {
                 <div className='subInvDiv'>
                   <div className="bttnsDiv">
                     <li onClick={() => editWH(index)}>{loc.toUpperCase()}</li>
-                    {loc && <IoIosCloseCircle title='Remover endereço' className='xButton' onClick={() => inv.deleteInv(loc)} />}
+                    {loc && <IoIosCloseCircle title='Remover endereço' className='xButton' tabIndex={1} onClick={() => inv.deleteInv(loc)} />}
                   </div>
                 </div>
                 {visibleIndex[index] && ( // Mantém o inventário aberto
@@ -286,7 +310,7 @@ function Inventory() {
                         <div className='subInvDiv'>
                           <div className="bttnsDiv">
                             <li onClick={() => editSubWH(subloc)}>{subloc.toUpperCase()}</li>
-                            {subloc && <IoIosCloseCircle title='Remover endereço' className='xButton' onClick={() => inv.deleteSubInv(loc, subloc)} />}
+                            {subloc && <IoIosCloseCircle title='Remover endereço' className='xButton' tabIndex={1} onClick={() => inv.deleteSubInv(loc, subloc)} />}
                           </div>
                         </div>
 
@@ -296,7 +320,7 @@ function Inventory() {
                               <div key={value}>
                                 <div className='bttnsDiv'>
                                   <li onClick={() => editSubValue(value)}>{value.toUpperCase()}</li>
-                                  {value && <IoIosCloseCircle title='Remover endereço' className='xButton' onClick={() => inv.deleteSubVal(loc, subloc, value)} />}
+                                  {value && <IoIosCloseCircle title='Remover endereço' className='xButton' tabIndex={1} onClick={() => inv.deleteSubVal(loc, subloc, value)} />}
                                 </div>
                                 {visibleSubValue[value] && ( // Exibe os subitens
                                   <ul>
@@ -304,7 +328,7 @@ function Inventory() {
 
                                       <div className='bttnsDiv'>
                                         <li key={subIdx}>{subValue}</li>
-                                        {subValue && <IoIosCloseCircle title='Remover endereço' className='xButton'
+                                        {subValue && <IoIosCloseCircle title='Remover endereço' className='xButton' tabIndex={1}
                                           onClick={() => inv.deleteSubItem(loc, subloc, value, subValue)} 
                                         />}
                                       </div>
@@ -314,7 +338,14 @@ function Inventory() {
 
                                       <div className='bttnsDiv'>
                                         <input maxLength={40} type="text" className='addInput' onChange={(e) => setValor(e.target.value)} />
-                                        <MdLibraryAdd title='Adicionar endereço' className='addButton' onClick={() => inv.addSubItem(loc, subloc, value, valor.toUpperCase())} />
+                                        <MdLibraryAdd title='Adicionar endereço' className='addButton'
+                                          tabIndex={0}  
+                                          onClick={() => inv.addSubItem(loc, subloc, value, valor.toUpperCase())}
+                                          onKeyDown={(e) => {
+                                            if (e.key === 'Enter') {
+                                              inv.addSubItem(loc, subloc, value, valor.toUpperCase())
+                                            }
+                                          }} />
                                       </div>
 
                                     </li>
@@ -326,7 +357,14 @@ function Inventory() {
 
                               <div className='bttnsDiv'>
                                 <input maxLength={40} type="text" className='addInput' onChange={(e) => setValor(e.target.value)} />
-                                <MdLibraryAdd title='Adicionar endereço' className='addButton' onClick={() => inv.addSubVal(loc, subloc, valor.toUpperCase())} />
+                                <MdLibraryAdd title='Adicionar endereço' className='addButton' 
+                                  tabIndex={0}
+                                  onClick={() => inv.addSubVal(loc, subloc, valor.toUpperCase())}
+                                  onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                      inv.addSubVal(loc, subloc, valor.toUpperCase())
+                                    }
+                                  }} />
                               </div>
 
                             </li>
@@ -337,7 +375,14 @@ function Inventory() {
 
                     <div className='bttnsDiv'>
                       <input maxLength={40} type="text" className='addInput' onChange={(e) => setValor(e.target.value)} />
-                      <MdLibraryAdd title='Adicionar endereço' className='addButton' onClick={() => inv.addSubInv(loc, valor.toUpperCase())} />
+                      <MdLibraryAdd title='Adicionar endereço' className='addButton' 
+                        tabIndex={0}
+                        onClick={() => inv.addSubInv(loc, valor.toUpperCase())}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            inv.addSubInv(loc, valor.toUpperCase())
+                          }
+                        }} />
                     </div>
 
                   </ul>
@@ -347,7 +392,14 @@ function Inventory() {
             <li>
               <div className='bttnsDiv'>
                 <input maxLength={40} type="text" className='addInput' onChange={(e) => setValor(e.target.value)} autoFocus={true} />
-                <MdLibraryAdd title='Adicionar endereço' className='addButton' onClick={() => inv.addInv(valor.toUpperCase())} />
+                <MdLibraryAdd title='Adicionar endereço' className='addButton' 
+                  tabIndex={0}
+                  onClick={() => inv.addInv(valor.toUpperCase())}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      inv.addInv(valor.toUpperCase())
+                    }
+                  }} />
               </div>
             </li>
           </ul>

@@ -9,9 +9,10 @@ import Empty from '../messages/Empty.jsx'
 
 // PRONTO!
 
-const url = import.meta.env.VITE_PRODUCTS_URL;
 const user_id = localStorage.getItem('id');
 const username = localStorage.getItem('username');
+const url = import.meta.env.VITE_PRODUCTS_URL;
+const queryUrl = import.meta.env.VITE_PRODUCTS_QUERY_URL + user_id
 
 function Products(props) {
   const {products, setProducts} = useContext(ProductsContext)
@@ -26,32 +27,62 @@ function Products(props) {
   }
 
 
-  async function addOneProduct(name, price, category) {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user_id: user_id,
-        username: username,
-        category: category,
-        product: {
-          name: name,
-          price: price,
-          quantity: 1
+
+  async function get_products() {
+    try {
+      const response = await fetch(queryUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
         }
       })
-    });
+  
+      if (!response.ok) {
+        console.log('erro ao buscar produtos: ', response.status)
+        return
+      }
 
-    if (!response.ok) {
-      console.log('error occurred: ', response.status)
-      return
+      const data = await response.json()
+      console.log("aqui os produtos: ", data.products);
+      if (data.products) {
+        setProducts(data.products);
+
+      } else {
+        console.log('Nenhum produto encontrado', data)
+      }
+    } catch (error) {
+      console.log('Erro ao buscar produtos: ', error)
     }
+  };
 
+
+  async function addOneProduct(name, price, category) {
     try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: user_id,
+          username: username,
+          category: category,
+          product: {
+            name: name,
+            price: price,
+            quantity: 1
+          }
+        })
+      });
+
+      if (!response.ok) {
+        console.log('error occurred: ', response.status)
+        return
+      }
+
+    
       const data = await response.json();
-      props.setTrigger(prev => !prev);
+      await get_products();
       console.log('Server response: ', data);
 
     } catch (error) {
@@ -61,31 +92,31 @@ function Products(props) {
 
 
   async function deleteProduct(name, price, quantity, category) {
-    const response = await fetch(url, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user_id,
-        username,
-        category: category,
-        product: {
-          name: name,
-          price: price,
-          quantity: quantity
-        }
-      })
-    });
-
-    if (!response.ok) {
-      console.log("Erro ao inserir dados dos produtos")
-      return;
-    }
-
     try {
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_id,
+          username,
+          category: category,
+          product: {
+            name: name,
+            price: price,
+            quantity: quantity
+          }
+        })
+      });
+
+      if (!response.ok) {
+        console.log("Erro ao inserir dados dos produtos")
+        return;
+      }
+
       const data = await response.json();
-      props.setTrigger(prev => !prev);
+      await get_products();
       console.log('Server response: ', data);
 
     } catch (error) {

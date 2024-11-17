@@ -115,7 +115,6 @@ table {
 
     & .info {
         display: flex;
-        margin: 5px;
         
         & .singularInfo {
             width: 44vw;
