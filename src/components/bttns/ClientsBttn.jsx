@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FiUser } from "react-icons/fi"
 import { MdOutlineLocalPhone } from "react-icons/md"
 import '../../../styles/Clients.css'
+import { ClientsContext } from '../contexts/ClientsContext'
 
 function ClientsBttn(props) {
+  const {clientsList, setClientsList, getClientInfo} = useContext(ClientsContext)
 
   return (
     <>
-      <main className='cliBttnMain' onClick={() => {props.setClients(true); props.getClientInfo(props.name)}}>
+      <main className='cliBttnMain' onClick={() => {props.setClients(true); getClientInfo(props.name)}}>
         <article className='nameClient'>
             <div>
               <FiUser size={35} />

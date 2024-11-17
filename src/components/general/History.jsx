@@ -19,7 +19,7 @@ function History(props) {
                 </tr>
             </thead>
             <tbody>
-                <tr onClick={() => {props.setClients(true); props.getClientInfo('João')}}>
+                <tr onClick={() => {props.setClients(true); getClientInfo('João')}}>
                     <td>1</td>
                     <td>João</td>
                     <td>Paçoca</td>

@@ -31,7 +31,6 @@ function Home(props) {
   const [time, setTime] = useState(new Date());
   const [greeting, setGreeting] = useState('');
   const [activeComponent, setActiveComponent] = useState(null);
-  const [selectedClient, setSelectedClient] = useState(null);
   const [trigger, setTrigger] = useState(false);
   const [activate, setActivate] = useState(false);
 
@@ -45,13 +44,6 @@ function Home(props) {
   function handleLogout() {
     localStorage.clear();
     props.setIsToken(false);
-  };
-
-
-  function getClientInfo(event) {
-    const item = localStorage.getItem('clients')
-    const visibleClient = JSON.parse(item).find(client => client.client === event)
-    setSelectedClient(visibleClient)
   };
 
 
@@ -96,7 +88,7 @@ function Home(props) {
             <div>Informações gerais</div>
           </div>
           <div className="iconTextWrapper" 
-            onClick={() => renderComponent('Adicionar vendas feitas', <NewSales setClients={setClients} getClientInfo={getClientInfo} />)}>
+            onClick={() => renderComponent('Adicionar vendas feitas', <NewSales setClients={setClients} />)}>
             <BsBuildingGear size={30} />
             <div>Adicionar vendas feitas</div>
           </div>
@@ -105,7 +97,7 @@ function Home(props) {
             <GrHistory size={30} />
             <div>Histórico de vendas</div>
           </div>
-          <div className="iconTextWrapper" onClick={() => renderComponent('Clientes', <Clients getClientInfo={getClientInfo} setClients={setClients} setSelectedClient={setSelectedClient} />)}>
+          <div className="iconTextWrapper" onClick={() => renderComponent('Clientes', <Clients setClients={setClients} />)}>
             <RiContactsLine size={30} />
             <div>Clientes</div>
           </div>
@@ -113,7 +105,7 @@ function Home(props) {
             <AiOutlineProduct size={30} />
             <div>Produtos</div>
           </div>
-          <div className="iconTextWrapper" onClick={() => renderComponent('Inventário', <Inventory trigger={trigger} setTrigger={setTrigger} getClientInfo={getClientInfo} />)}>
+          <div className="iconTextWrapper" onClick={() => renderComponent('Inventário', <Inventory trigger={trigger} setTrigger={setTrigger} />)}>
             <MdOutlineInventory size={30} />
             <div>Inventário</div>
           </div>
@@ -142,7 +134,7 @@ function Home(props) {
             }
             <article className='singularInfo'>
               {
-                clients === true ? <ClientsInfo setClients={setClients} clientData={selectedClient} /> : 
+                clients === true ? <ClientsInfo setClients={setClients} /> : 
                 (title === 'Produtos' ? <ProductsForm trigger={trigger} /> : 
                   (title === 'Inventário' ? <Products setActivate={setActivate} setTrigger={setTrigger} /> : 
                     (title === 'Informações gerais' ? <GeneralCharts /> : 

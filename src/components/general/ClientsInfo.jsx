@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Chart from 'react-apexcharts'
 import { IoIosClose } from 'react-icons/io'
+import { ClientsContext } from '../contexts/ClientsContext';
 
 function ClientsInfo(props) {
-  const {client, address, contact, observations} = props.clientData || {};
+  const {selectedClient, clientsList, setClientsList} = useContext(ClientsContext)
 
   const options = {
     chart: {
@@ -50,22 +51,22 @@ function ClientsInfo(props) {
           </div>
           <label>Nome:</label>
           <div className="cliData">
-            {client}
+            {selectedClient["client"]}
           </div>
 
           <label>Contato:</label>
           <div className="cliData">
-            {contact}
+            {selectedClient["contact"]}
           </div>
 
           <label>Local/Endereço:</label>
           <div className="cliData">
-            {address}
+            {selectedClient["address"]}
           </div>
 
           <label>Observações</label>
           <div className="cliData" style={{fontSize: 15}}>
-            {observations ? observations : (
+            {selectedClient["observations"] ? selectedClient["observations"] : (
               <div style={{color: 'grey', fontStyle: 'italic', cursor: 'default'}}>
                 Sem comentários
               </div>
