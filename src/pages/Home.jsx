@@ -48,35 +48,6 @@ function Home(props) {
   };
 
 
-  async function getProducts() {
-    try {
-      console.log('chamou getprod')
-      const response = await fetch(queryUrl, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-  
-      if (!response.ok) {
-        console.log('erro ao buscar produtos: ', response.status)
-        return
-      }
-
-      const data = await response.json()
-      console.log("aqui os produtos: ", data.products);
-      if (data.products) {
-        setProducts(data.products);
-
-      } else {
-        console.log('Nenhum produto encontrado', data)
-      }
-    } catch (error) {
-      console.log('Erro ao buscar produtos: ', error)
-    }
-  };
-
-
   function getClientInfo(event) {
     const item = localStorage.getItem('clients')
     const visibleClient = JSON.parse(item).find(client => client.client === event)
@@ -142,7 +113,7 @@ function Home(props) {
             <AiOutlineProduct size={30} />
             <div>Produtos</div>
           </div>
-          <div className="iconTextWrapper" onClick={() => renderComponent('Inventário', <Inventory trigger={trigger} setTrigger={setTrigger} getProducts={getProducts} getClientInfo={getClientInfo} />)}>
+          <div className="iconTextWrapper" onClick={() => renderComponent('Inventário', <Inventory trigger={trigger} setTrigger={setTrigger} getClientInfo={getClientInfo} />)}>
             <MdOutlineInventory size={30} />
             <div>Inventário</div>
           </div>
@@ -172,7 +143,7 @@ function Home(props) {
             <article className='singularInfo'>
               {
                 clients === true ? <ClientsInfo setClients={setClients} clientData={selectedClient} /> : 
-                (title === 'Produtos' ? <ProductsForm trigger={trigger} getProducts={getProducts} /> : 
+                (title === 'Produtos' ? <ProductsForm trigger={trigger} /> : 
                   (title === 'Inventário' ? <Products setActivate={setActivate} setTrigger={setTrigger} /> : 
                     (title === 'Informações gerais' ? <GeneralCharts /> : 
                       (title === 'Clientes' ? <ClientsForm /> :
