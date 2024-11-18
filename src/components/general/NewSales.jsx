@@ -11,6 +11,7 @@ function NewSales(props) {
   const [client, setClient] = useState('');
   const [prodName, setProdName] = useState('');
 
+
   async function fetchData(product) {
     try {
       const response = await fetch(url, {
@@ -25,40 +26,42 @@ function NewSales(props) {
           product: product.name,
           price: product.price,
           quantity: 1,
-          data: props.getDate()
+          day: props.getDate(),
+          hour: props.getHour(),
+          status: 'pending'
         })
       });
 
-      const data = await response.json()
+      const data = await response.json();
+
+      console.log(data);
+
     } catch (error) {
       console.log('Erro: ', error)
     }
   };
 
-  const registerSales = useCallback(
-    async function (event) {
-      // pega o nome do produto e pesquisa ele no contexto de produtos
-      event.preventDefault();
-      const existingProduct = products.find((prod) =>
-        prod.products.some((val) => val.name === prodName)
-      );
-  
-      const product = existingProduct
-        ? existingProduct.products.find((item) => item.name === prodName)
-        : undefined;
-  
-      if (!product) {
-        console.log('não existe produto');
-        // retornar erro
-        return;
-      }
-  
-      console.log(product);
-  
-      await fetchData(product);
-    },
-    [products, prodName] // Adicione aqui quaisquer dependências externas
-  );
+
+  async function registerSales(event) {
+    // pega o nome do produto e pesquisa ele no contexto de produtos
+    event.preventDefault();
+    const existingProduct = products.find((prod) =>
+      prod.products.some((val) => val.name === prodName)
+    );
+
+    const product = existingProduct
+      ? existingProduct.products.find((item) => item.name === prodName)
+      : undefined;
+
+    if (!product) {
+      // retornar erro
+      return;
+    }
+
+    console.log(product);
+
+    fetchData(product);
+  };
   
 
   return (
