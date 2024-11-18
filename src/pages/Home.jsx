@@ -34,6 +34,11 @@ function Home(props) {
   const [trigger, setTrigger] = useState(false);
   const [activate, setActivate] = useState(false);
 
+  function getHour() {
+    
+  };
+
+
   function renderComponent(title, component) {
     setTitle(title);
     setActiveComponent(component)
@@ -69,6 +74,7 @@ function Home(props) {
     return () => clearInterval(timer);
   }, [time]);
 
+
   useEffect(() => {
     if (!props.isToken) {
       navigate('/');
@@ -88,7 +94,7 @@ function Home(props) {
             <div>Informações gerais</div>
           </div>
           <div className="iconTextWrapper" 
-            onClick={() => renderComponent('Adicionar vendas feitas', <NewSales setClients={setClients} />)}>
+            onClick={() => renderComponent('Adicionar vendas feitas', <NewSales setClients={setClients} getHour={getHour} />)}>
             <BsBuildingGear size={30} />
             <div>Adicionar vendas feitas</div>
           </div>
@@ -149,6 +155,6 @@ function Home(props) {
       </main>
     </>
   )
-}
+};
 
 export default Home
