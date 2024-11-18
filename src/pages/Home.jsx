@@ -34,8 +34,22 @@ function Home(props) {
   const [trigger, setTrigger] = useState(false);
   const [activate, setActivate] = useState(false);
 
+
+  function getDate() {
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth();
+
+    return `${day}/${month}`
+  };
+
+
   function getHour() {
-    
+    const date = new Date();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+
+    return `${hour}:${minute}`
   };
 
 
@@ -94,12 +108,12 @@ function Home(props) {
             <div>Informações gerais</div>
           </div>
           <div className="iconTextWrapper" 
-            onClick={() => renderComponent('Adicionar vendas feitas', <NewSales setClients={setClients} getHour={getHour} />)}>
+            onClick={() => renderComponent('Adicionar vendas feitas', <NewSales setClients={setClients} getDate={getDate} />)}>
             <BsBuildingGear size={30} />
             <div>Adicionar vendas feitas</div>
           </div>
           <div className="iconTextWrapper" 
-            onClick={() => renderComponent('Histórico de vendas', <History setClients={setClients} />)}>
+            onClick={() => renderComponent('Histórico de vendas', <History setClients={setClients} getDate={getDate} getHour={getHour} />)}>
             <GrHistory size={30} />
             <div>Histórico de vendas</div>
           </div>

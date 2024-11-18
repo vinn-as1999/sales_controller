@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import '../../../styles/NewSales.css'
 import { ClientsContext } from '../contexts/ClientsContext'
 import { ProductsContext } from '../contexts/ProductsContext'
@@ -25,7 +25,7 @@ function NewSales(props) {
           product: product.name,
           price: product.price,
           quantity: 1,
-          data: 12
+          data: props.getDate()
         })
       });
 
