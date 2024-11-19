@@ -94,13 +94,13 @@ function NewSales(props) {
               </tr>
             </thead>
             <tbody>
-              {/* <tr onClick={() => props.setClients(true)}>
+              <tr onClick={() => props.setClients(true)}>
                 <td>1</td>
                 <td>João</td>
                 <td>Paçoca</td>
                 <td>3,00</td>
                 <td>23/10</td>
-              </tr> */}
+              </tr>
             </tbody>
         </table>
       </main>
