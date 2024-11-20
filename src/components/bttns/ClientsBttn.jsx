@@ -9,7 +9,7 @@ function ClientsBttn(props) {
 
   return (
     <>
-      <main className='cliBttnMain' onClick={() => {props.setClients(true); getClientInfo(props.name)}}>
+      <main className='cliBttnMain' onClick={() => {props.setClients(true); getClientInfo(props.contact)}}>
         <article className='nameClient'>
             <div>
               <FiUser size={35} />

@@ -36,13 +36,15 @@ export const ClientsProvider = ({children}) => {
 
 
     function getClientInfo(event) {
-        const visibleClient = clientsList.find(client => client.client === event)
+        const visibleClient = clientsList.find(client => client.contact === event)
         setSelectedClient(visibleClient)
     };
 
+    useEffect(() => {
+        getClients(user_id)
 
-    useEffect(() => getClients(user_id), []);
-
+        return () => {}
+    }, [])
 
     return (
         <ClientsContext.Provider value={{clientsList, setClientsList, getClientInfo, selectedClient}}>
