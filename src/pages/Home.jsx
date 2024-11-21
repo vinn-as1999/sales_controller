@@ -108,7 +108,7 @@ function Home(props) {
             <div>Informações gerais</div>
           </div>
           <div className="iconTextWrapper" 
-            onClick={() => renderComponent('Adicionar vendas feitas', <NewSales setClients={setClients} getDate={getDate} />)}>
+            onClick={() => renderComponent('Adicionar vendas feitas', <NewSales setClients={setClients} getDate={getDate} getHour={getHour} />)}>
             <BsBuildingGear size={30} />
             <div>Adicionar vendas feitas</div>
           </div>

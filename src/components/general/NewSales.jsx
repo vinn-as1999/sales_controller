@@ -14,7 +14,7 @@ function NewSales(props) {
   const [prodName, setProdName] = useState('');
 
 
-  async function fetchData(product, status) {
+  async function fetchData(product, category, status) {
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -35,7 +35,12 @@ function NewSales(props) {
       });
 
       const data = await response.json();
-      await deleteProduct(product.name, product.price, product.quantity, product.category)
+      if ("error" in data) {
+        console.log(data)
+        return
+      }
+
+      await deleteProduct(product.name, product.price, 1, category)
       console.log(data);
 
     } catch (error) {
@@ -73,7 +78,7 @@ function NewSales(props) {
             <form style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}} onSubmit={(e)=>registerSales(e, 'pending')}>
               <div>
                 <label>Cliente: </label>
-                <input type="text" placeholder='ex: João' autoFocus={true} />
+                <input type="text" value={client} placeholder='ex: João' autoFocus={true} onChange={e => setClient(e.target.value)} />
               </div>
               <div>
                 <label htmlFor="">Produto: </label>
