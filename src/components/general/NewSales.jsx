@@ -4,15 +4,17 @@ import { ClientsContext } from '../contexts/ClientsContext'
 import { ProductsContext } from '../contexts/ProductsContext'
 
 const url = import.meta.env.VITE_NEW_SALES_URL
+const user_id = localStorage.getItem('id')
+const username = localStorage.getItem('username')
 
 function NewSales(props) {
   const {clients, setClients} = useContext(ClientsContext);
-  const {products, setProducts} = useContext(ProductsContext);
+  const {products, setProducts, deleteProduct} = useContext(ProductsContext);
   const [client, setClient] = useState('');
   const [prodName, setProdName] = useState('');
 
 
-  async function fetchData(product) {
+  async function fetchData(product, status) {
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -28,12 +30,12 @@ function NewSales(props) {
           quantity: 1,
           day: props.getDate(),
           hour: props.getHour(),
-          status: 'pending'
+          status: status
         })
       });
 
       const data = await response.json();
-
+      await deleteProduct(product.name, product.price, product.quantity, product.category)
       console.log(data);
 
     } catch (error) {
@@ -42,7 +44,7 @@ function NewSales(props) {
   };
 
 
-  async function registerSales(event) {
+  function registerSales(event, status) {
     // pega o nome do produto e pesquisa ele no contexto de produtos
     event.preventDefault();
     const existingProduct = products.find((prod) =>
@@ -57,10 +59,10 @@ function NewSales(props) {
       // retornar erro
       return;
     }
+    const category = existingProduct.category
+    console.log(category)
 
-    console.log(product);
-
-    fetchData(product);
+    fetchData(product, category, status);
   };
   
 
@@ -68,7 +70,7 @@ function NewSales(props) {
     <>
       <main className='salesMain'>
         <section className='newSales'>
-            <form style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}} onSubmit={registerSales}>
+            <form style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}} onSubmit={(e)=>registerSales(e, 'pending')}>
               <div>
                 <label>Cliente: </label>
                 <input type="text" placeholder='ex: João' autoFocus={true} />

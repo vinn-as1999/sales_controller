@@ -45,11 +45,13 @@ function ClientsForm(props) {
       }
   
       const newClients = {
-        client: data[0].client,
-        contact: data[0].contact,
-        address: data[0].address,
-        observations: data[0].observations
+        client: data[0].client.client,
+        contact: data[0].client.contact,
+        address: data[0].client.address,
+        observations: data[0].client.observations
       }
+
+      console.log(data)
   
       setClientsList(prev => [...prev, newClients]);
   
