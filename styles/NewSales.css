@@ -45,10 +45,12 @@
         & tr {
 
             & th {
-                background-color: #2A2D34;  
-                color: white;
+                background: none;
+                color: rgb(148, 44, 44);
                 width: 10vw;  
                 padding: 5px;
+                cursor: default;
+                user-select: none;
             }
             
             & td {

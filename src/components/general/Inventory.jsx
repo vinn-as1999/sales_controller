@@ -298,7 +298,7 @@ function Inventory() {
               <div key={loc}>
                 <div className='subInvDiv'>
                   <div className="bttnsDiv">
-                    <li onClick={() => editWH(index)}>{loc.toUpperCase()}</li>
+                    <li onClick={() => editWH(index)}>{loc.toLowerCase()}</li>
                     {loc && <IoIosCloseCircle title='Remover endereço' className='xButton' tabIndex={1} onClick={() => inv.deleteInv(loc)} />}
                   </div>
                 </div>
@@ -309,7 +309,7 @@ function Inventory() {
 
                         <div className='subInvDiv'>
                           <div className="bttnsDiv">
-                            <li onClick={() => editSubWH(subloc)}>{subloc.toUpperCase()}</li>
+                            <li onClick={() => editSubWH(subloc)}>{subloc.toLowerCase()}</li>
                             {subloc && <IoIosCloseCircle title='Remover endereço' className='xButton' tabIndex={1} onClick={() => inv.deleteSubInv(loc, subloc)} />}
                           </div>
                         </div>
@@ -319,7 +319,7 @@ function Inventory() {
                             {Object.entries(values).map(([value, subValues], idx) => (
                               <div key={value}>
                                 <div className='bttnsDiv'>
-                                  <li onClick={() => editSubValue(value)}>{value.toUpperCase()}</li>
+                                  <li onClick={() => editSubValue(value)}>{value.toLowerCase()}</li>
                                   {value && <IoIosCloseCircle title='Remover endereço' className='xButton' tabIndex={1} onClick={() => inv.deleteSubVal(loc, subloc, value)} />}
                                 </div>
                                 {visibleSubValue[value] && ( // Exibe os subitens
@@ -340,10 +340,10 @@ function Inventory() {
                                         <input maxLength={40} type="text" className='addInput' onChange={(e) => setValor(e.target.value)} />
                                         <MdLibraryAdd title='Adicionar endereço' className='addButton'
                                           tabIndex={0}  
-                                          onClick={() => inv.addSubItem(loc, subloc, value, valor.toUpperCase())}
+                                          onClick={() => inv.addSubItem(loc, subloc, value, valor.toLowerCase())}
                                           onKeyDown={(e) => {
                                             if (e.key === 'Enter') {
-                                              inv.addSubItem(loc, subloc, value, valor.toUpperCase())
+                                              inv.addSubItem(loc, subloc, value, valor.toLowerCase())
                                             }
                                           }} />
                                       </div>
@@ -359,10 +359,10 @@ function Inventory() {
                                 <input maxLength={40} type="text" className='addInput' onChange={(e) => setValor(e.target.value)} />
                                 <MdLibraryAdd title='Adicionar endereço' className='addButton' 
                                   tabIndex={0}
-                                  onClick={() => inv.addSubVal(loc, subloc, valor.toUpperCase())}
+                                  onClick={() => inv.addSubVal(loc, subloc, valor.toLowerCase())}
                                   onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
-                                      inv.addSubVal(loc, subloc, valor.toUpperCase())
+                                      inv.addSubVal(loc, subloc, valor.toLowerCase())
                                     }
                                   }} />
                               </div>
@@ -377,10 +377,10 @@ function Inventory() {
                       <input maxLength={40} type="text" className='addInput' onChange={(e) => setValor(e.target.value)} />
                       <MdLibraryAdd title='Adicionar endereço' className='addButton' 
                         tabIndex={0}
-                        onClick={() => inv.addSubInv(loc, valor.toUpperCase())}
+                        onClick={() => inv.addSubInv(loc, valor.toLowerCase())}
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') {
-                            inv.addSubInv(loc, valor.toUpperCase())
+                            inv.addSubInv(loc, valor.toLowerCase())
                           }
                         }} />
                     </div>
@@ -394,10 +394,10 @@ function Inventory() {
                 <input maxLength={40} type="text" className='addInput' onChange={(e) => setValor(e.target.value)} autoFocus={true} />
                 <MdLibraryAdd title='Adicionar endereço' className='addButton' 
                   tabIndex={0}
-                  onClick={() => inv.addInv(valor.toUpperCase())}
+                  onClick={() => inv.addInv(valor.toLowerCase())}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
-                      inv.addInv(valor.toUpperCase())
+                      inv.addInv(valor.toLowerCase())
                     }
                   }} />
               </div>

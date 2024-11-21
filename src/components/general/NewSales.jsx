@@ -2,6 +2,8 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import '../../../styles/NewSales.css'
 import { ClientsContext } from '../contexts/ClientsContext'
 import { ProductsContext } from '../contexts/ProductsContext'
+import { IoCheckmarkDoneOutline } from "react-icons/io5"
+
 
 const url = import.meta.env.VITE_NEW_SALES_URL
 const user_id = localStorage.getItem('id')
@@ -93,20 +95,20 @@ function NewSales(props) {
         <table>
             <thead>
               <tr>
-                <th>ID</th>
                 <th>Cliente</th>
                 <th>Produto</th>
                 <th>Valor</th>
                 <th>Data</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               <tr onClick={() => props.setClients(true)}>
-                <td>1</td>
                 <td>João</td>
                 <td>Paçoca</td>
                 <td>3,00</td>
                 <td>23/10</td>
+                <td><IoCheckmarkDoneOutline className='check-status' /></td>
               </tr>
             </tbody>
         </table>
