@@ -3,15 +3,13 @@ import '../../../styles/NewSales.css'
 import { ClientsContext } from '../contexts/ClientsContext'
 import { ProductsContext } from '../contexts/ProductsContext'
 import { IoCheckmarkDoneOutline } from "react-icons/io5"
+import { SalesContext } from '../contexts/SalesContext'
 
-
-const url = import.meta.env.VITE_NEW_SALES_URL
-const user_id = localStorage.getItem('id')
-const username = localStorage.getItem('username')
 
 function NewSales(props) {
   const {clients, setClients} = useContext(ClientsContext);
   const {products, setProducts, deleteProduct} = useContext(ProductsContext);
+  const {user_id, username, url, sales, getSales, setSales} = useContext(SalesContext);
   const [client, setClient] = useState('');
   const [prodName, setProdName] = useState('');
 
@@ -77,7 +75,8 @@ function NewSales(props) {
     <>
       <main className='salesMain'>
         <section className='newSales'>
-            <form style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}} onSubmit={(e)=>registerSales(e, 'pending')}>
+            <form style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}} 
+              onSubmit={(e)=>registerSales(e, 'pending')}>
               <div>
                 <label>Cliente: </label>
                 <input type="text" value={client} placeholder='ex: João' autoFocus={true} onChange={e => setClient(e.target.value)} />
@@ -103,13 +102,19 @@ function NewSales(props) {
               </tr>
             </thead>
             <tbody>
-              <tr onClick={() => props.setClients(true)}>
+              {
+
+              }
+              {/* <tr onClick={() => props.setClients(true)}>
                 <td>João</td>
                 <td>Paçoca</td>
                 <td>3,00</td>
                 <td>23/10</td>
-                <td><IoCheckmarkDoneOutline className='check-status' /></td>
-              </tr>
+                <td>
+                  <IoCheckmarkDoneOutline className='check-status' 
+                      onClick={(e) => registerSales(e, 'paid')} />
+                </td>
+              </tr> */}
             </tbody>
         </table>
       </main>

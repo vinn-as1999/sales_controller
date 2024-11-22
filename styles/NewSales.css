@@ -64,3 +64,12 @@
         }
     }
 }
+
+.check-status {
+    font-size: 25px;
+    color: rgb(30, 204, 102);
+}
+
+.check-status:hover {
+    color: rgb(63, 245, 139);;
+}
