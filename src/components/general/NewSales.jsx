@@ -65,7 +65,6 @@ function NewSales(props) {
       return;
     }
     const category = existingProduct.category
-    console.log(category)
 
     fetchData(product, category, status);
   };
@@ -103,7 +102,19 @@ function NewSales(props) {
             </thead>
             <tbody>
               {
-
+                sales.length > 0 ? sales.map((sale, index) => (
+                  <tr key={index}>
+                    <td>{sale.client}</td>
+                    <td>{sale.product}</td>
+                    <td>{sale.price}</td>
+                    <td>{sale.day}</td>
+                    <td>
+                      <IoCheckmarkDoneOutline 
+                          className='check-status' 
+                          onClick={(e) => registerSales(e, 'paid')} />
+                    </td>
+                  </tr>
+                )) : (<div>nada n</div>) 
               }
               {/* <tr onClick={() => props.setClients(true)}>
                 <td>João</td>

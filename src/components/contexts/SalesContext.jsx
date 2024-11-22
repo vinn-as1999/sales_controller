@@ -9,10 +9,11 @@ const queryUrl = import.meta.env.VITE_NEW_SALES_URL + `/${user_id}`
 
 export function SalesProvider({children}) {
     const [sales, setSales] = useState([]);
+    const [history, setHistory] = useState([]);
 
     async function getSales() {
         try {
-            const response = await fetch(url, {
+            const response = await fetch(queryUrl, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -25,8 +26,9 @@ export function SalesProvider({children}) {
             }
 
             const data = await response.json();
-            console.log(data);
-            
+            console.log(data.data);
+            setSales(data.data);
+            setHistory(data.data);
 
         } catch (error) {
             console.log("Erro ao buscar vendas: ", error)
@@ -46,8 +48,10 @@ export function SalesProvider({children}) {
                 username,
                 url,
                 queryUrl,
+                history,
                 getSales,
-                setSales
+                setSales,
+                setHistory
             }}>
             {children}
         </SalesContext.Provider>
