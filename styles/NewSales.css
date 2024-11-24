@@ -71,5 +71,14 @@
 }
 
 .check-status:hover {
-    color: rgb(63, 245, 139);;
+    color: rgb(63, 245, 139);
+}
+
+.pending-status {
+    font-size: 25px;
+    color: #F13A43
+}
+
+.pending-status:hover {
+    color: #fa7178
 }

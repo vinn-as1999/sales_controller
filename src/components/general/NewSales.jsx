@@ -9,7 +9,7 @@ import { SalesContext } from '../contexts/SalesContext'
 function NewSales(props) {
   const {clients, setClients} = useContext(ClientsContext);
   const {products, setProducts, deleteProduct} = useContext(ProductsContext);
-  const {user_id, username, url, sales, getSales, setSales} = useContext(SalesContext);
+  const {user_id, username, url, sales, getSales, setSales, setHistory} = useContext(SalesContext);
   const [client, setClient] = useState('');
   const [prodName, setProdName] = useState('');
 
@@ -40,11 +40,67 @@ function NewSales(props) {
         return
       }
 
-      await deleteProduct(product.name, product.price, 1, category)
-      console.log(data);
+      await deleteProduct(product.name, product.price, 1, category);
+      await getSales();
 
     } catch (error) {
       console.log('Erro: ', error)
+    }
+  };
+
+
+  async function removePending(pending) {
+    try {
+      const response = await fetch(`${url}/${pending}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        console.log("Erro: ", response, response.status)
+      }
+
+      const data = await response.json()
+      
+      console.log('Server response (removePending): ', data);
+      await getSales();
+      return
+      
+    } catch (error) {
+      console.log("trycatch error: ", error)
+    }
+  };
+
+
+  async function registerPayment(saleData) {
+    // essa função deve remover a venda pendente da lista de pendencias
+    saleData.day = props.getDate()
+    saleData.hour = props.getHour()
+    saleData.status = 'paid'
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(saleData)
+      });
+
+      if (!response.ok) {
+        console.log('Erro: ', response, response.status)
+        return
+      }
+
+      const data = await response.json()
+      console.log(data)
+      removePending(saleData._id)
+      return
+
+    } catch (error) {
+      console.log('Trycatch error: ', error)
     }
   };
 
@@ -68,6 +124,9 @@ function NewSales(props) {
 
     fetchData(product, category, status);
   };
+
+
+  useEffect(() => {console.log(sales)}, [sales])
   
 
   return (
@@ -102,30 +161,20 @@ function NewSales(props) {
             </thead>
             <tbody>
               {
-                sales.length > 0 ? sales.map((sale, index) => (
+                sales.length > 0 ? sales.map((sale, index) => sale.status === 'pending' && (
                   <tr key={index}>
                     <td>{sale.client}</td>
                     <td>{sale.product}</td>
-                    <td>{sale.price}</td>
+                    <td>R$ {sale.price}</td>
                     <td>{sale.day}</td>
                     <td>
                       <IoCheckmarkDoneOutline 
                           className='check-status' 
-                          onClick={(e) => registerSales(e, 'paid')} />
+                          onClick={() => registerPayment(sale)} />
                     </td>
                   </tr>
-                )) : (<div>nada n</div>) 
+                )) : <div className="empty"><Empty /></div>  
               }
-              {/* <tr onClick={() => props.setClients(true)}>
-                <td>João</td>
-                <td>Paçoca</td>
-                <td>3,00</td>
-                <td>23/10</td>
-                <td>
-                  <IoCheckmarkDoneOutline className='check-status' 
-                      onClick={(e) => registerSales(e, 'paid')} />
-                </td>
-              </tr> */}
             </tbody>
         </table>
       </main>

@@ -3,6 +3,7 @@ import { BsThreeDots } from "react-icons/bs"
 import { IoCheckmarkDoneSharp } from "react-icons/io5"
 import { FaExclamation } from "react-icons/fa6"
 import { SalesContext } from '../contexts/SalesContext'
+import Empty from '../messages/Empty'
 
 function History(props) {
   const {history, setHistory} = useContext(SalesContext)
@@ -10,6 +11,22 @@ function History(props) {
   return (
     <>
       <main className='histMain'>
+        <form className='historyForm'>
+          <label>
+            Cliente: 
+          </label>
+          <input type="text" />
+
+          <label>
+            Mês: 
+          </label>
+          <input type="number" />
+
+          <label>
+            Ano: 
+          </label>
+          <input type="number" />
+        </form>
         <table>
             <thead>
                 <tr>
@@ -33,12 +50,12 @@ function History(props) {
                     <td>
                       {
                         sale.status === "pending" 
-                          ? <BsThreeDots size={25} color='#F13A43' />
-                          : <IoCheckmarkDoneSharp size={25} color='#85FF9E' />
+                          ? <BsThreeDots className='pending-status' />
+                          : <IoCheckmarkDoneSharp className='check-status' />
                       }
                     </td>
                   </tr>
-                )) : (<div>nada n</div>)
+                )) : <div className="empty"><Empty /></div> 
               }
               <tr onClick={() => {props.setClients(true); getClientInfo('João')}}>
               </tr>
