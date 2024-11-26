@@ -11,11 +11,12 @@ function History(props) {
   const [month, setMonth] = useState('mês');
   const [year, setYear] = useState('ano');
 
+
   return (
     <>
       <main className='histMain'>
         <header>
-          <HistoryForm month={month} setMonth={setMonth} year={year} setYear={setYear} />
+          <HistoryForm />
           <h2>{`${month}/${year}`}</h2>
         </header>
         <table>
@@ -46,7 +47,7 @@ function History(props) {
                       }
                     </td>
                   </tr>
-                )) : <div className="empty"><Empty /></div> 
+                )) : null
               }
             </tbody>
         </table>

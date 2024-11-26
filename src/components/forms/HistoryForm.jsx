@@ -1,6 +1,6 @@
 import React from 'react'
 
-function HistoryForm(props) {
+function HistoryForm() {
   return (
     <>
       <main>
@@ -13,12 +13,12 @@ function HistoryForm(props) {
             <label>
               Mês:
             </label>
-            <input type="number" value={props.month} onChange={(e) => setMonth(e.target.value)} />
+            <input type="number" />
 
             <label>
               Ano:
             </label>
-            <input type="number" value={props.year} onChange={(e) => setYear(e.target.value)} />
+            <input type="number" />
         </form>
       </main>
     </>
