@@ -1,42 +1,33 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { BsThreeDots } from "react-icons/bs"
 import { IoCheckmarkDoneSharp } from "react-icons/io5"
 import { FaExclamation } from "react-icons/fa6"
 import { SalesContext } from '../contexts/SalesContext'
+import HistoryForm from '../forms/HistoryForm'
 import Empty from '../messages/Empty'
 
 function History(props) {
-  const {history, setHistory} = useContext(SalesContext)
+  const {history, setHistory} = useContext(SalesContext);
+  const [month, setMonth] = useState('mês');
+  const [year, setYear] = useState('ano');
 
   return (
     <>
       <main className='histMain'>
-        <form className='historyForm'>
-          <label>
-            Cliente: 
-          </label>
-          <input type="text" />
-
-          <label>
-            Mês: 
-          </label>
-          <input type="number" />
-
-          <label>
-            Ano: 
-          </label>
-          <input type="number" />
-        </form>
+        <header>
+          <HistoryForm month={month} setMonth={setMonth} year={year} setYear={setYear} />
+          <h2>{`${month}/${year}`}</h2>
+        </header>
         <table>
             <thead>
-                <tr>
-                  <th>Cliente</th>
-                  <th>Produto</th>
-                  <th>Valor</th>
-                  <th>Data</th>
-                  <th>Hora</th>
-                  <th>Status</th>
-                </tr>
+              <tr>
+                <th>Cliente</th>
+                <th>Produto</th>
+                <th>Valor</th>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Status</th>
+              </tr>
             </thead>
             <tbody>
               {
@@ -44,7 +35,7 @@ function History(props) {
                   <tr>
                     <td>{sale.client}</td>
                     <td>{sale.product}</td>
-                    <td>{sale.price}</td>
+                    <td>R$ {String(sale.price).padStart(2,'0')}</td>
                     <td>{sale.day}</td>
                     <td>{sale.hour}</td>
                     <td>
@@ -57,8 +48,6 @@ function History(props) {
                   </tr>
                 )) : <div className="empty"><Empty /></div> 
               }
-              <tr onClick={() => {props.setClients(true); getClientInfo('João')}}>
-              </tr>
             </tbody>
         </table>
       </main>

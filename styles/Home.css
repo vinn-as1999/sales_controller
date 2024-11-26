@@ -36,6 +36,11 @@ table {
     animation: tableEntrance 0.3s linear;
 }
 
+tr:hover {
+    color: rgb(247, 93, 93);
+    font-weight: 500;
+}
+
 .homeMain {
     display: flex;
     overflow: hidden;
@@ -122,6 +127,27 @@ table {
             overflow-y: auto;
             overflow-x: hidden;
         }
+    }
+}
+
+.histMain header {
+    display: flex;
+    align-items: center;
+
+    h2 {
+        color: grey;
+    }
+}
+
+.historyForm {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+
+    input {
+        width: 5vw;
+        margin: 5px;
+        outline-color:#e65c55;
     }
 }
 

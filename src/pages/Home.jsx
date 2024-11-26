@@ -40,7 +40,7 @@ function Home(props) {
     const day = date.getDate();
     const month = date.getMonth();
 
-    return `${day}/${month}`
+    return `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}`
   };
 
 
@@ -49,7 +49,7 @@ function Home(props) {
     const hour = date.getHours();
     const minute = date.getMinutes();
 
-    return `${hour}:${minute}`
+    return `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`
   };
 
 

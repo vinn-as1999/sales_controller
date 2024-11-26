@@ -4,6 +4,7 @@ import { ClientsContext } from '../contexts/ClientsContext'
 import { ProductsContext } from '../contexts/ProductsContext'
 import { IoCheckmarkDoneOutline } from "react-icons/io5"
 import { SalesContext } from '../contexts/SalesContext'
+import Empty from '../messages/Empty'
 
 
 function NewSales(props) {
@@ -49,28 +50,10 @@ function NewSales(props) {
   };
 
 
-  async function removePending(pending) {
-    try {
-      const response = await fetch(`${url}/${pending}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
-      if (!response.ok) {
-        console.log("Erro: ", response, response.status)
-      }
-
-      const data = await response.json()
-      
-      console.log('Server response (removePending): ', data);
-      await getSales();
-      return
-      
-    } catch (error) {
-      console.log("trycatch error: ", error)
-    }
+  function removePending(pending) {
+    const updatedSales = sales.filter(sale => sale._id !== pending)
+    console.log(updatedSales)
+    setSales(updatedSales)
   };
 
 
@@ -96,6 +79,7 @@ function NewSales(props) {
 
       const data = await response.json()
       console.log(data)
+      await getSales()
       removePending(saleData._id)
       return
 
@@ -126,7 +110,7 @@ function NewSales(props) {
   };
 
 
-  useEffect(() => {console.log(sales)}, [sales])
+  useEffect(() => {console.log('veja o sales', sales)}, [sales])
   
 
   return (

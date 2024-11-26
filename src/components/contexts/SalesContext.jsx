@@ -26,9 +26,9 @@ export function SalesProvider({children}) {
             }
 
             const data = await response.json();
-            console.log(data.data);
-            setSales(data.data);
-            setHistory(data.data);
+            console.log('aqui temos o data: ', data.sales, "e o history", data.history)
+            setSales(data.sales);
+            setHistory(data.history);
 
         } catch (error) {
             console.log("Erro ao buscar vendas: ", error)
