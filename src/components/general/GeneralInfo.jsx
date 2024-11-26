@@ -43,7 +43,7 @@ function GeneralInfo() {
                     Total (vendas):    
                 </div>
                 <div className='artValue'>
-                    55
+                    {String(sales.length).padStart(2, '0')}
                 </div>
             </article>
 
@@ -52,7 +52,9 @@ function GeneralInfo() {
                     Total obtido (R$)
                 </div>
                 <div className='artValue'>
-                    R$ 55,55
+                    R$ {
+                        sales.reduce((total, sale) => total + Number(sale.price), 0).toFixed(2)
+                    }
                 </div>
             </article>
 

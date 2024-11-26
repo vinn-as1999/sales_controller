@@ -183,7 +183,7 @@ th:hover {
     to {
       max-width: 500px;
     }
-  }
+}
 
 @keyframes ulExpands {
     from {
@@ -194,5 +194,92 @@ th:hover {
     to {
         max-height: 80vh;
         overflow: hidden;
+    }
+}
+
+/* Adicionando Media Queries para responsividade */
+
+@media (max-width: 768px) {
+    /* Ajuste de tamanhos e posicionamento para telas pequenas */
+
+    .homeMain {
+        flex-direction: column;
+    }
+
+    .homeMain sidebar {
+        width: 100%;
+        height: 50px;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .generalInfo {
+        width: 100%;
+    }
+
+    .giHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .giTitle {
+        font-size: 20px;
+    }
+
+    .iconTextWrapper {
+        width: 10vw;
+        font-size: 12px;
+    }
+
+    table {
+        font-size: 12px;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    .empty {
+        font-size: 40vw;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ajuste de tamanhos e posicionamento para dispositivos muito pequenos */
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .homeMain sidebar {
+        width: 100%;
+        height: 40px;
+        flex-direction: row;
+    }
+
+    .generalInfo {
+        width: 100%;
+    }
+
+    .giHeader {
+        padding: 10px;
+    }
+
+    .iconTextWrapper {
+        width: 15vw;
+        padding: 8px;
+    }
+
+    .giTitle {
+        font-size: 18px;
+    }
+
+    table {
+        font-size: 10px;
+    }
+
+    .empty {
+        font-size: 50vw;
     }
 }
