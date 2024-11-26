@@ -127,7 +127,11 @@ function NewSales(props) {
   };
 
 
-  useEffect(() => {console.log('veja o sales', sales)}, [sales])
+  useEffect(() => {
+    console.log('veja o sales', sales)
+    
+    return () => {}
+  }, [sales])
   
 
   return (

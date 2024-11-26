@@ -43,6 +43,8 @@ export const ClientsProvider = ({children}) => {
     useEffect(() => {
         getClients(user_id)
 
+        console.log('o cliList', clientsList)
+
         return () => {}
     }, [])
 

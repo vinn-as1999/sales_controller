@@ -36,9 +36,10 @@ table {
     animation: tableEntrance 0.3s linear;
 }
 
-tr:hover {
+th:hover {
     color: rgb(247, 93, 93);
-    font-weight: 500;
+    cursor: default;
+    user-select: none;
 }
 
 .homeMain {
