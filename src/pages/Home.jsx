@@ -34,11 +34,6 @@ function Home(props) {
   const [trigger, setTrigger] = useState(false);
   const [activate, setActivate] = useState(false);
 
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight
-  });
-
 
   function getDate() {
     const date = new Date();
