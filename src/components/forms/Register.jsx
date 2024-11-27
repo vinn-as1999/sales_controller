@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Message from '../messages/Message';
 import Error from '../messages/Error';
 
-const apiUrl = "http://localhost:3333/api/users";
+const apiUrl = "https://random.ngrok.io/api/users";
 
 function Register(props) {
   const [name, setName] = useState('');
