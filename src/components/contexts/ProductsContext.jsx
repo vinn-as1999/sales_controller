@@ -4,8 +4,7 @@ export const ProductsContext = createContext();
 
 const user_id = localStorage.getItem('id');
 const username = localStorage.getItem('username');
-const url = import.meta.env.VITE_PRODUCTS_URL;
-const queryUrl = import.meta.env.VITE_PRODUCTS_QUERY_URL + user_id;
+const queryUrl = `http://localhost:3333/api/products?user_id=${user_id}`
 
 export function ProductsProvider({ children }) {
   const [products, setProducts] = useState([]);

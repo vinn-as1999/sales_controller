@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Error from '../messages/Error';
 
-const apiUrl = import.meta.env.VITE_LOGIN_URL;
+const apiUrl = "http://localhost:3333/api/login";
 
 function LoginForm(props) {
   const [email, setEmail] = useState('');

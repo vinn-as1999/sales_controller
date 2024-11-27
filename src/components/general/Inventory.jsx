@@ -6,8 +6,7 @@ import '../../../styles/Inventory.css'
 
 const user_id = localStorage.getItem('id');
 const username = localStorage.getItem('username');
-const url = import.meta.env.VITE_INVENTORY_URL;
-const queryUrl = import.meta.env.VITE_INVENTORY_URL + `/${user_id}`
+const queryUrl = `http://localhost:3333/api/inventory/${user_id}`
 
 function Inventory() {
   const {products, setProducts} = useContext(ProductsContext)

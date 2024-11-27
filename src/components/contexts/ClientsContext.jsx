@@ -4,7 +4,7 @@ import React, { createContext, useEffect, useState } from 'react'
 export const ClientsContext = createContext();
 
 const user_id = localStorage.getItem("id")
-const url = import.meta.env.VITE_CLIENTS_URL + `/${user_id}`
+const url = `http://localhost:3333/api/clients/${user_id}`
 
 export const ClientsProvider = ({children}) => {
     const [clientsList, setClientsList] = useState([])

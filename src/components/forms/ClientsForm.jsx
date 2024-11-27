@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ClientsContext } from '../contexts/ClientsContext.jsx'
 import '../../../styles/Clients.css'
 
-const apiUrl = import.meta.env.VITE_ADD_CLIENTS_URL
+const apiUrl = "http://localhost:3333/api/add_clients"
 
 function ClientsForm(props) {
   const {clientsList, setClientsList} = useContext(ClientsContext)

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Message from '../messages/Message';
 import Error from '../messages/Error';
 
-const apiUrl = import.meta.env.VITE_USERS_URL;
+const apiUrl = "http://localhost:3333/api/users";
 
 function Register(props) {
   const [name, setName] = useState('');
