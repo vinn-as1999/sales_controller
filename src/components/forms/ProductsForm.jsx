@@ -4,7 +4,7 @@ import { ProductsContext } from '../contexts/ProductsContext'
 const userID = localStorage.getItem('id')
 const username = localStorage.getItem('username')
 
-const queryUrl = `http://localhost:3333/api/products/${userID}`
+const queryUrl = `${import.meta.env.VITE_PRODUCTS_URL}/${userID}`
 
 function ProductsForm(props) {
   const {products, setProducts} = useContext(ProductsContext);

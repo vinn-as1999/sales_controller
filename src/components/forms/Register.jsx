@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Message from '../messages/Message';
 import Error from '../messages/Error';
 
-const apiUrl = "https://random.ngrok.io/api/users";
+const apiUrl = import.meta.env.VITE_USERS_URL;
 
 function Register(props) {
   const [name, setName] = useState('');
