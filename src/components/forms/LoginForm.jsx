@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Error from '../messages/Error';
 
-const apiUrl = import.meta.env.VITE_LOGIN_URL;
+const apiUrl = import.meta.env.VITE_LOGIN_URL || "https://backend-sales-brxa2vh2n-vinicyus-projects-5e32f694.vercel.app/api/login";
 
 function LoginForm(props) {
   const [email, setEmail] = useState('');
