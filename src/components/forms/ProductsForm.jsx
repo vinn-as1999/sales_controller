@@ -3,8 +3,8 @@ import { ProductsContext } from '../contexts/ProductsContext'
 
 const userID = localStorage.getItem('id')
 const username = localStorage.getItem('username')
-
-const queryUrl = `https://6868-2804-7f0-3e4-ef12-be36-ba9e-d704-83ec.ngrok-free.app/api/products/${userID}`
+const url = import.meta.env.VITE_PRODUCTS_URL
+const queryUrl = `${url}/${userID}`
 
 function ProductsForm(props) {
   const {products, setProducts} = useContext(ProductsContext);
@@ -18,10 +18,7 @@ function ProductsForm(props) {
   async function getProducts() {
     try {
       const response = await fetch(queryUrl, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        method: 'GET'
       })
   
       if (!response.ok) {
@@ -30,7 +27,7 @@ function ProductsForm(props) {
       }
 
       const data = await response.json()
-      console.log("aqui os produtos: ", data.products);
+      console.log('Texto da resposta do servidor:', data);
       if (data.products) {
         setProducts(data.products);
 
