@@ -2,12 +2,11 @@ import React, { createContext, useState, useEffect } from 'react';
 
 export const ProductsContext = createContext();
 
-const user_id = localStorage.getItem('id');
-const username = localStorage.getItem('username');
-const queryUrl = `${import.meta.env.VITE_PRODUCTS_QUERY_URL}${user_id}`
-
 export function ProductsProvider({ children }) {
   const [products, setProducts] = useState([]);
+  const user_id = localStorage.getItem('id');
+  const username = localStorage.getItem('username');
+  const queryUrl = `${import.meta.env.VITE_PRODUCTS_QUERY_URL}${user_id}`
 
   // Fetch products from the server
   async function getProducts() {
