@@ -107,7 +107,6 @@ function Inventory() {
 
         setList((prev) => {
           const updatedList = {...prev, [newItem]: {}}
-          console.log(updatedList)
           return updatedList;
         })
       },
@@ -195,7 +194,6 @@ function Inventory() {
           const updatedArr = arr.filter((it) => it !== item)
 
           updatedList[loc][subloc][value] = [updatedArr]
-          console.log(updatedList)
           return updatedList;
         })
       },
@@ -241,7 +239,6 @@ function Inventory() {
           delete myList[loc]
 
           insertInventory(myList)
-
           return myList;
         })
       }
@@ -284,7 +281,6 @@ function Inventory() {
     
     return () => {isMounted = false}
   }, [list]);
-  
 
   const inv = invInterface();
 

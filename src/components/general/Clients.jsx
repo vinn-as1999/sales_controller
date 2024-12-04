@@ -6,10 +6,7 @@ import { ClientsContext } from '../contexts/ClientsContext';
 function Clients(props) {
   const {clientsList, setClientsList} = useContext(ClientsContext)
   
-  useEffect(() => {
-    console.log('foi')
-    console.log(clientsList)
-  }, [clientsList]);
+  useEffect(() => {}, [clientsList]);
 
 
   return (

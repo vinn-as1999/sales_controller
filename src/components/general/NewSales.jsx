@@ -36,7 +36,6 @@ function NewSales(props) {
 
       const data = await response.json();
       if ("error" in data) {
-        console.log(data)
         return
       }
 
@@ -95,7 +94,6 @@ function NewSales(props) {
       }
 
       const data = await response.json()
-      console.log(data)
       await getSales()
       removePending(saleData._id)
       return
@@ -128,8 +126,6 @@ function NewSales(props) {
 
 
   useEffect(() => {
-    console.log('veja o sales', sales)
-    
     return () => {}
   }, [sales])
   

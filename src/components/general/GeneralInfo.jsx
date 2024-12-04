@@ -21,15 +21,12 @@ function GeneralInfo() {
     
             return cliArr;
         });
-    
-        console.log('o cliInfo', cliInfo);
-    
+
         setPending(cliInfo);
     };
 
     getInformations();
 
-    console.log('o pending atualizado', pending);
 }, [sales, clientsList]);
 
 

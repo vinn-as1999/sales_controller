@@ -34,12 +34,9 @@ function LoginForm(props) {
       const data = await response.json();
 
       if (data[0].error) {
-        console.log(data[0].error)
         setError(data[0].error)
         return
       }
-
-      console.log('O DATA', data)
 
       props.setIsToken(true);
       localStorage.setItem('id', data[0].id);
