@@ -4,7 +4,7 @@ export const SalesContext = createContext();
 
 const user_id = localStorage.getItem('id')
 const username = localStorage.getItem('username')
-const url = `${import.meta.env.VITE_NEW_SALES_URL}/${user_id}`
+const url = import.meta.env.VITE_NEW_SALES_URL
 
 
 export function SalesProvider({children}) {
