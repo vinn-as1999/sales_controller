@@ -21,7 +21,7 @@ function GeneralInfo() {
     
             return cliArr;
         });
-
+        console.log('o cliInfo aqui', cliInfo)
         setPending(cliInfo);
     };
 
