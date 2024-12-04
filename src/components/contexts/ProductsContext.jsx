@@ -6,6 +6,7 @@ export function ProductsProvider({ children }) {
   const [products, setProducts] = useState([]);
   const user_id = localStorage.getItem('id');
   const username = localStorage.getItem('username');
+  const url = import.meta.env.VITE_PRODUCTS_URL;
   const queryUrl = `${import.meta.env.VITE_PRODUCTS_QUERY_URL}${user_id}`
 
   // Fetch products from the server
