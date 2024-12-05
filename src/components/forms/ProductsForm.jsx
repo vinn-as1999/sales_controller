@@ -1,10 +1,6 @@
 import React, {useContext, useEffect, useRef, useState} from 'react'
 import { ProductsContext } from '../contexts/ProductsContext'
 
-const userID = localStorage.getItem('id')
-const username = localStorage.getItem('username')
-const url = import.meta.env.VITE_PRODUCTS_URL
-const queryUrl = `${url}/${userID}`
 
 function ProductsForm(props) {
   const {products, setProducts} = useContext(ProductsContext);
@@ -13,6 +9,10 @@ function ProductsForm(props) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState();
   const [quantity, setQuantity] = useState();
+  const userID = localStorage.getItem('id');
+  const username = localStorage.getItem('username');
+  const url = import.meta.env.VITE_PRODUCTS_URL;
+  const queryUrl = `${url}/${userID}`;
 
 
   async function getProducts() {

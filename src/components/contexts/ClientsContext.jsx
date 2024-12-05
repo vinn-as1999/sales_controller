@@ -3,12 +3,11 @@ import React, { createContext, useEffect, useState } from 'react'
 
 export const ClientsContext = createContext();
 
-const user_id = localStorage.getItem("id")
-const url = `${import.meta.env.VITE_CLIENTS_URL}/${user_id}`
-
 export const ClientsProvider = ({children}) => {
     const [clientsList, setClientsList] = useState([])
     const [selectedClient, setSelectedClient] = useState({})
+    const user_id = localStorage.getItem("id")
+    const url = `${import.meta.env.VITE_CLIENTS_URL}/${user_id}`
 
 
     async function getClients() {

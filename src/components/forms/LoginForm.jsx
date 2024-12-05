@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Error from '../messages/Error';
 
-const apiUrl = import.meta.env.VITE_LOGIN_URL;
 
 function LoginForm(props) {
+  const apiUrl = import.meta.env.VITE_LOGIN_URL;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

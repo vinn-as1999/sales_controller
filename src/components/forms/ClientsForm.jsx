@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ClientsContext } from '../contexts/ClientsContext.jsx'
 import '../../../styles/Clients.css'
 
-const apiUrl = import.meta.env.VITE_ADD_CLIENTS_URL
 
 function ClientsForm(props) {
+  const apiUrl = import.meta.env.VITE_ADD_CLIENTS_URL
   const {clientsList, setClientsList} = useContext(ClientsContext)
   const [name, setName] = useState('');
   const [contact, setContact] = useState('');

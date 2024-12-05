@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Message from '../messages/Message';
 import Error from '../messages/Error';
 
-const apiUrl = import.meta.env.VITE_USERS_URL;
 
 function Register(props) {
+  const apiUrl = import.meta.env.VITE_USERS_URL;
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
