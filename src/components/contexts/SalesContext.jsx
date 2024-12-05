@@ -25,7 +25,6 @@ export function SalesProvider({children}) {
             }
 
             const data = await response.json();
-            console.log('aqui temos o data: ', data.sales, "e o history", data.history)
             setSales(data.sales);
             setHistory(data.history);
 
