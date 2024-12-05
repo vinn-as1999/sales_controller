@@ -1,34 +1,35 @@
 .gInfoMain {
     header {
         display: flex;
+        flex-wrap: wrap; /* Permite quebra de linha nos artigos */
+        justify-content: center; /* Centraliza os itens menores */
         margin: 5px;
 
-        
         article {
             display: flex;
             flex-direction: column;
             align-items: center;
             background: linear-gradient(to bottom, white, rgb(221, 221, 221));
-            padding: 20px;
+            padding: 15px;
             margin: 5px;
             box-shadow: 2px 2px 5px rgb(44, 44, 44);
-            width: 12vw;
+            width: 30%; /* Adaptação padrão */
             cursor: pointer;
         }
 
         article:hover {
             background: linear-gradient(to bottom, rgb(212, 212, 212), rgb(141, 141, 141));
-            color: white
+            color: white;
         }
     
         .artTitle {
-            font-size: 18px;
+            font-size: 16px; /* Ajuste menor para telas pequenas */
             font-weight: 600;
             color: grey;
         }
     
         .artValue {
-            font-size: 30px;
+            font-size: 24px; /* Ajuste proporcional */
         }
     }
 
@@ -36,36 +37,35 @@
         margin: 10px;
         background: linear-gradient(to bottom, white, rgb(221, 221, 221));
         width: 97%;
-        max-width: 700px; /* Limita a largura máxima */
+        max-width: 700px; /* Mantém limite máximo */
         height: auto;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         overflow: hidden;
-    
+
         table {
             width: 100%;
             border-spacing: 0;
             border-collapse: collapse;
-    
+
             thead {
                 background-color: #2A2D34;
                 color: white;
-    
+
                 th {
                     text-align: center;
-                    padding: 10px;
-                    text-align: center;
+                    padding: 8px; /* Margem menor em telas menores */
                     font-weight: bold;
-                    font-size: 0.9em;
+                    font-size: 0.8em; /* Menor para tabelas menores */
                 }
             }
-    
+
             tbody {
                 td {
                     background-color: #F7E6D7;
-                    padding: 10px;
+                    padding: 8px;
                     text-align: center;
-                    font-size: 0.9em;
+                    font-size: 0.8em; /* Reduz para melhor exibição */
                     color: #333;
                 }
             }
@@ -80,8 +80,45 @@
     overflow-y: auto;
     overflow-x: hidden;
 
-
     h4 {
         color: grey;
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .gInfoMain {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+    }
+
+    .gInfoMain header {
+        flex-wrap: wrap; 
+        justify-content: center; 
+        align-items: center; 
+    }
+
+    .gInfoMain header article {
+        width: 50%; 
+        margin: 10px 0; 
+        text-align: center; 
+    }
+
+    .gITable {
+        width: 100%;
+        margin: 10px 0; 
+    }
+
+    .gITable table thead th,
+    .gITable table tbody td {
+        font-size: 0.9em; 
+        text-align: center; 
+    }
+
+    .genChartsMain, .singularInfo {
+        display: none;
     }
 }

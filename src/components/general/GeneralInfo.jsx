@@ -15,13 +15,11 @@ function GeneralInfo() {
     const getInformations = () => {
         const cliInfo = sales.flatMap((sale) => {
             const cliArr = clientsList.filter((client) => {
-                console.log('sale', sale.client, 'client', client.client);
                 return sale.client === client.client;
             });
     
             return cliArr;
         });
-        console.log('o cliInfo aqui', cliInfo)
         setPending(cliInfo);
     };
 

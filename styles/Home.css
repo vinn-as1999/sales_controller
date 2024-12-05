@@ -204,10 +204,21 @@ th:hover {
 
     .homeMain {
         flex-direction: column;
+
+        .iconTextWrapper {
+            width: 5vw;
+            padding: 5px 10px;
+            font-size: 15px;
+    
+            div {
+                display: none !important;
+            }
+        }
     }
 
     .homeMain sidebar {
         width: 100%;
+        padding: 5px;
         height: 50px;
         flex-direction: row;
         justify-content: space-around;
@@ -224,11 +235,6 @@ th:hover {
 
     .giTitle {
         font-size: 20px;
-    }
-
-    .iconTextWrapper {
-        width: 10vw;
-        font-size: 12px;
     }
 
     table {

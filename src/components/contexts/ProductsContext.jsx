@@ -6,6 +6,7 @@ export function ProductsProvider({ children }) {
   const [products, setProducts] = useState([]);
   const user_id = localStorage.getItem('id');
   const username = localStorage.getItem('username');
+  const token = localStorage.getItem('token');
   const url = import.meta.env.VITE_PRODUCTS_URL;
   const queryUrl = `${url}/${user_id}`
 
@@ -89,15 +90,15 @@ export function ProductsProvider({ children }) {
         return;
       }
 
-      await getProducts(); // Update products list after deletion
+      await getProducts(); 
     } catch (error) {
       console.log('Erro ao deletar o produto: ', error);
     }
   }
 
   useEffect(() => {
-    getProducts(); // Fetch products on component mount
-  }, []);
+    getProducts(); 
+  }, [token]);
 
   return (
     <ProductsContext.Provider value={{ products, getProducts, setProducts, addOneProduct, deleteProduct }}>

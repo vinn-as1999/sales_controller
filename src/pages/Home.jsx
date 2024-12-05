@@ -20,10 +20,14 @@ import GeneralInfo from '../components/general/GeneralInfo.jsx'
 import GeneralCharts from '../components/general/GeneralCharts.jsx'
 import { useNavigate } from 'react-router-dom'
 import ClientsForm from '../components/forms/ClientsForm.jsx'
+import { SalesContext } from '../components/contexts/SalesContext.jsx'
+import { ClientsContext } from '../components/contexts/ClientsContext.jsx'
 
 function Home(props) {
   const navigate = useNavigate();
-  const {products, setProducts} = useContext(ProductsContext)
+  const {products, setProducts} = useContext(ProductsContext);
+  const {sales, setSales, setHistory} = useContext(SalesContext);
+  const {clientsList, setClientsList} = useContext(ClientsContext);
   const [title, setTitle] = useState('Informações gerais');
   const [clients, setClients] = useState(false);
   const [time, setTime] = useState(new Date());
@@ -61,6 +65,9 @@ function Home(props) {
 
   function handleLogout() {
     localStorage.clear();
+    setClientsList([]);
+    setSales([]);
+    setHistory([]);
     props.setIsToken(false);
   };
 

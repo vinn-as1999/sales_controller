@@ -7,6 +7,7 @@ export function SalesProvider({children}) {
     const [history, setHistory] = useState([]);
     const user_id = localStorage.getItem('id');
     const username = localStorage.getItem('username');
+    const token = localStorage.getItem('token');
     const url = import.meta.env.VITE_NEW_SALES_URL;
     const queryUrl = `${import.meta.env.VITE_NEW_SALES_URL}/${user_id}`;
 
@@ -36,7 +37,7 @@ export function SalesProvider({children}) {
     useEffect(() => {
         getSales()
         return () => {}
-    }, [])
+    }, [token])
 
 
     return (
