@@ -84,7 +84,7 @@ function ClientsForm(props) {
             <label>
                 Contato:
             </label>
-            <input type="number" value={contact} onChange={e => setContact(e.target.value)} />
+            <input type="number" value={contact} onChange={e => setContact(e.target.value)} maxLength={11} />
 
             <label>
                 Local/Endereço:

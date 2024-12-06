@@ -5,20 +5,9 @@ function HistoryForm() {
     <>
       <main>
         <form className='historyForm'>
-            <label>
-              Cliente:
-            </label>
-            <input type="text" />
-
-            <label>
-              Mês:
-            </label>
-            <input type="number" />
-
-            <label>
-              Ano:
-            </label>
-            <input type="number" />
+            <input type="text" placeholder='Cliente' />
+            <input type="number" placeholder='Mês' />
+            <input type="number" placeholder='Ano' />
         </form>
       </main>
     </>

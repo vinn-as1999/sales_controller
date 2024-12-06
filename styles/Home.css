@@ -146,7 +146,7 @@ th:hover {
     margin: 5px;
 
     input {
-        width: 5vw;
+        width: 16vw;
         margin: 5px;
         outline-color:#e65c55;
     }
@@ -202,6 +202,10 @@ th:hover {
 @media (max-width: 768px) {
     /* Ajuste de tamanhos e posicionamento para telas pequenas */
 
+    h2 {
+        font-size: 20px;
+    }
+
     .homeMain {
         flex-direction: column;
 
@@ -252,7 +256,6 @@ th:hover {
 }
 
 @media (max-width: 480px) {
-    /* Ajuste de tamanhos e posicionamento para dispositivos muito pequenos */
 
     h1 {
         font-size: 25px;
@@ -262,6 +265,12 @@ th:hover {
         width: 100%;
         height: 40px;
         flex-direction: row;
+    }
+
+    .info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .generalInfo {
@@ -287,5 +296,13 @@ th:hover {
 
     .empty {
         font-size: 50vw;
+    }
+
+    .histMain {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100vw;
+
     }
 }

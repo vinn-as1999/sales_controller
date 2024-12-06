@@ -144,3 +144,17 @@
         }
     }
 }
+
+@media (max-width: 760px) {
+    .cliBttnMain {
+        .nameClient div {
+            font-size: 21px;
+            max-width: 25vw;
+        }
+
+        .numberClient div {
+            font-size: 21px;
+            max-width: 25vw;
+        }
+    }
+}

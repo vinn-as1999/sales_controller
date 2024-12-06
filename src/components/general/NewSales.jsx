@@ -134,7 +134,7 @@ function NewSales(props) {
     <>
       <main className='salesMain'>
         <section className='newSales'>
-            <form style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}} 
+            <form
               onSubmit={(e)=>registerSales(e, 'pending')}>
               <div>
                 <label>Cliente: </label>

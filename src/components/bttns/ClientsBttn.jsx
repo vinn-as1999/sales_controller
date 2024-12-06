@@ -12,7 +12,7 @@ function ClientsBttn(props) {
       <main className='cliBttnMain' onClick={() => {props.setClients(true); getClientInfo(props.contact)}}>
         <article className='nameClient'>
             <div>
-              <FiUser size={35} />
+              <FiUser />
             </div>
             <div>
               {props.name}
@@ -21,7 +21,7 @@ function ClientsBttn(props) {
 
         <article className='numberClient'>
             <div>
-              <MdOutlineLocalPhone size={35} />
+              <MdOutlineLocalPhone />
             </div>
             <div>
               {props.contact}

@@ -31,12 +31,14 @@ function Products(props) {
                   productPrice={prod.price}
                   productQty={prod.quantity}
                 />
-                <FaChevronUp className='qtyBttn' color='#45CB85' title='+1'
-                  onClick={() => addOneProduct(prod.name, prod.price, cat.category)} />
-                <FaChevronDown className='qtyBttn' color='#F34747' title='-1'
-                  onClick={() => deleteProduct(prod.name, prod.price, 1, cat.category)} />
-                <BiSolidTrash className='qtyBttn' title='Remover produto'
-                  onClick={() => deleteProduct(prod.name, prod.price, prod.quantity, cat.category)} />
+                <div>
+                  <FaChevronUp className='qtyBttn' color='#45CB85' title='+1'
+                    onClick={() => addOneProduct(prod.name, prod.price, cat.category)} />
+                  <FaChevronDown className='qtyBttn' color='#F34747' title='-1'
+                    onClick={() => deleteProduct(prod.name, prod.price, 1, cat.category)} />
+                  <BiSolidTrash className='qtyBttn' title='Remover produto'
+                    onClick={() => deleteProduct(prod.name, prod.price, prod.quantity, cat.category)} />
+                </div>
               </li>
             ))}
           </ul>
