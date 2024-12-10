@@ -147,14 +147,18 @@
 
 @media (max-width: 760px) {
     .cliBttnMain {
-        .nameClient div {
-            font-size: 21px;
-            max-width: 25vw;
+        .nameDiv {
+            font-size: 13px;
+            max-width: 20vw;
+            word-wrap: break-word;
+            width: 15vw;
         }
 
-        .numberClient div {
-            font-size: 21px;
-            max-width: 25vw;
+        .numberDiv {
+            text-align: start;
+            font-size: 13px;
+            max-width: 20vw;
+            width: 20vw;
         }
     }
 }

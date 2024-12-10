@@ -14,7 +14,7 @@ function ClientsBttn(props) {
             <div>
               <FiUser />
             </div>
-            <div>
+            <div className='nameDiv'>
               {props.name}
             </div>
         </article>
@@ -23,7 +23,7 @@ function ClientsBttn(props) {
             <div>
               <MdOutlineLocalPhone />
             </div>
-            <div>
+            <div className='numberDiv'>
               {props.contact}
             </div>
         </article>
