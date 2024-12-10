@@ -7,9 +7,20 @@ import '../../styles/Shopping.css';
 function Shopping() {
     const { products, deleteProduct } = useContext(ProductsContext);
     const [expandedCategories, setExpandedCategories] = useState([]);
-    const [selectedProduct, setSelectedProduct] = useState([]); // Produtos selecionados
-    const [productCount, setProductCount] = useState({}); // Contagem de produtos selecionados
+    const [selectedProduct, setSelectedProduct] = useState([]);
+    const [productCount, setProductCount] = useState({}); 
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const dialogRef = useRef(null);
+
+    const openModal = () => {
+        dialogRef.current.showModal();
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        dialogRef.current.close();
+        setIsModalOpen(false);
+    };
 
     // Alterna a visibilidade das categorias
     const toggleCategory = (category) => {
@@ -42,8 +53,9 @@ function Shopping() {
     return (
         <>
             <main className='shoppingMain'>
+                {isModalOpen && <div className='modalBackdrop' onClick={() => closeModal()}></div>}
                 <dialog ref={dialogRef} className='regModal'>
-                    <MdClose onClick={() => dialogRef.current.close()} className='modalClose' />
+                    <MdClose onClick={() => closeModal()} className='modalClose' />
                     <form className='cliUserForm' onSubmit={() => register()}>
                         <label>Seu nome:</label>
                         <input type="text" placeholder='ex: João' />
@@ -105,7 +117,7 @@ function Shopping() {
                                 ? Object.keys(productCount).map((productName) => (
                                     <div key={productName} className='shopProds'>
                                         {productName}
-                                        <p> - Quantidade: {productCount[productName]}</p>
+                                        <p>Quantidade: {productCount[productName]}</p>
                                     </div>
                                 )) 
                                 : (<div className='noProd'>Nenhum produto aqui</div>)}
@@ -116,7 +128,7 @@ function Shopping() {
                             <input className='payment-input' title='Clique caso já tenha pago' type="checkbox" />
                         </div>  
 
-                        <button onClick={() => dialogRef.current.showModal()}>Finalizar</button>
+                        <button onClick={() => openModal()}>Finalizar</button>
                     </article>
                 </section>
             </main>
