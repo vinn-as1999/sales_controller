@@ -84,3 +84,40 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .inventoryMain {
+        max-height: 100vh;
+        padding: 10px;
+
+        section {
+            width: 100%; /* Ajuste para ocupar toda a largura */
+            height: auto; /* Ajuste a altura para ser dinâmica */
+            margin: 10px 0;
+        }
+
+        .WH {
+            width: 100%;
+            height: auto;
+            margin-left: 0;
+
+            .subInvDiv {
+                .whInput {
+                    width: 90%; /* Expanda inputs */
+                }
+
+                button {
+                    width: 90%; /* Botões maiores e mais acessíveis */
+                }
+            }
+        }
+
+        .addButton, .xButton {
+            font-size: 1rem; /* Reduza o tamanho da fonte */
+        }
+
+        .addInput {
+            width: 90%; /* Inputs ocupam mais espaço */
+        }
+    }
+}

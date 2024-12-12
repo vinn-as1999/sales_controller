@@ -24,9 +24,10 @@ function Shopping() {
     const dialogRef = useRef(null);
 
     // inputs states
-    const [name, setName] = useState('');
-    const [phone, setPhone] = useState(null);
-    const [address, setAddress] = useState('');
+    const clientObj = JSON.parse(localStorage.getItem('client')) || {};
+    const [name, setName] = useState(() => clientObj.client ? JSON.parse(clientObj.client) : '');
+    const [phone, setPhone] = useState(() => clientObj.contact ? JSON.parse(clientObj.contact) : null);
+    const [address, setAddress] = useState(() => clientObj.address ? JSON.parse(clientObj.address) : '');
     const [isPaid, setIsPaid] = useState(false);
 
     function openModal() {
@@ -99,9 +100,9 @@ function Shopping() {
             observations: data[0].client.observations
           }
     
-          console.log('sucesso, cliente adicionado: ', data)
           setClientsList(prev => [...prev, newClients]);
-          localStorage.setItem('clients', JSON.stringify(clientsList))
+          localStorage.setItem('client', JSON.stringify(newClients));
+          console.log('sucesso, cliente adicionado: ', data);
     
         } catch (error) {
           console.log('Erro ocorrido: ', error)
@@ -110,23 +111,23 @@ function Shopping() {
 
     async function register(event) {
         event.preventDefault();
-        await addClients()
+
+        if (!localStorage.getItem('client')) await addClients();
         
-        const status = isPaid ? 'paid' : 'pending'
+        const status = isPaid ? 'paid' : 'pending';
 
         for (let item in productCount) {
-            const itemQty = productCount[item]
-            console.log(fixedUser)
-            await registerSales(event, fixedId, fixedUser, name, item, itemQty, status)
-        };
+            const itemQty = productCount[item];
+            await registerSales(event, fixedId, fixedUser, name, item, itemQty, status);
+        }
 
-        console.log('Dados enviados')
+        console.log('Dados enviados');
     };
 
 
     useEffect(() => {
         console.log(productCount)
-    }, [productCount])
+    }, [productCount]);
     
 
     // Atualiza o contador sempre que selectedProduct mudar
@@ -225,7 +226,9 @@ function Shopping() {
                             <input className='payment-input' title='Clique caso já tenha pago' type="checkbox" checked={isPaid} onChange={() => setIsPaid(prev => !prev)} />
                         </div>  
 
-                        <button onClick={() => openModal()}>Finalizar</button>
+                        <button onClick={(e) => {
+                            Object.keys(clientObj).length === 0 ? openModal() : register(e)
+                        }}>Finalizar</button>
                     </article>
                 </section>
             </main>

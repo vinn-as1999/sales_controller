@@ -8,7 +8,8 @@ import '../../../styles/Inventory.css'
 function Inventory() {
   const user_id = localStorage.getItem('id');
   const username = localStorage.getItem('username');
-  const queryUrl = `${import.meta.env.VITE_INVENTORY_URL}/${user_id}`;
+  const url = import.meta.env.VITE_INVENTORY_URL;
+  const queryUrl = `${url}/${user_id}`;
   const {products, setProducts} = useContext(ProductsContext)
   const [visibleIndex, setVisibleIndex] = useState({});
   const [visibleSubIndex, setVisibleSubIndex] = useState({});
