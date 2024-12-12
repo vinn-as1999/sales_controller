@@ -142,6 +142,8 @@ function Shopping() {
     useEffect(() => {
         console.log('chamou produtos');
         getProducts(`${prodUrl}/${fixedId}`);
+
+        return () => {}
     }, [sales]);
 
     return (
