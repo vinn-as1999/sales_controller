@@ -11,9 +11,9 @@ export function ProductsProvider({ children }) {
   const queryUrl = `${url}/${user_id}`
 
   // Fetch products from the server
-  async function getProducts() {
+  async function getProducts(query) {
     try {
-      const response = await fetch(queryUrl, {
+      const response = await fetch(query, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +66,8 @@ export function ProductsProvider({ children }) {
   }
 
   // Delete a product
-  async function deleteProduct(name, price, quantity, category) {
+  async function deleteProduct(id, user, name, price, quantity, category) {
+    console.log('nome', name, 'preco', price, 'qty', quantity)
     try {
       const response = await fetch(url, {
         method: 'DELETE',
@@ -74,8 +75,8 @@ export function ProductsProvider({ children }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          user_id,
-          username,
+          user_id: id,
+          username: user,
           category,
           product: {
             name,
@@ -86,7 +87,7 @@ export function ProductsProvider({ children }) {
       });
 
       if (!response.ok) {
-        console.log('Erro ao deletar o produto');
+        console.log('Erro ao deletar o produto', response);
         return;
       }
 
@@ -97,7 +98,7 @@ export function ProductsProvider({ children }) {
   }
 
   useEffect(() => {
-    getProducts(); 
+    getProducts(queryUrl); 
   }, [token]);
 
   return (

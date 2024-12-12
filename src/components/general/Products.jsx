@@ -7,6 +7,8 @@ import '../../../styles/Products.css';
 import Empty from '../messages/Empty.jsx';
 
 function Products(props) {
+  const user_id = localStorage.getItem('id');
+  const username = localStorage.getItem('username');
   const { products, addOneProduct, deleteProduct } = useContext(ProductsContext);
   const [visibleCategories, setVisibleCategories] = useState({});
 
@@ -35,9 +37,9 @@ function Products(props) {
                   <FaChevronUp className='qtyBttn' color='#45CB85' title='+1'
                     onClick={() => addOneProduct(prod.name, prod.price, cat.category)} />
                   <FaChevronDown className='qtyBttn' color='#F34747' title='-1'
-                    onClick={() => deleteProduct(prod.name, prod.price, 1, cat.category)} />
+                    onClick={() => deleteProduct(user_id, username, prod.name, prod.price, 1, cat.category)} />
                   <BiSolidTrash className='qtyBttn' title='Remover produto'
-                    onClick={() => deleteProduct(prod.name, prod.price, prod.quantity, cat.category)} />
+                    onClick={() => deleteProduct(user_id, username, prod.name, prod.price, prod.quantity, cat.category)} />
                 </div>
               </li>
             ))}

@@ -1,45 +1,133 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
-import { ProductsContext } from '../components/contexts/ProductsContext';
-import { BiSolidTrash } from "react-icons/bi";
-import { MdClose } from "react-icons/md";
-import '../../styles/Shopping.css';
+import React, { useContext, useState, useRef, useEffect } from 'react'
+import { ProductsContext } from '../components/contexts/ProductsContext'
+import Empty from '../components/messages/Empty'
+import { BiSolidTrash } from "react-icons/bi"
+import { GiNothingToSay } from 'react-icons/gi'
+import { MdClose } from "react-icons/md"
+import '../../styles/Shopping.css'
+import { SalesContext } from '../components/contexts/SalesContext'
+import { ClientsContext } from '../components/contexts/ClientsContext'
 
 function Shopping() {
-    const { products, deleteProduct } = useContext(ProductsContext);
+    const prodUrl = import.meta.env.VITE_PRODUCTS_URL;
+    const clientsUrl = import.meta.env.VITE_ADD_CLIENTS_URL;
+    const fixedId = import.meta.env.VITE_FIXED_ID;
+    const fixedUser = import.meta.env.VITE_FIXED_USERNAME;
+
+    const {products, getProducts} = useContext(ProductsContext);
+    const {sales, registerSales, registerPayment} = useContext(SalesContext);
+    const {clientsList, setClientsList} = useContext(ClientsContext)
     const [expandedCategories, setExpandedCategories] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState([]);
     const [productCount, setProductCount] = useState({}); 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const dialogRef = useRef(null);
 
-    const openModal = () => {
+    // inputs states
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState(null);
+    const [address, setAddress] = useState('');
+    const [isPaid, setIsPaid] = useState(false);
+
+    function openModal() {
         dialogRef.current.showModal();
         setIsModalOpen(true);
     };
-
-    const closeModal = () => {
+    
+    function closeModal() {
         dialogRef.current.close();
         setIsModalOpen(false);
     };
-
-    // Alterna a visibilidade das categorias
-    const toggleCategory = (category) => {
-        setExpandedCategories((prev) =>
-            prev.includes(category)
-                ? prev.filter((cat) => cat !== category)
-                : [...prev, category]
-        );
+    
+    function toggleCategory(category) {
+        setExpandedCategories(function (prev) {
+            return prev.includes(category)
+                ? prev.filter(function (cat) { return cat !== category; })
+                : [...prev, category];
+        });
+    };
+    
+    function handleProductClick(productName) {
+        setSelectedProduct(function (prev) {
+            return [...prev, productName];
+        });
+    };
+    
+    function handleProductRemove(productName) {
+        setSelectedProduct(function (prev) {
+            return prev.filter(function (item) { return item !== productName; });
+        });
     };
 
-    // Função para lidar com a seleção de produtos
-    const handleProductClick = (productName) => {
-        setSelectedProduct((prev) => [...prev, productName]); // Adiciona o produto à seleção
+    async function addClients() {
+        if (!name.trim || !phone.trim() || !address.trim()) {
+          console.log('deu n')
+          return
+        }
+    
+        try {
+          const response = await fetch(clientsUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              user_id: fixedId,
+              client: name,
+              contact: phone,
+              address: address,
+              observations: ''
+            })
+          });
+          
+          if (!response.ok) {
+            console.log('Erro ao adicionar cliente: ', response);
+            return
+          }
+      
+          const data = await response.json();
+      
+          if (data[0].error) {
+            console.log(data[0].error);
+            return
+          }
+      
+          const newClients = {
+            client: data[0].client.client,
+            contact: data[0].client.contact,
+            address: data[0].client.address,
+            observations: data[0].client.observations
+          }
+    
+          console.log('sucesso, cliente adicionado: ', data)
+          setClientsList(prev => [...prev, newClients]);
+          localStorage.setItem('clients', JSON.stringify(clientsList))
+    
+        } catch (error) {
+          console.log('Erro ocorrido: ', error)
+        }
+      };
+
+    async function register(event) {
+        event.preventDefault();
+        await addClients()
+        
+        const status = isPaid ? 'paid' : 'pending'
+
+        for (let item in productCount) {
+            const itemQty = productCount[item]
+            console.log(fixedUser)
+            await registerSales(event, fixedId, fixedUser, name, item, itemQty, status)
+        };
+
+        console.log('Dados enviados')
     };
 
-    // Função para lidar com a remoção de um produto
-    const handleProductRemove = (productName) => {
-        setSelectedProduct((prev) => prev.filter(item => item !== productName)); // Remove o produto da seleção
-    };
+
+    useEffect(() => {
+        console.log(productCount)
+    }, [productCount])
+    
 
     // Atualiza o contador sempre que selectedProduct mudar
     useEffect(() => {
@@ -50,21 +138,28 @@ function Shopping() {
         setProductCount(count); // Atualiza o estado de contagem
     }, [selectedProduct]);
 
+    useEffect(() => {
+        console.log('chamou produtos');
+        getProducts(`${prodUrl}/${fixedId}`);
+    }, [sales]);
+
     return (
         <>
             <main className='shoppingMain'>
                 {isModalOpen && <div className='modalBackdrop' onClick={() => closeModal()}></div>}
                 <dialog ref={dialogRef} className='regModal'>
-                    <MdClose onClick={() => closeModal()} className='modalClose' />
-                    <form className='cliUserForm' onSubmit={() => register()}>
+                    <div style={{width: '60vw', textAlign: 'end'}}>
+                        <MdClose onClick={() => closeModal()} className='modalClose' />
+                    </div>
+                    <form className='cliUserForm' onSubmit={(e) => register(e)}>
                         <label>Seu nome:</label>
-                        <input type="text" placeholder='ex: João' />
+                        <input type="text" placeholder='ex: João' value={name} onChange={(e) => setName(e.target.value)} />
 
                         <label>Telefone:</label>
-                        <input type="number" placeholder='ex: 19999999' />
+                        <input type="number" placeholder='ex: 19999999' value={phone} onChange={(e) => setPhone(e.target.value)} />
 
                         <label>Local:</label>
-                        <input type="text" placeholder='ex: Eaton' />
+                        <input type="text" placeholder='ex: Eaton' value={address} onChange={(e) => setAddress(e.target.value)} />
 
                         <button type='submit'>Registrar</button>
                     </form>
@@ -103,7 +198,9 @@ function Shopping() {
                                     )}
                                 </div>
                             )) 
-                            : 'não'}
+                            : <div className='noProd'>
+                                Nada em estoque
+                            </div>}
                     </article>
                 </section>
 
@@ -125,7 +222,7 @@ function Shopping() {
 
                         <div>
                             <label>Já pagou? Clique aqui:</label>
-                            <input className='payment-input' title='Clique caso já tenha pago' type="checkbox" />
+                            <input className='payment-input' title='Clique caso já tenha pago' type="checkbox" checked={isPaid} onChange={() => setIsPaid(prev => !prev)} />
                         </div>  
 
                         <button onClick={() => openModal()}>Finalizar</button>

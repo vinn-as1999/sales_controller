@@ -14,17 +14,26 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <SalesProvider>
-          <ClientsProvider>
-            <ProductsProvider>
+        <ProductsProvider>
+          <SalesProvider>
+            <ClientsProvider>
               <Routes>
-                <Route element={<Login isToken={isToken} setIsToken={setIsToken} />} path='/' />
-                <Route element={<Home isToken={isToken} setIsToken={setIsToken} />} path='/home' />
-                <Route element={<Shopping />} path='/shopping' />
+                <Route 
+                  path="/" 
+                  element={<Login isToken={isToken} setIsToken={setIsToken} />} 
+                />
+                <Route 
+                  path="/home" 
+                  element={<Home isToken={isToken} setIsToken={setIsToken} />} 
+                />
+                <Route 
+                  path="/shopping" 
+                  element={<Shopping />} 
+                />
               </Routes>
-            </ProductsProvider>
-          </ClientsProvider>
-        </SalesProvider>
+            </ClientsProvider>
+          </SalesProvider>
+        </ProductsProvider>
       </BrowserRouter>
     </>
   )

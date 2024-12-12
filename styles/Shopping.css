@@ -43,8 +43,8 @@ button {
         top: 25vh;
         left: 15vw;
         border: none;
-        border-radius: 5px;
-        overflow: hidden;
+        border-radius: 15px;
+
     
         .modalClose {
             color: #C4423B;
@@ -57,13 +57,20 @@ button {
             align-items: center;
             justify-content: start;
             width: 56vw;
-            height: 60vh;
+            height: 30vh;
+
+            label {
+                color: #9b504c;
+                font-weight: 500;
+            }
             
             input {
                 margin: 10px;
                 padding: 5px;
                 outline-color: #C4423B;
                 border-radius: 5px;
+                border: 1px solid rgb(206, 206, 206);
+                box-shadow: 2px 2px 5px rgb(216, 216, 216);
             }
         }
     }
