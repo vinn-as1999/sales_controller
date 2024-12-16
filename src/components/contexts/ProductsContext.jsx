@@ -35,7 +35,7 @@ export function ProductsProvider({ children }) {
   }
 
   // Add a product
-  async function addOneProduct(name, price, category) {
+  async function addOneProduct(id, username, name, price, category) {
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -43,8 +43,8 @@ export function ProductsProvider({ children }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          user_id,
-          username,
+          user_id: id,
+          username: username,
           category,
           product: {
             name,
@@ -59,7 +59,7 @@ export function ProductsProvider({ children }) {
         return;
       }
 
-      await getProducts(); // Update products list after addition
+      await getProducts(queryUrl); // Update products list after addition
     } catch (error) {
       console.log('Erro ao inserir dados: ', error);
     }

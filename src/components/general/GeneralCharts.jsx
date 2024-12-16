@@ -1,8 +1,36 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Chart from 'react-apexcharts'
+import { SalesContext } from '../contexts/SalesContext'
 
 function GeneralCharts() {
+  const {sales, pending} = useContext(SalesContext);
+  const [categories, setCategories] = useState([]);
+  const [data, setData] = useState();
 
+  function get() {
+    const processedSales = [];
+    const salesMap = {};
+    
+    sales.forEach(sale => {
+      if (salesMap[sale.client]) {
+        salesMap[sale.client].price += sale.price;
+
+      } else {
+        salesMap[sale.client] = { client: sale.client, price: sale.price };
+        processedSales.push(salesMap[sale.client]);
+      }
+    });
+
+    const names = processedSales.map(client => client.client);
+    const prices = processedSales.map(client => client.price);
+
+    setCategories(names)
+    setData(prices)
+  };
+
+  useEffect(() => {
+    get()
+  }, [])
 
   return (
     <>
@@ -16,8 +44,9 @@ function GeneralCharts() {
               },
               plotOptions: {
                   bar: {
-                      horizontal: true
-                  }
+                      horizontal: true,
+                      barHeight: '60%'
+                  },
                 },
                 colors: ['#C4423B'],
                 xaxis: {
@@ -25,25 +54,20 @@ function GeneralCharts() {
                       text: 'Valores',
                       align: 'center'
                   },
-                  categories: [
-                      'João',
-                      'Maria',
-                      'Ana',
-                      'Paulo'
-                  ], // virá de um estado
+                  categories: categories, 
                 },
-              yaxis: {max: 2500}
+              yaxis: {max: 100}
               }}
 
               series={
                 [{
                   name: 'Total Vendas',
-                  data: [1000, 2000, 1500, 1350] // virá de outro lugar
+                  data: data // virá de outro lugar
                 }]
               }
               type='bar'
               width={600}
-              height={200} />
+              height={250} />
           </section>
 
           <section>

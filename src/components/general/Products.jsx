@@ -35,7 +35,7 @@ function Products(props) {
                 />
                 <div>
                   <FaChevronUp className='qtyBttn' color='#45CB85' title='+1'
-                    onClick={() => addOneProduct(prod.name, prod.price, cat.category)} />
+                    onClick={() => addOneProduct(user_id, username, prod.name, prod.price, cat.category)} />
                   <FaChevronDown className='qtyBttn' color='#F34747' title='-1'
                     onClick={() => deleteProduct(user_id, username, prod.name, prod.price, 1, cat.category)} />
                   <BiSolidTrash className='qtyBttn' title='Remover produto'

@@ -6,10 +6,9 @@ import { SalesContext } from '../contexts/SalesContext'
 import { ClientsContext } from '../contexts/ClientsContext'
 
 function GeneralInfo() {
-  const {sales} = useContext(SalesContext);
+  const {sales, pending, setPending} = useContext(SalesContext);
   const {clientsList} = useContext(ClientsContext);
-  const [pending, setPending] = useState([]);
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState('');
 
   useEffect(() => {
     const getInformations = () => {
@@ -20,6 +19,7 @@ function GeneralInfo() {
     
             return cliArr;
         });
+        
         setPending(cliInfo);
     };
 

@@ -15,10 +15,8 @@ function Inventory() {
   const [visibleSubIndex, setVisibleSubIndex] = useState({});
   const [visibleSubValue, setVisibleSubValue] = useState({});
   const [valor, setValor] = useState();
-  
   // Exemplo de estrutura de list atualizada para suportar subinventários nos itens
   const [list, setList] = useState({});
-
 
   async function getInventory() {
     try {

@@ -4,7 +4,8 @@ import { ProductsContext } from "./ProductsContext.jsx";
 export const SalesContext = createContext();
 
 export function SalesProvider({children}) {
-    const {products, deleteProduct} = useContext(ProductsContext)
+    const {products, deleteProduct} = useContext(ProductsContext);
+    const [pending, setPending] = useState([]);
     const [sales, setSales] = useState([]);
     const [history, setHistory] = useState([]);
     const user_id = localStorage.getItem('id');
@@ -13,11 +14,13 @@ export function SalesProvider({children}) {
     const url = import.meta.env.VITE_NEW_SALES_URL;
     const queryUrl = `${import.meta.env.VITE_NEW_SALES_URL}/${user_id}`;
 
+    const [error, setError] = useState('');
+
 
     function getDate() {
         const date = new Date();
         const day = date.getDate();
-        const month = date.getMonth();
+        const month = date.getMonth() + 1;
     
         return `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}`
       };
@@ -159,6 +162,7 @@ export function SalesProvider({children}) {
         // Se não encontrar a categoria, retorna erro
         if (!existingCategory) {
           console.log("Erro: Produto não encontrado em nenhuma categoria");
+          setError("Produto não encontrado em nenhuma categoria");
           return;
         }
         // Busca o produto dentro da categoria encontrada
@@ -166,6 +170,7 @@ export function SalesProvider({children}) {
       
         if (!product) {
           console.log("Erro: Produto não encontrado");
+          setError("Produto não encontrado");
           return;
         }
         // Chama a função para registrar a venda
@@ -180,7 +185,6 @@ export function SalesProvider({children}) {
         );
     };
 
-
     useEffect(() => {
         getSales()
         return () => {}
@@ -192,6 +196,8 @@ export function SalesProvider({children}) {
             value={{
                 sales,
                 history,
+                pending,
+                setPending,
                 getSales,
                 registerPayment,
                 registerSales,

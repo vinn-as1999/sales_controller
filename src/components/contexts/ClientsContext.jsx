@@ -39,6 +39,7 @@ export const ClientsProvider = ({children}) => {
         const visibleClient = clientsList.find(client => client.contact === event)
         setSelectedClient(visibleClient)
     };
+    
 
     useEffect(() => {
         getClients(user_id)

@@ -79,10 +79,15 @@
     width: 46vw;
     max-height: 80vh;
     overflow-y: auto;
-    overflow-x: hidden;
 
     h4 {
         color: grey;
+    }
+
+    section {
+        max-height: 40vh;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 }
 
