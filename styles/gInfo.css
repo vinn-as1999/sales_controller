@@ -17,12 +17,19 @@
             margin: 5px;
             cursor: pointer;
             transition: ease-in-out 0.1s;
+            background-color: white;
         }
 
         article:hover {
-            background-color: #ffffff;
-            box-shadow: 2px 2px 5px rgb(112, 112, 112);
             margin-left: 10px;
+
+            .artTitle {
+                color: rgb(145, 145, 145);
+            }
+
+            .artValue {
+                color: rgb(47, 255, 116);
+            }
         }
     
         .artTitle {
