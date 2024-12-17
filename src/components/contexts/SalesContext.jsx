@@ -14,6 +14,9 @@ export function SalesProvider({children}) {
     const url = import.meta.env.VITE_NEW_SALES_URL;
     const queryUrl = `${import.meta.env.VITE_NEW_SALES_URL}/${user_id}`;
 
+    const total = history.filter(data => data.status === 'paid');
+    const $total = total.reduce((total, sale) => total + Number(sale.price), 0).toFixed(2);
+
     const [error, setError] = useState('');
 
 
@@ -197,6 +200,8 @@ export function SalesProvider({children}) {
                 sales,
                 history,
                 pending,
+                total,
+                $total,
                 setPending,
                 getSales,
                 registerPayment,

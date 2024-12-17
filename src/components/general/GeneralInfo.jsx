@@ -1,17 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
-import History from './History'
 import '../../../styles/gInfo.css'
-import { IoCheckmarkDoneOutline } from 'react-icons/io5'
 import { SalesContext } from '../contexts/SalesContext'
 import { ClientsContext } from '../contexts/ClientsContext'
 
 function GeneralInfo() {
-  const {sales, pending, setPending} = useContext(SalesContext);
+  const {sales, pending, setPending, total, $total} = useContext(SalesContext);
   const {clientsList} = useContext(ClientsContext);
-  const [value, setValue] = useState('');
 
   useEffect(() => {
-    const getInformations = () => {
+    function getInformations() {
         const cliInfo = sales.flatMap((sale) => {
             const cliArr = clientsList.filter((client) => {
                 return sale.client === client.client;
@@ -19,7 +16,6 @@ function GeneralInfo() {
     
             return cliArr;
         });
-        
         setPending(cliInfo);
     };
 
@@ -38,7 +34,7 @@ function GeneralInfo() {
                     Total (vendas):    
                 </div>
                 <div className='artValue'>
-                    {String(sales.length).padStart(2, '0')}
+                    {String(total.length).padStart(2, '0')}
                 </div>
             </article>
 
@@ -47,9 +43,7 @@ function GeneralInfo() {
                     Total obtido (R$)
                 </div>
                 <div className='artValue'>
-                    R$ {
-                        sales.reduce((total, sale) => total + Number(sale.price), 0).toFixed(2)
-                    }
+                    R$ { $total }
                 </div>
             </article>
 

@@ -26,7 +26,7 @@ import { ClientsContext } from '../components/contexts/ClientsContext.jsx'
 function Home(props) {
   const navigate = useNavigate();
   const {products, setProducts} = useContext(ProductsContext);
-  const {sales, setSales, setHistory} = useContext(SalesContext);
+  const {sales, setSales, setHistory, $total} = useContext(SalesContext);
   const {clientsList, setClientsList} = useContext(ClientsContext);
   const [title, setTitle] = useState('Informações gerais');
   const [clients, setClients] = useState(false);
@@ -144,7 +144,7 @@ function Home(props) {
         <section className='generalInfo'>
           <article className='giHeader'>
             <div className='gihGreetings'>{greeting}, {name}</div>
-            <div className='gihCapital'>Capital: R$ 500,00</div>
+            <div className='gihCapital'>Capital: R$ {$total}</div>
           </article>
 
           <article className='giTitle'>

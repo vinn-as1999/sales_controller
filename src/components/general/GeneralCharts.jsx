@@ -3,11 +3,59 @@ import Chart from 'react-apexcharts'
 import { SalesContext } from '../contexts/SalesContext'
 
 function GeneralCharts() {
-  const {sales, pending} = useContext(SalesContext);
+  const {sales, pending, history} = useContext(SalesContext);
   const [categories, setCategories] = useState([]);
   const [data, setData] = useState();
 
-  function get() {
+
+  // Função para obter os últimos 7 dias no formato 'DD/MM'
+const getLast7Days = () => {
+  const days = [];
+  const today = new Date();
+  for (let i = 6; i >= 0; i--) {
+    const day = new Date(today);
+    day.setDate(today.getDate() - i);
+    days.push(day.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }));
+  }
+  return days;
+};
+
+// Processar as vendas
+const processSalesForChart = (history) => {
+  const last7Days = getLast7Days(); // Array com os últimos 7 dias no formato ['05/11', '06/11', ...]
+  
+  // Objeto para agrupar produtos por nome e data
+  const productData = {};
+
+  history.forEach((sale) => {
+    const { product, quantity, day } = sale;
+
+    // Se o produto ainda não está no mapa, inicialize-o
+    if (!productData[product]) {
+      productData[product] = Array(7).fill(0); // Inicializar array para os últimos 7 dias
+    }
+
+    // Verificar se o dia da venda está nos últimos 7 dias
+    const dayIndex = last7Days.indexOf(day);
+    if (dayIndex !== -1) {
+      productData[product][dayIndex] += quantity; // Adicionar a quantidade ao índice do dia correspondente
+    }
+  });
+
+  // Converter o objeto em um array no formato esperado pelo gráfico
+  const series = Object.entries(productData).map(([name, data]) => ({
+    name, // Nome do produto
+    data, // Array com a quantidade por dia
+  }));
+
+    return { series, cat: last7Days };
+  };
+  // Obter os dados do gráfico
+  const { series, cat } = processSalesForChart(history);
+
+
+
+  function getPending() {
     const processedSales = [];
     const salesMap = {};
     
@@ -24,13 +72,16 @@ function GeneralCharts() {
     const names = processedSales.map(client => client.client);
     const prices = processedSales.map(client => client.price);
 
+    console.log(processedSales)
+
     setCategories(names)
     setData(prices)
   };
 
   useEffect(() => {
-    get()
+    getPending();
   }, [])
+
 
   return (
     <>
@@ -61,12 +112,12 @@ function GeneralCharts() {
 
               series={
                 [{
-                  name: 'Total Vendas',
+                  name: 'Devendo',
                   data: data // virá de outro lugar
                 }]
               }
               type='bar'
-              width={600}
+              width={580}
               height={250} />
           </section>
 
@@ -74,26 +125,21 @@ function GeneralCharts() {
             <h3>Mais Vendidos</h3>
             <h4>(últimos 7 dias)</h4>
 
-            <Chart options={{
-              chart: {
-                type: 'line'
-              },
-              xaxis: {
-                title: '7 dias',
-                align: 'center',
-                categories: ['05/11', '06/11', '07/11', '08/11', '09/11', '10/11', '11/11'] // array com os últimos sete dias
-              },
-              yaxis: {max: 20}
-            }}
-            series={[
-              { name: 'Paçoca', data: [10, 5, 15, 13, 11, 2, 20] },
-              { name: 'Cocada', data: [8, 10, 6, 20, 4, 2, 14] },
-              { name: 'Amendoin', data: [3, 8, 1, 13, 10, 1, 4] },
-              { name: 'Alpino', data: [2, 6, 8, 15, 6, 13, 6] }
-            ]}
-            type='line'
-            width={600}
-            height={250} />
+            <Chart
+              options={{
+                chart: { type: 'line' },
+                xaxis: {
+                  type: 'category',
+                  title: { text: '7 dias', align: 'center' },
+                  categories: cat, // Os últimos 7 dias
+                },
+                yaxis: { max: 20 },
+              }}
+              series={series} // Dados processados para o gráfico
+              type="line"
+              width={580}
+              height={250}
+            />
           </section>
 
           <section>

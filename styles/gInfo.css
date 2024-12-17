@@ -1,35 +1,40 @@
 .gInfoMain {
     header {
         display: flex;
+        flex-direction: column;
         flex-wrap: wrap; /* Permite quebra de linha nos artigos */
         justify-content: center; /* Centraliza os itens menores */
         margin: 5px;
+        width: 40vw;
 
         article {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            background: linear-gradient(to bottom, white, rgb(221, 221, 221));
-            padding: 15px;
+            padding: 5px;
             margin: 5px;
-            box-shadow: 2px 2px 5px rgb(44, 44, 44);
-            width: 30%; /* Adaptação padrão */
+            width: 90%;
+            border-radius: 5px;
+            margin: 5px;
             cursor: pointer;
+            transition: ease-in-out 0.1s;
         }
 
         article:hover {
-            background: linear-gradient(to bottom, rgb(212, 212, 212), rgb(141, 141, 141));
-            color: white;
+            background-color: #ffffff;
+            box-shadow: 2px 2px 5px rgb(112, 112, 112);
+            margin-left: 10px;
         }
     
         .artTitle {
             font-size: 16px; /* Ajuste menor para telas pequenas */
             font-weight: 600;
-            color: grey;
+            color: #2A2D34;
         }
     
         .artValue {
-            font-size: 24px; /* Ajuste proporcional */
+            font-size: 24px;
+            margin: 5px 10px;
+            color: rgb(109, 179, 113);
         }
     }
 
@@ -76,7 +81,7 @@
 
 .genChartsMain {
     margin: 5px;
-    width: 46vw;
+    width: 50vw;
     max-height: 80vh;
     overflow-y: auto;
 
@@ -99,11 +104,22 @@
         align-items: center;
         justify-content: center;
         margin: 10px;
+
+        header {
+            margin: 0;
+            width: 90vw;
+
+            article {
+                display: flex;
+                align-items: center;
+                padding: 5px;
+            }
+        }
         
         .gITable {
             width: 100%;
             margin: 10px 0; 
-            max-height: 25vh;
+            max-height: 38vh;
         }
     
         .gITable table thead th,
@@ -111,18 +127,6 @@
             font-size: 0.9em; 
             text-align: center; 
         }
-    }
-
-    .gInfoMain header {
-        flex-wrap: wrap; 
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    .gInfoMain header article {
-        width: 50%; 
-        margin: 10px 0; 
-        text-align: center; 
     }
 
     .genChartsMain, .singularInfo {
