@@ -98,28 +98,24 @@
     }
 
     .newSales {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .newSales div {
-        margin: 10px;
-        width: 80%;
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
 
-    .newSales input {
-        width: 100%;
-        padding: 8px;
-        font-size: 14px;
-    }
+        form {
+            display: flex;
+            align-items: center !important;
+            justify-content: center;
+            width: 100vw;
 
-    .newSales button {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
+            input {
+                width: 20vw !important;
+            }
+
+            button {
+                width: 30vw !important;
+            }
+        }
     }
 
     table {
@@ -129,11 +125,5 @@
 
     th, td {
         padding: 8px;
-    }
-
-    form {
-        display: flex;
-        align-items: center !important;
-        justify-content: center;
     }
 }

@@ -4,8 +4,47 @@ import { SalesContext } from '../contexts/SalesContext'
 import { ClientsContext } from '../contexts/ClientsContext'
 
 function GeneralInfo() {
+  const id = localStorage.getItem('id');
+  const url = import.meta.env.VITE_GOAL_URL;
   const {sales, pending, setPending, total, $total} = useContext(SalesContext);
   const {clientsList} = useContext(ClientsContext);
+  const [isEditing, setIsEditing] = useState(false);
+  const [goal, setGoal] = useState(localStorage.getItem('goal'));
+  const [error, setError] = useState('');
+
+  
+  async function saveGoal() {
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: id,
+                goal: goal
+            })
+        });
+
+        if (!response.ok) {
+            console.log(response, response.status);
+            return
+        }
+
+        const data = await response.json();
+
+        if ("error" in data) {
+            setError(data.error);
+            return
+        }
+
+        localStorage.setItem('goal', data)
+        setIsEditing(false);
+
+    } catch (error) {
+        console.log('Erro ao inserir meta mensal: ', error)
+    }
+  };
 
   
   useEffect(() => {
@@ -40,21 +79,39 @@ function GeneralInfo() {
 
             <article>
                 <div className='artTitle'>
-                    Total obtido (R$)
+                    Total obtido (R$):
                 </div>
                 <div className='artValue'>
                     R$ { $total }
                 </div>
             </article>
 
-            <article>
-                <div className='artTitle'>
-                    Projeção mensal
-                </div>
-                <div className='artValue'>
-                    R$ 555,55
-                </div>
-            </article>
+            {
+                !isEditing 
+                    ? (
+                        <article onClick={() => setIsEditing(true)}>
+                            <div className='artTitle'>
+                                goaleção mensal (R$):
+                            </div>
+                            <div className='artValue'>
+                                R$ {goal}
+                            </div>
+                        </article>
+                      )
+                    : (
+                        <article className='input-container'>
+                            <input type="text" 
+                                className='goalInput'
+                                placeholder='Sua meta mensal aqui'
+                                onChange={(e) => setGoal(e.target.value)} />
+                            <button className='goalBttn'
+                                onClick={() => saveGoal()}>
+                                Salvar
+                            </button>
+                        </article>
+                      )
+            }
+
         </header>
 
         <section className='gITable'>
