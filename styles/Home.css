@@ -110,6 +110,10 @@ th:hover {
                 cursor: default;
                 user-select: none;
             }
+
+            & .gihCapital {
+                color: #C4423B;
+            }
         }
 
         & .giTitle {
@@ -238,12 +242,18 @@ th:hover {
     }
 
     .giHeader {
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        text-align: center;
+    }
+
+    .gihCapital {
+        margin: 5px;
     }
 
     .giTitle {
         font-size: 20px;
+        text-align: center;
     }
 
     table {
