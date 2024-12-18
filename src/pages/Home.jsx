@@ -77,7 +77,7 @@ function Home(props) {
     const updateGreeting = () => {
       const hours = time.getHours();
       if (hours < 12) {
-        setGreeting(`Bom dia, ${name} Aparecido :)`);
+        setGreeting(`Bom dia, ${name} :)`);
       } else if (hours < 18) {
         setGreeting(`Boa tarde, ${name} :)`);
       } else {
