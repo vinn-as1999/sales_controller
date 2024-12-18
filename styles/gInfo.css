@@ -10,12 +10,13 @@
         article {
             display: flex;
             align-items: center;
+            cursor: default;
+            user-select: none;
             padding: 5px;
             margin: 5px;
-            width: 90%;
+            width: 97%;
             border-radius: 5px;
             margin: 5px;
-            cursor: pointer;
             transition: ease-in-out 0.1s;
             background-color: white;
         }
@@ -136,7 +137,5 @@
         }
     }
 
-    .genChartsMain, .singularInfo {
-        display: none;
-    }
+   
 }

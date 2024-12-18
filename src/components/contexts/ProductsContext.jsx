@@ -5,7 +5,6 @@ export const ProductsContext = createContext();
 export function ProductsProvider({ children }) {
   const [products, setProducts] = useState([]);
   const user_id = localStorage.getItem('id');
-  const username = localStorage.getItem('username');
   const token = localStorage.getItem('token');
   const url = import.meta.env.VITE_PRODUCTS_URL;
   const queryUrl = `${url}/${user_id}`

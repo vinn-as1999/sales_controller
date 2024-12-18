@@ -146,7 +146,7 @@ th:hover {
     margin: 5px;
 
     input {
-        width: 16vw;
+        width: 10vw;
         margin: 5px;
         outline-color:#e65c55;
     }
@@ -207,6 +207,7 @@ th:hover {
     }
 
     .homeMain {
+        display: flex;
         flex-direction: column;
 
         .iconTextWrapper {
@@ -218,14 +219,18 @@ th:hover {
                 display: none !important;
             }
         }
-    }
 
-    .homeMain sidebar {
-        width: 100%;
-        padding: 5px;
-        height: 50px;
-        flex-direction: row;
-        justify-content: space-around;
+        sidebar {
+            width: 100%;
+            padding: 5px;
+            height: 50px;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .singularInfo {
+            display: none;
+        }
     }
 
     .generalInfo {

@@ -54,7 +54,6 @@ const processSalesForChart = (history) => {
   const { series, cat } = processSalesForChart(history);
 
 
-
   function getPending() {
     const processedSales = [];
     const salesMap = {};
@@ -72,15 +71,13 @@ const processSalesForChart = (history) => {
     const names = processedSales.map(client => client.client);
     const prices = processedSales.map(client => client.price);
 
-    console.log(processedSales)
-
     setCategories(names)
     setData(prices)
   };
 
   useEffect(() => {
     getPending();
-  }, [])
+  }, [sales])
 
 
   return (
@@ -88,58 +85,63 @@ const processSalesForChart = (history) => {
       <main className='genChartsMain'>
           <section>
             <h3>Saldo Devedor</h3>
-            <Chart options={{
-              chart: {
-                type: 'bar',
-                height: '5vh'
-              },
-              plotOptions: {
-                  bar: {
-                      horizontal: true,
-                      barHeight: '60%'
-                  },
+            <div className="chart-container">
+              <Chart options={{
+                chart: {
+                  type: 'bar',
+                  height: '5vh'
                 },
-                colors: ['#C4423B'],
-                xaxis: {
-                  title: {
-                      text: 'Valores',
-                      align: 'center'
+                plotOptions: {
+                    bar: {
+                        horizontal: true,
+                        barHeight: '60%'
+                    },
                   },
-                  categories: categories, 
-                },
-              yaxis: {max: 100}
-              }}
-
-              series={
-                [{
-                  name: 'Devendo',
-                  data: data // virá de outro lugar
-                }]
-              }
-              type='bar'
-              width={580}
-              height={250} />
+                  colors: ['#C4423B'],
+                  xaxis: {
+                    title: {
+                        text: 'Valores',
+                        align: 'center'
+                    },
+                    categories: categories,
+                  },
+                yaxis: {max: 100}
+                }}
+                series={
+                  [{
+                    name: 'Devendo',
+                    data: data // virá de outro lugar
+                  }]
+                }
+                type='bar'
+                width={580}
+                height={250} />
+            </div>
           </section>
 
           <section>
             <h3>Mais Vendidos</h3>
             <h4>(últimos 7 dias)</h4>
 
-            <Chart
-              options={{
-                chart: { type: 'line' },
-                xaxis: {
-                  type: 'category',
-                  title: { text: '7 dias', align: 'center' },
-                  categories: cat, // Os últimos 7 dias
-                },
-                yaxis: { max: 20 },
-              }}
-              series={series} // Dados processados para o gráfico
-              type="line"
-              width={580}
-              height={250}
-            />
+            <div className="chart-container">
+              <Chart
+                options={{
+                  chart: { 
+                    type: 'line' 
+                  },
+                  xaxis: {
+                    type: 'category',
+                    title: { text: '7 dias', align: 'center' },
+                    categories: cat, // Os últimos 7 dias
+                  },
+                  yaxis: { max: 50 },
+                }}
+                series={series} // Dados processados para o gráfico
+                type="line"
+                width={580}
+                height={230}
+              />
+            </div>
           </section>
 
           <section>

@@ -7,6 +7,7 @@ function GeneralInfo() {
   const {sales, pending, setPending, total, $total} = useContext(SalesContext);
   const {clientsList} = useContext(ClientsContext);
 
+  
   useEffect(() => {
     function getInformations() {
         const cliInfo = sales.flatMap((sale) => {
@@ -22,7 +23,6 @@ function GeneralInfo() {
     getInformations();
 
 }, [sales, clientsList]);
-
 
 
   return (

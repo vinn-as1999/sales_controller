@@ -6,6 +6,7 @@ import { RiContactsLine } from "react-icons/ri"
 import { AiOutlineProduct } from "react-icons/ai"
 import { MdOutlineInventory } from "react-icons/md"
 import { CiLogout } from "react-icons/ci"
+import { IoSunnyOutline } from "react-icons/io5"
 import { ProductsContext } from '../components/contexts/ProductsContext.jsx'
 import '../../styles/Home.css'
 import NewSales from '../components/general/NewSales.jsx'
@@ -76,11 +77,11 @@ function Home(props) {
     const updateGreeting = () => {
       const hours = time.getHours();
       if (hours < 12) {
-        setGreeting("Bom dia");
+        setGreeting(`Bom dia, ${name} :)`);
       } else if (hours < 18) {
-        setGreeting("Boa tarde");
+        setGreeting(`Boa tarde, ${name}`);
       } else {
-        setGreeting("Boa noite");
+        setGreeting(`Boa noite, ${name}`);
       }
     };
 
@@ -143,7 +144,7 @@ function Home(props) {
 
         <section className='generalInfo'>
           <article className='giHeader'>
-            <div className='gihGreetings'>{greeting}, {name}</div>
+            <div className='gihGreetings'>{greeting}</div>
             <div className='gihCapital'>Capital: R$ {$total}</div>
           </article>
 

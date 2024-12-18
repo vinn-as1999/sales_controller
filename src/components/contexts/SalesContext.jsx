@@ -62,39 +62,37 @@ export function SalesProvider({children}) {
     };
 
     async function fetchData(id, user, product, category, client, status, qty) {
-        console.log('dados recebidos: ', id, user, product, category, client, status, qty)
         try {
-          const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              user_id: id,
-              username: user,
-              client: client,
-              product: product.name,
-              price: product.price,
-              quantity: qty,
-              day: getDate(),
-              hour: getHour(),
-              status: status
-            })
-          });
+            const saleData = {
+                user_id: id,
+                username: user,
+                client,
+                product: product.name,
+                price: product.price,
+                quantity: qty,
+                day: getDate(),
+                hour: getHour(),
+                status,
+            };
     
-          const data = await response.json();
-          if ("error" in data) {
-            return
-          }
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(saleData),
+            });
     
-          await deleteProduct(id, user, product.name, product.price, qty, category);
-          await getSales();
-          console.log('Compra efetuada')
+            const data = await response.json();
+            if (data.error) return;
+    
+            setSales((prev) => [...prev, saleData]);
+            setHistory((prev) => [...prev, saleData]);
+    
+            await deleteProduct(id, user, product.name, product.price, qty, category);
     
         } catch (error) {
-          console.log('Erro: ', error)
+            console.log('Erro: ', error);
         }
-      };
+    };
     
     
     async function removePending(pending) {
@@ -109,11 +107,8 @@ export function SalesProvider({children}) {
             if (!response.ok) {
                 console.log("Erro: ", response, response.status)
             }
-
-            const data = await response.json()
             
-            console.log('Server response (removePending): ', data);
-            await getSales();
+            setPending((prev) => prev.filter((p) => p._id !== pending));
             return
             
         } catch (error) {
@@ -189,7 +184,7 @@ export function SalesProvider({children}) {
     };
 
     useEffect(() => {
-        getSales()
+        if (token) getSales()
         return () => {}
     }, [token]);
 
