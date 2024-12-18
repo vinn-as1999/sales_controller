@@ -129,7 +129,7 @@
                 align-items: center;
             }
 
-            .projInput {
+            .goalInput {
                 margin: 0px 10px;
                 padding: 2px;
                 width: 50vw;
@@ -138,7 +138,7 @@
                 outline-color: rgb(240, 144, 144);
             }
 
-            .projBttn {
+            .goalBttn {
                 font-size: 15px;
                 padding: 2px;
                 width: 20vw;

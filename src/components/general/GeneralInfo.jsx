@@ -9,7 +9,10 @@ function GeneralInfo() {
   const {sales, pending, setPending, total, $total} = useContext(SalesContext);
   const {clientsList} = useContext(ClientsContext);
   const [isEditing, setIsEditing] = useState(false);
-  const [goal, setGoal] = useState(localStorage.getItem('goal'));
+  const [goal, setGoal] = useState(() => {
+    const go = localStorage.getItem('goal');
+    return go ? JSON.parse(go) : '00,00'
+  });
   const [error, setError] = useState('');
 
   
@@ -38,7 +41,7 @@ function GeneralInfo() {
             return
         }
 
-        localStorage.setItem('goal', data)
+        localStorage.setItem('goal', goal)
         setIsEditing(false);
 
     } catch (error) {
@@ -91,7 +94,7 @@ function GeneralInfo() {
                     ? (
                         <article onClick={() => setIsEditing(true)}>
                             <div className='artTitle'>
-                                goaleção mensal (R$):
+                                Projeção mensal (R$):
                             </div>
                             <div className='artValue'>
                                 R$ {goal}
@@ -100,7 +103,7 @@ function GeneralInfo() {
                       )
                     : (
                         <article className='input-container'>
-                            <input type="text" 
+                            <input type="number" 
                                 className='goalInput'
                                 placeholder='Sua meta mensal aqui'
                                 onChange={(e) => setGoal(e.target.value)} />
