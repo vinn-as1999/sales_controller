@@ -26,7 +26,12 @@ export const ClientsProvider = ({children}) => {
             }
     
             const data = await response.json();
-            console.log("Server response: ", data);
+
+            if ("error" in data) {
+                console.log(data);
+                return;
+            }
+            
             setClientsList(data);
 
         } catch (error) {
@@ -43,8 +48,6 @@ export const ClientsProvider = ({children}) => {
 
     useEffect(() => {
         getClients(user_id)
-
-        console.log('o cliList', clientsList)
 
         return () => {}
     }, [token])

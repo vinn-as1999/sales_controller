@@ -16,7 +16,6 @@ export function SalesProvider({children}) {
 
     const total = history.filter(data => data.status === 'paid');
     const $total = total.reduce((total, sale) => total + Number(sale.price), 0).toFixed(2);
-
     const [error, setError] = useState('');
 
 
@@ -82,12 +81,14 @@ export function SalesProvider({children}) {
             });
     
             const data = await response.json();
-            if (data.error) return;
-    
-            setSales((prev) => [...prev, saleData]);
-            setHistory((prev) => [...prev, saleData]);
-    
-            await deleteProduct(id, user, product.name, product.price, qty, category);
+            if (data.error) {
+                console.log(data.error)
+                return
+            };
+
+            Promise.all([getSales(), 
+                deleteProduct(id, user, product.name, product.price, qty, category)])
+                .catch(error => console.log('Erro: ', error));
     
         } catch (error) {
             console.log('Erro: ', error);
@@ -108,7 +109,16 @@ export function SalesProvider({children}) {
                 console.log("Erro: ", response, response.status)
             }
             
-            setPending((prev) => prev.filter((p) => p._id !== pending));
+            await Promise.all([
+                new Promise((resolve) => {
+                  setPending((prev) => {
+                    const updatedPending = prev.filter((p) => p._id !== pending);
+                    resolve(updatedPending);
+                    return updatedPending;
+                  });
+                }),
+                getSales(),
+              ]);
             return
             
         } catch (error) {
@@ -138,9 +148,19 @@ export function SalesProvider({children}) {
             }
 
             const data = await response.json()
+
+            if (data.error) {
+                console.log(data.error);
+                return
+            }
+
             console.log("Server response: ", data)
-            await getSales()
-            removePending(saleData._id)
+
+            await Promise.all([getSales(), removePending(saleData._id)])
+                .catch(error => {
+                    console.log('Erro em uma das promessas.', error)
+                });
+
             return
 
         } catch (error) {

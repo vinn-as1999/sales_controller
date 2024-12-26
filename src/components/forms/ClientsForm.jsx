@@ -4,8 +4,8 @@ import '../../../styles/Clients.css'
 
 
 function ClientsForm(props) {
-  const apiUrl = import.meta.env.VITE_ADD_CLIENTS_URL
-  const {clientsList, setClientsList} = useContext(ClientsContext)
+  const apiUrl = import.meta.env.VITE_ADD_CLIENTS_URL;
+  const {clientsList, setClientsList} = useContext(ClientsContext);
   const [name, setName] = useState('');
   const [contact, setContact] = useState('');
   const [clientAddress, setClientAddress] = useState('');
@@ -13,7 +13,6 @@ function ClientsForm(props) {
 
   async function addClients() {
     if (!name.trim || !contact.trim() || !clientAddress.trim()) {
-      console.log('deu n')
       return
     }
 

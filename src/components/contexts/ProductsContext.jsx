@@ -90,7 +90,7 @@ export function ProductsProvider({ children }) {
         return;
       }
 
-      await getProducts(); 
+      await getProducts(queryUrl); 
     } catch (error) {
       console.log('Erro ao deletar o produto: ', error);
     }

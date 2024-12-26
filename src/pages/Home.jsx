@@ -39,10 +39,13 @@ function Home(props) {
   const name = localStorage.getItem('username');
 
 
-  function getDate() {
+  function getDate(isYear) {
     const date = new Date();
     const day = date.getDate();
     const month = date.getMonth() + 1;
+    const year = date.getFullYear()
+
+    if (isYear) return `${String(month).padStart(2, '0')}/${String(year).slice(-2)}`
 
     return `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}`
   };

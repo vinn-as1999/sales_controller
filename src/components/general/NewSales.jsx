@@ -9,12 +9,14 @@ import { SalesContext } from '../contexts/SalesContext'
 function NewSales(props) {
   const user_id = localStorage.getItem('id');
   const username = localStorage.getItem('username');
-  const {sales, registerPayment, registerSales} = useContext(SalesContext);
+  const {sales, pending, registerPayment, registerSales} = useContext(SalesContext);
   const [client, setClient] = useState('');
   const [prodName, setProdName] = useState('');
 
 
   useEffect(() => {
+    console.log('o SALES', sales)
+    console.log('o pending', pending)
     return () => {}
   }, [sales])
   
@@ -51,7 +53,7 @@ function NewSales(props) {
             </thead>
             <tbody>
               {
-                sales.length > 0 ? sales.map((sale, index) => sale.status === 'pending' && (
+                sales.length > 0 ? sales.map((sale, index) => (
                   <tr key={index}>
                     <td>{sale.client}</td>
                     <td>{sale.product}</td>
