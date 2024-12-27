@@ -33,12 +33,12 @@ function ClientsInfo(props) {
   const series = [{
     name: 'Quantidade',
     data: [
-      [new Date(2024, 9, 1).getTime(), 12], // 1 de Outubro
-      [new Date(2024, 9, 3).getTime(), 5.5], // 3 de Outubro
-      [new Date(2024, 9, 5).getTime(), 14],  // 5 de Outubro
-      [new Date(2024, 9, 7).getTime(), 5],  // 7 de Outubro
-      [new Date(2024, 9, 9).getTime(), 3.5], // 9 de Outubro
-      [new Date(2024, 9, 11).getTime(), 7],  // 11 de Outubro
+      [new Date(2024, 9, 1).getTime(), 12],
+      [new Date(2024, 9, 3).getTime(), 5.5], 
+      [new Date(2024, 9, 5).getTime(), 14],  
+      [new Date(2024, 9, 7).getTime(), 5],  
+      [new Date(2024, 9, 9).getTime(), 3.5], 
+      [new Date(2024, 9, 11).getTime(), 7],  
     ]
   }];
 
