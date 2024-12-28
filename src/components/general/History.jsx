@@ -20,7 +20,6 @@ function History(props) {
       setHistoryList(filteredList)
 
     } else {
-      console.log('a lista', list)
       setHistoryList(list)
     }
   };

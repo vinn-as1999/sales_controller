@@ -1,10 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react'
 import Chart from 'react-apexcharts'
 import { IoIosClose } from 'react-icons/io'
-import { ClientsContext } from '../contexts/ClientsContext';
+import { ClientsContext } from '../contexts/ClientsContext'
+import { SalesContext } from '../contexts/SalesContext'
 
 function ClientsInfo(props) {
-  const {selectedClient} = useContext(ClientsContext)
+  const {selectedClient} = useContext(ClientsContext);
+  const {sales, history} = useContext(SalesContext);
+
+  const list = history.filter(sale => sale.client === selectedClient.client);
+  const days = list.map(client => client.day);
+
+
+  useEffect(() => console.log('os dias', days), [selectedClient])
 
   const options = {
     chart: {

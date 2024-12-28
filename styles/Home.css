@@ -51,7 +51,9 @@ th:hover {
 .dateKey {
     text-align: center;
     font-size: 30px;
-    text-decoration: underline;
+    cursor: default;
+    color: grey;
+    opacity: 0.8;
 }
 
 .homeMain {
